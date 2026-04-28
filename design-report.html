@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>デザインガイドライン取得レポート 2026-04-15</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  body { font-family: -apple-system, "Hiragino Sans", "Yu Gothic UI", sans-serif; font-size: 11pt; line-height: 1.85; color: #14161C; }
+  h1 { font-size: 22pt; border-bottom: 3px solid #2E7BE6; padding-bottom: 8px; margin-bottom: 24px; }
+  h2 { font-size: 15pt; color: #1B3B7A; margin-top: 28px; padding-left: 10px; border-left: 4px solid #2E7BE6; }
+  h3 { font-size: 12pt; color: #14161C; margin-top: 18px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 10pt; }
+  th, td { border: 1px solid #d0d8e6; padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: #EAF3FF; color: #1B3B7A; }
+  tr:nth-child(even) td { background: #F5F9FF; }
+  .ng { color: #c0392b; font-weight: 700; }
+  .ok { color: #27ae60; font-weight: 700; }
+  .warn { color: #d97706; font-weight: 700; }
+  ul { padding-left: 20px; }
+  li { margin-bottom: 6px; }
+  .meta { color: #5A6778; font-size: 10pt; margin-bottom: 24px; }
+  .box { background: #F5F9FF; border-left: 4px solid #2E7BE6; padding: 14px 20px; margin: 14px 0; border-radius: 4px; }
+  .footer { margin-top: 40px; padding-top: 14px; border-top: 1px solid #d0d8e6; font-size: 9pt; color: #5A6778; text-align: center; }
+</style>
+</head>
+<body>
+
+<h1>デザインガイドライン取得レポート</h1>
+<div class="meta">
+  作成日: 2026-04-15 ／ 対象プロジェクト: saiteki-services 他 全プロジェクト共通<br>
+  指示: Apple HIG / Apple Design Resources / Material Design 3 を一語一句CLAUDE.mdに保存し、UI/LP作成で常に参照する。理解できない・実現できない部分はPDFで報告する。
+</div>
+
+<h2>1. 取得結果サマリー</h2>
+<table>
+  <tr><th>ソース</th><th>取得状態</th><th>CLAUDE.md保存</th><th>備考</th></tr>
+  <tr>
+    <td>Apple Human Interface Guidelines<br><small>https://developer.apple.com/design/human-interface-guidelines/</small></td>
+    <td class="warn">部分取得</td>
+    <td class="ok">完了（A章）</td>
+    <td>SPA・JSレンダのため WebFetch で本文が空になるサブページ多数。後述（§3）の方法で補完済</td>
+  </tr>
+  <tr>
+    <td>Apple Design Resources<br><small>https://developer.apple.com/design/resources/</small></td>
+    <td class="ok">取得</td>
+    <td class="ok">完了（C章）</td>
+    <td>UI Kit、フォント、SF Symbols、Technology Templates等の一覧と注意事項を保存</td>
+  </tr>
+  <tr>
+    <td>Material Design 3<br><small>https://m3.material.io/</small></td>
+    <td class="warn">部分取得</td>
+    <td class="ok">完了（B章）</td>
+    <td>m3.material.io も SPA でサブページ本文取得不可。Google公式 material-tokens JSON / Material Web / Compose Material3 公式ドキュメントから一次値を補完</td>
+  </tr>
+</table>
+
+<h2>2. 理解できなかった・実現できなかった部分</h2>
+
+<h3>2-1. SPAで取得不可だった具体ページ</h3>
+<p>下記ページは全文を取得できず、外部の一次情報（公式トークンJSON、UIKit/SwiftUI/Compose実装定数、WCAG）から補完して値を確定しました。値そのものは正確ですが、最新の文章ニュアンスは反映できていない可能性があります。</p>
+<ul>
+  <li>HIG: <em>foundations / accessibility, branding, color, dark-mode, layout, sf-symbols, spatial-layout, writing</em></li>
+  <li>HIG: <em>patterns / feedback, loading, modality, onboarding, settings</em></li>
+  <li>HIG: <em>components / buttons, lists-and-tables, navigation-bars, sheets, toolbars</em></li>
+  <li>M3: <em>foundations / accessibility, adaptive design, content design, customization, design tokens, layout grid</em></li>
+  <li>M3: <em>styles / color (dynamic color, color roles), elevation, motion, shape, typography, icons</em></li>
+  <li>M3: <em>components / 各コンポーネント詳細</em></li>
+</ul>
+
+<h3>2-2. 実現できないこと（Web/外部プロジェクトでの制約）</h3>
+<table>
+  <tr><th>項目</th><th>制約</th><th>代替策</th></tr>
+  <tr>
+    <td>SF Pro等のAppleシステムフォント</td>
+    <td class="ng">Webサイトへの直接埋め込み・再配布は<strong>ライセンス上不可</strong></td>
+    <td>CSS で <code>-apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", sans-serif</code> のスタックを使う</td>
+  </tr>
+  <tr>
+    <td>SF Symbols（6,900+ アイコン）</td>
+    <td class="ng">Web/HTMLでの利用は原則不可（Apple製アプリ画面内のみ）</td>
+    <td>Phosphor Icons / Lucide / Heroicons / Material Symbols で代替</td>
+  </tr>
+  <tr>
+    <td>Dynamic Color（ユーザー壁紙からの自動生成）</td>
+    <td class="ng">Android/iOS のシステム機能。Webでは再現不可</td>
+    <td>固定 color roles を CSS 変数化する。ダーク/ライト切替のみ <code>prefers-color-scheme</code> で対応</td>
+  </tr>
+  <tr>
+    <td>Dynamic Type（11pt〜AX5の自動拡大）</td>
+    <td class="warn">Webでは完全再現不可</td>
+    <td><code>rem</code> 単位 + メディアクエリで拡大対応、ユーザーのブラウザ拡大を妨げない設計</td>
+  </tr>
+  <tr>
+    <td>Materials（ultraThin/thin/regular/thick/chrome）</td>
+    <td class="warn">Web では <code>backdrop-filter: blur()</code> で類似実装可能だが Safari/iOS で挙動差あり</td>
+    <td>背景に半透明色 + <code>backdrop-filter: blur(20px) saturate(180%)</code> で近似</td>
+  </tr>
+  <tr>
+    <td>Continuous corner（squircle）</td>
+    <td class="warn">CSS の <code>border-radius</code> は厳密には circular。iOS は continuous</td>
+    <td>SVG で<code>squircle</code>パスを使うか、CSS Houdini Paint API 使用。一般プロジェクトでは <code>border-radius</code> で十分近似</td>
+  </tr>
+  <tr>
+    <td>Liquid Glass（Apple Icon Composer / Sequoia+）</td>
+    <td class="ng">macOS/iOS 専用機能、Webで再現不可</td>
+    <td>イメージとしてグラデ + ハイライトで模倣（厳密な再現はあきらめる）</td>
+  </tr>
+  <tr>
+    <td>Live Activities, App Clips 等のTechnology Templates</td>
+    <td class="ng">プラットフォーム機能。デザイン素材は配布されているが、機能としてはApple純正アプリのみ</td>
+    <td>LP 上はスクリーンショットや Product Bezels を使ったモックで表現</td>
+  </tr>
+</table>
+
+<h3>2-3. 取得が不確定な値</h3>
+<ul>
+  <li>HIG「foundations / writing」のVoice &amp; Tone 詳細ガイドラインは取得不可。日本語UIライティングは独自に判断</li>
+  <li>M3「customization / theming with components」の詳細手順は取得不可。実装は material-tokens JSON を直接参照</li>
+  <li>M3「motion / transitions（具体的コンポーネント遷移パターン）」は取得不可。Compose Material3 のソース定数で代替</li>
+  <li>visionOS 固有のレイアウト・空間設計・視差やHover影響範囲（28pt視線+ピンチ等）は概念のみ。実装は visionOS UIKit を参照</li>
+</ul>
+
+<h2>3. 補完に使った一次情報</h2>
+<ul>
+  <li>HIG: WebFetch で取得できた iOS設計 / Typography / Motion / Materials ページ</li>
+  <li>HIG: UIKit / SwiftUI 公式定数（44pt min target、ControlSize、systemColor 等）、WCAG 2.1</li>
+  <li>M3: <code>github.com/material-foundation/material-tokens</code>（Google公式 design tokens JSON）</li>
+  <li>M3: <code>material-web.dev</code>（Material Web 実装ドキュメント）</li>
+  <li>M3: <code>developer.android.com/jetpack/compose/designsystems/material3</code>（Compose Material3 リファレンス）</li>
+  <li>M3: <code>developer.android.com/codelabs/adaptive-material-guidance</code></li>
+  <li>Apple Resources: 公式ダウンロードページの製品リスト（フォント・キット・SF Symbols バージョン）</li>
+</ul>
+
+<h2>4. 推奨アクション</h2>
+
+<div class="box">
+<strong>定期的に更新</strong>: HIGとM3は年1回程度大型改訂される（M3 Expressive 2025、SF Symbols 7、iOS 26など）。3-6ヶ月ごとにこのレポートと CLAUDE.md を再生成し、最新値を反映する。
+</div>
+
+<div class="box">
+<strong>SPA対応の取得方法</strong>: 今後 HIG/M3 から最新情報を取得する際は、WebFetch ではなく <strong>Playwright で実際にレンダリング</strong>してテキストを抜き出す方法に切り替える（本レポート作成後に実装可）。
+</div>
+
+<div class="box">
+<strong>個別案件への適用</strong>: ブランドカラー・トーンが指定されている案件（サイテキ等）では、A/B章の構造（タイポスケール・gridシステム・state layer・モーション duration）はそのまま採用し、配色のみブランド準拠に置き換える運用が安全。
+</div>
+
+<h2>5. 結論</h2>
+<p>
+Apple HIG / Material Design 3 / Apple Design Resources の中核となる実装値はすべて CLAUDE.md（A〜D章）に保存済み。SPA制限により公式ドキュメントの本文ニュアンスは一部欠落しているが、数値・トークン・コンポーネント仕様はGoogle/Apple の一次資料から補完しており、実装に必要な情報は揃っている。
+</p>
+<p>
+今後すべてのUI/LP作成時には、新規ファイルを書き始める前に必ず CLAUDE.md の「デザイン方針（全プロジェクト共通）」章を読み返し、コンポーネント実装時は仕様の数値を逐一引用する運用を徹底する。
+</p>
+
+<div class="footer">
+  Generated 2026-04-15 ／ Claude Code (Opus 4.6, 1M context)<br>
+  保存先: c:\Users\fujik\vscode\CLAUDE.md（A章=Apple HIG / B章=Material 3 / C章=Apple Resources / D章=運用ルール）
+</div>
+
+</body>
+</html>

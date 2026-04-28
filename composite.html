@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>サイテキHP 4カード差し替え合成プレビュー</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --panel: #111b2e;
+      --fg: #fff;
+      --fg-2: #a8b4c8;
+      --accent: #2E7BE6;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg); font-family: "Noto Sans JP", -apple-system, "Hiragino Sans", sans-serif; }
+    header { position: sticky; top: 0; z-index: 10; background: rgba(11,18,32,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 14px 20px; }
+    header .row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; max-width: 1400px; margin: 0 auto; }
+    h1 { font-size: 16px; font-weight: 700; margin: 0; letter-spacing: 0.04em; }
+    h1 span.tag { color: var(--accent); font-size: 12px; letter-spacing: 0.24em; display: block; font-weight: 600; margin-bottom: 2px; }
+    .spacer { flex: 1; }
+    .zoom-group { display: flex; gap: 8px; }
+    button {
+      background: var(--panel); color: var(--fg); border: 1px solid rgba(255,255,255,0.12);
+      padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;
+      font-family: inherit; transition: background 200ms;
+    }
+    button:hover { background: #1b2944; }
+    button.active { background: var(--accent); border-color: var(--accent); }
+    a.link-btn { background: var(--panel); color: var(--fg); border: 1px solid rgba(255,255,255,0.12); padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; display: inline-block; }
+    a.link-btn:hover { background: #1b2944; }
+    .viewport { padding: 24px; display: flex; justify-content: center; }
+    .viewport img { display: block; box-shadow: 0 20px 60px rgba(0,0,0,0.5); border-radius: 4px; }
+    .mode-fit img { max-width: min(1200px, 100%); height: auto; }
+    .mode-100 { overflow-x: auto; }
+    .mode-100 img { width: 1280px; height: auto; }
+    .mode-full { overflow-x: auto; }
+    .mode-full img { width: 2560px; height: auto; }
+    .legend { max-width: 1200px; margin: 0 auto 20px; padding: 16px 24px; background: var(--panel); border-radius: 12px; color: var(--fg-2); font-size: 13px; line-height: 1.8; }
+    .legend strong { color: var(--fg); }
+    .legend .k { color: var(--accent); font-weight: 700; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="row">
+      <h1>
+        <span class="tag">SAITEKI-NET.JP COMPOSITE</span>
+        4カード差し替え後のイメージ
+      </h1>
+      <div class="spacer"></div>
+      <div class="zoom-group">
+        <button id="btn-fit" class="active">画面に合わせる</button>
+        <button id="btn-100">原寸（1280）</button>
+        <button id="btn-full">高精細（2560）</button>
+      </div>
+      <a class="link-btn" href="saiteki-composite.png" target="_blank">画像直リンク ↗</a>
+    </div>
+  </header>
+  <div class="legend">
+    <div><span class="k">上部</span>: saiteki-net.jp の既存ヘッダー + メインバナー（コンサート映像）</div>
+    <div><span class="k">中央</span>: <strong>新しい4サービス差し替え部分</strong>（タグライン → 定量指標 → SERVICE → 4カード）</div>
+    <div><span class="k">下部</span>: saiteki-net.jp の既存 OPT!M / REPORT バナー → VISION → ABOUT US → TOPICS → CONTACT</div>
+  </div>
+  <div class="viewport mode-fit" id="viewport">
+    <img id="img" src="saiteki-composite.png" alt="サイテキHP合成プレビュー">
+  </div>
+  <script>
+    const vp = document.getElementById('viewport');
+    const btnFit = document.getElementById('btn-fit');
+    const btn100 = document.getElementById('btn-100');
+    const btnFull = document.getElementById('btn-full');
+    function setMode(mode, activeBtn) {
+      vp.className = 'viewport mode-' + mode;
+      [btnFit, btn100, btnFull].forEach(b => b.classList.remove('active'));
+      activeBtn.classList.add('active');
+    }
+    btnFit.onclick = () => setMode('fit', btnFit);
+    btn100.onclick = () => setMode('100', btn100);
+    btnFull.onclick = () => setMode('full', btnFull);
+  </script>
+</body>
+</html>
