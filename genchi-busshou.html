@@ -1,210 +1,280 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SERVICE 01 現地物販運営 | サイテキ</title>
-  <meta name="description" content="会場でのグッズ販売を、企画・スタッフ・運営までぜんぶサイテキにお任せ。長い行列・売り切れ・売り上げの取りこぼしを解消します。">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles-common.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>現地物販運営｜株式会社サイテキ — 現地物販の渋滞を、構造から解消する。</title>
+<meta name="description" content="売り場効率×動きの設計で、待機時間を「買い物時間」に。事前選択→QR提示→即決済のOPT!Mで、1人あたり購入金額150%UP・レジ時間1/3を実現。">
+<link rel="stylesheet" href="assets/css/figma-design.css">
+<style>
+  .page-hero { --hero-image: url('../parts/pptx/hero-merch.jpg'); }
+  .opt-flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 980px; margin: 0 auto; }
+  @media (max-width: 820px) { .opt-flow { grid-template-columns: 1fr; max-width: 480px; } }
+  .opt-step {
+    text-align: center;
+    padding: 36px 24px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 18px;
+    transition: transform 0.3s, background 0.3s, border-color 0.3s;
+  }
+  .opt-step:hover { transform: translateY(-3px); background: rgba(255,255,255,0.06); border-color: rgba(136,184,255,0.4); }
+  .opt-step__num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px; height: 44px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #88b8ff, #d63976);
+    color: #fff;
+    font-size: 17px;
+    font-weight: 900;
+    margin-bottom: 18px;
+  }
+  .opt-step h3 { color: #fff; font-size: 19px; font-weight: 800; margin-bottom: 10px; }
+  .opt-step p { color: rgba(255,255,255,0.78); font-size: 13.5px; line-height: 1.8; }
+</style>
 </head>
 <body>
 
-  <header class="l-header">
-    <div class="l-header__inner">
-      <div class="l-header__logo">
-        <a href="https://saiteki-net.jp/"><img src="assets/brand/logo-dark.png" alt="株式会社サイテキ"></a>
-      </div>
-      <nav class="l-header__gnav">
-        <ul class="c-gnav">
-          <li><a href="https://saiteki-net.jp/activity/">私たちの取り組み</a></li>
-          <li><a href="https://saiteki-net.jp/topic/">新着情報</a></li>
-          <li><a href="https://saiteki-net.jp/interview/">インタビュー</a></li>
-          <li><a href="https://saiteki-net.jp/history/">会社の沿革</a></li>
-          <li><a href="https://saiteki-net.jp/company-info/">会社概要</a></li>
-        </ul>
-      </nav>
-      <div class="w-header">
-        <a class="w-header__cta" href="http://saiteki-net.jp/wordpress/contact-from/">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v12H4z"/><path d="M4 6l8 7 8-7"/></svg>
-          <span>お問い合わせ</span>
-        </a>
-      </div>
-    </div>
-  </header>
+<header class="site-header">
+  <a href="hero-demo.html" class="site-header__logo" aria-label="株式会社サイテキ">
+    <img src="assets/brand/saiteki-white.png" alt="株式会社サイテキ">
+  </a>
+  <a href="hero-demo.html" class="site-header__home">← ホームに戻る</a>
+</header>
 
-  <section class="page-hero">
-    <div class="page-hero-inner">
-      <span class="module-tag">SERVICE 01</span>
-      <h1>会場での販売、<br>ぜんぶサイテキが代わりにやります。</h1>
-      <p class="lead">
-        企画から、スタッフ手配、当日の運営、撤収まで。<br>
-        主催者は、商品を渡すだけでOK。あとはお任せください。
+<section class="page-hero">
+  <div class="page-hero__bg"></div>
+  <div class="page-hero__overlay"></div>
+  <div class="page-hero__inner">
+    <span class="page-hero__tag">SERVICE 01 ／ ON-SITE OPERATIONS</span>
+    <h1>現地物販の渋滞を、<br><span class="accent">構造から解消する。</span></h1>
+    <p class="page-hero__lead">
+      売り場効率 × 動きの設計で、<br>
+      お客様の「待機時間」を「買い物時間」に変えます。<br>
+      従来の3倍の回転スピードで、売上と満足度の両方を最大化。
+    </p>
+  </div>
+  <div class="page-hero__scroll">SCROLL</div>
+</section>
+
+<section class="section section--dark2">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">PROBLEM</span>
+      <h2>イベント物販現場の<br><span class="accent">こんな当たり前</span>、変えられます。</h2>
+      <p class="section-head__lead">
+        ファンも運営も、どちらも我慢している。それが、イベント物販の常識になっていました。
       </p>
     </div>
-  </section>
-
-  <section class="section">
-    <div class="section-inner">
-      <div class="section-head">
-        <h2>こんなこと、<br>困っていませんか？</h2>
-      </div>
-      <div class="issue-grid">
-        <div class="issue-col fan">
-          <div class="issue-tag">FAN — ファンの声</div>
-          <ul>
-            <li>「物販の行列、開演に間に合うかな…」</li>
-            <li>「せっかく並んだのに売り切れ…」</li>
-            <li>「今どき電卓で計算してるの？」</li>
-          </ul>
-        </div>
-        <div class="issue-col host">
-          <div class="issue-tag">HOST — 主催者の悩み</div>
-          <ul>
-            <li>スタッフ集めや教育に時間がかかる</li>
-            <li>レジが遅くて販売機会を逃している</li>
-            <li>在庫が読めず、余ったり足りなかったり</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section alt">
-    <div class="section-inner">
-      <div class="section-head">
-        <h2>サイテキの「現地物販運営」で、<br>こう変わります</h2>
-        <p>長年の現場経験に、便利な仕組みを組み合わせます。<br>結果として、<strong>回転は約3倍</strong>、<strong>客単価は約1.5倍</strong>。</p>
-      </div>
-      <div class="visual-block">
-        <img src="assets/parts/body-module01.png" alt="従来の物販とサイテキが最適化した物販" class="slide-visual">
-        <p class="visual-subcaption">
-          スタッフが商品を探し回る従来型から、<strong>番号で管理された棚</strong>でサッと取り出せる仕組みへ。どの列でも同じスピードで進むので、ファンは並ぶストレスが減ります。
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-inner">
-      <div class="section-head">
-        <h2>サイテキだから、<br>できること</h2>
-      </div>
-      <div class="points">
-        <div class="point-row">
-          <span class="point-tag">POINT 01</span>
-          <div class="point-body">
-            <h4>準備から当日まで、ぜんぶサイテキ</h4>
-            <p>企画提案・什器手配・スタッフ採用・教育・当日運営・撤収まで、すべてサイテキが代わりに行います。主催者の負担はゼロです。</p>
-          </div>
-        </div>
-        <div class="point-row">
-          <span class="point-tag">POINT 02</span>
-          <div class="point-body">
-            <h4>商品はすべて番号で管理</h4>
-            <p>商品を番号で並べているので、スタッフは迷わずすぐに取り出せます。POPにも番号がついているので、お客さんも番号を伝えるだけで注文できます。</p>
-          </div>
-        </div>
-        <div class="point-row">
-          <span class="point-tag">POINT 03</span>
-          <div class="point-body">
-            <h4>並んでいる間に、お買い物</h4>
-            <p>会場限定アプリ「OPT!M（オプティム）」で、列に並んでいる間に商品を選んで注文リストを作れます。窓口ではQRコードを見せるだけ。買い物時間が約1/3に短縮されます。</p>
-          </div>
-        </div>
-        <div class="point-row">
-          <span class="point-tag">POINT 04</span>
-          <div class="point-body">
-            <h4>完全オフラインで動くレジ</h4>
-            <p>密集した会場でも電波の影響を受けない独自レジ「POST!M（ポスティム）」を採用。会計が止まる心配はありません。</p>
-          </div>
-        </div>
-        <div class="point-row">
-          <span class="point-tag">POINT 05</span>
-          <div class="point-body">
-            <h4>売れたデータが、次の販売に活きる</h4>
-            <p>誰がいつ何を買ったかの情報が自動で残るので、次回の製造数や品揃えの判断に使えます。「作りすぎ」や「売り切れ」を減らせます。</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section alt">
-    <div class="section-inner">
-      <div class="section-head">
-        <h2>導入後の変化</h2>
-      </div>
-      <div class="image-grid cols-3">
-        <img src="assets/parts/impact-1.png" alt="平均購入金額 156% UP">
-        <img src="assets/parts/impact-2.png" alt="会計時間 1/3 に短縮">
-        <img src="assets/parts/impact-3.png" alt="通信障害 0">
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-inner">
-      <div class="section-head">
-        <h2>こんなイベントで<br>使われています</h2>
-      </div>
-      <div class="case-grid">
-        <div class="case-card">
-          <div class="case-tag">音楽フェス</div>
-          <h4>VIVA LA ROCK / RUSH BALL / MONSTER baSH</h4>
-        </div>
-        <div class="case-card">
-          <div class="case-tag">舞台・ミュージカル</div>
-          <h4>ミュージカル『ジョジョの奇妙な冒険』<br>ミュージカル『刀剣乱舞』</h4>
-        </div>
-        <div class="case-card">
-          <div class="case-tag">アニメ・ゲーム</div>
-          <h4>呪術廻戦 ファントムパレード<br>コミックマーケット</h4>
-        </div>
-        <div class="case-card">
-          <div class="case-tag">アーティスト</div>
-          <h4>緑黄色社会 / fripSide / ゲスの極み乙女</h4>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="bottom-cta">
-    <div class="bottom-cta-inner">
-      <div class="bottom-cta-brand">
-        <img src="assets/brand/logo-dark.png" alt="株式会社サイテキ">
-        <span class="brand-name">SAITEKI INC.</span>
-      </div>
-      <h2>会場での販売、<br>サイテキにお任せください</h2>
-      <p>イベント規模・会場・予算に合わせて、最適なご提案をします。<br>ご相談・お見積もりは無料です。</p>
-      <div class="contacts-box">
-        <div class="contact-item"><span class="k">TEL</span><span class="v">03-6868-5533</span></div>
-        <div class="contact-item"><span class="k">MAIL</span><span class="v">toiawase@saiteki-net.jp</span></div>
-      </div>
-      <div class="back-row"><a href="index.html" class="back-link">← サービス一覧へ戻る</a></div>
-    </div>
-  </section>
-
-  <footer class="l-footer">
-    <div class="l-footer__foot">
-      <div class="l-footer__inner">
-        <ul class="l-footer__nav">
-          <li><a href="https://saiteki-net.jp/">TOP</a></li>
-          <li><a href="https://saiteki-net.jp/activity/">私たちの取り組み</a></li>
-          <li><a href="https://saiteki-net.jp/topic/">新着情報</a></li>
-          <li><a href="https://saiteki-net.jp/report/">実績</a></li>
-          <li><a href="https://saiteki-net.jp/interview/">インタビュー</a></li>
-          <li><a href="https://saiteki-net.jp/history/">会社の沿革</a></li>
-          <li><a href="https://saiteki-net.jp/company-info/">会社概要</a></li>
-          <li><a href="http://saiteki-net.jp/wordpress/contact-from/">お問い合わせ</a></li>
-          <li><a href="https://saiteki-net.jp/privacy-policy/">プライバシーポリシー</a></li>
+    <div class="problem-grid">
+      <div class="problem-col fan">
+        <span class="problem-col__tag">FAN ／ お客様の本音</span>
+        <h3>「並んでる時間がもったいない」</h3>
+        <ul>
+          <li>長い行列で本編に間に合わない</li>
+          <li>欲しかった商品が売り切れていた</li>
+          <li>レジが遅く、せっかくの楽しい気分が萎える</li>
+          <li>選びたいのに、後ろが詰まって急かされる</li>
         </ul>
-        <p class="l-footer__copyright">&copy; 株式会社サイテキ 2023</p>
+      </div>
+      <div class="problem-col host">
+        <span class="problem-col__tag">HOST ／ 主催・運営の悩み</span>
+        <h3>「もっと売れたはずなのに」</h3>
+        <ul>
+          <li>行列のせいで購入を諦めた人がたくさんいる</li>
+          <li>レジ要員を増やしても、人件費だけがかさむ</li>
+          <li>その日の売れ筋・残在庫がリアルタイムで見えない</li>
+          <li>翌日以降の発注判断が、いつも勘任せ</li>
+        </ul>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
+
+<section class="section section--light1">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">SOLUTION</span>
+      <h2>並ばない、迷わない、待たない。<br><span class="accent">OPT!M</span> の3ステップ。</h2>
+      <p class="section-head__lead">
+        モバイルオーダー × QR決済 × 売場設計。「現地に着いたらすぐ受け取れる」体験で、レジ前の混雑を構造から無くします。
+      </p>
+    </div>
+    <div class="flow-grid">
+
+      <div class="flow-step">
+        <div class="flow-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <defs><linearGradient id="gb-g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#88b8ff"/><stop offset="1" stop-color="#d63976"/></linearGradient></defs>
+            <rect x="6.5" y="2.5" width="11" height="19" rx="2" stroke="url(#gb-g1)"/>
+            <line x1="11" y1="18.5" x2="13" y2="18.5" stroke="url(#gb-g1)"/>
+            <path d="M9.5 6.5h5 M9.5 9.5h5 M14 14l-3 3-1.5-1.5" stroke="url(#gb-g1)"/>
+          </svg>
+        </div>
+        <h3>STEP 1 ／ 事前選択</h3>
+        <p>来場前にスマホで商品を確認 → カートに入れて決済まで完了。</p>
+      </div>
+
+      <div class="flow-arrow">→</div>
+
+      <div class="flow-step">
+        <div class="flow-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <defs><linearGradient id="gb-g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#88b8ff"/><stop offset="1" stop-color="#d63976"/></linearGradient></defs>
+            <rect x="4" y="4" width="7" height="7" rx="1" stroke="url(#gb-g2)"/>
+            <rect x="13" y="4" width="7" height="7" rx="1" stroke="url(#gb-g2)"/>
+            <rect x="4" y="13" width="7" height="7" rx="1" stroke="url(#gb-g2)"/>
+            <path d="M13 14h3v3 M16 17l4 0M16 20l4 0" stroke="url(#gb-g2)"/>
+          </svg>
+        </div>
+        <h3>STEP 2 ／ QR提示</h3>
+        <p>当日は売り場でQRコードをスタッフに提示。商品はすでに用意済み。</p>
+      </div>
+
+      <div class="flow-arrow">→</div>
+
+      <div class="flow-step">
+        <div class="flow-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <defs><linearGradient id="gb-g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#88b8ff"/><stop offset="1" stop-color="#d63976"/></linearGradient></defs>
+            <circle cx="12" cy="12" r="8.5" stroke="url(#gb-g3)"/>
+            <path d="M8 12l2.5 2.5L16 9" stroke="url(#gb-g3)"/>
+          </svg>
+        </div>
+        <h3>STEP 3 ／ 即決済</h3>
+        <p>待ち時間ゼロで受け取り。レジ前の行列が、物理的に消えます。</p>
+      </div>
+
+    </div>
+
+    <figure class="feature-image">
+      <img src="assets/parts/pptx/image55.png" alt="OPT!Mモバイルアプリの画面：商品一覧と決済UI" loading="lazy">
+      <figcaption>実際のOPT!Mモバイルアプリ画面。来場者は事前にスマホで商品を選び、当日はQRコード提示で即受け取り。</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section section--dark3">
+  <div class="container">
+    <div class="highlight-box">
+      <span class="highlight-box__label">DESIGN INSIGHT</span>
+      <h3>売り場の動線設計で、<br>従来の<strong style="color:#ffaee0">3倍の回転スピード</strong>を実現。</h3>
+      <p>
+        OPT!M を支えるのは、もう一つの専門性 ——「物販現場の動線設計」です。<br>
+        どこに何を置けばお客様が迷わず動けるか。スタッフがどう立てば最短で渡せるか。サイテキは年間100案件超の運営現場で磨いた「並ばせない物販の設計図」を持っています。
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--light1">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">RESULTS</span>
+      <h2>数字が証明する、<span class="accent">「並ばせない物販」</span>の効果。</h2>
+      <p class="section-head__lead">
+        実際の稼働現場で計測した数値。「行列が無くなった分、買い物時間が増えた」結果です。
+      </p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat"><div class="stat__num">150<span class="small">%UP</span></div><div class="stat__label">1人あたり平均購入金額<br>¥4,713 → ¥7,359</div></div>
+      <div class="stat"><div class="stat__num">1/3</div><div class="stat__label">レジ対応時間<br>事前選択＋QR提示で短縮</div></div>
+      <div class="stat"><div class="stat__num">18<span class="small">万</span></div><div class="stat__label">OPT!M<br>ユーザーDL数突破</div></div>
+      <div class="stat"><div class="stat__num">100<span class="small">+</span></div><div class="stat__label">年間稼働案件数<br>エンタメ業界を支える</div></div>
+      <div class="stat"><div class="stat__num">0</div><div class="stat__label">通信障害<br>完全オフライン対応</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--white">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">TRUSTED BY</span>
+      <h2>年間<span class="accent">100案件</span>超のエンタメ現場で稼働中。</h2>
+      <p class="section-head__lead">
+        音楽フェスから舞台・アニメ・コミックマーケットまで。ジャンルを問わず、物販のある現場をご一緒しています。
+      </p>
+    </div>
+    <div class="proof-strip">
+      <div class="proof-strip__list">
+        <span class="proof-tag"><span class="proof-tag__cat">FES</span>VIVA LA ROCK</span>
+        <span class="proof-tag"><span class="proof-tag__cat">FES</span>NUMBER SHOT</span>
+        <span class="proof-tag"><span class="proof-tag__cat">FES</span>MONSTER baSH</span>
+        <span class="proof-tag"><span class="proof-tag__cat">FES</span>RUSH BALL</span>
+        <span class="proof-tag"><span class="proof-tag__cat">STAGE</span>ジョジョの奇妙な冒険 ミュージカル</span>
+        <span class="proof-tag"><span class="proof-tag__cat">STAGE</span>刀剣乱舞 舞台版</span>
+        <span class="proof-tag"><span class="proof-tag__cat">ANIME</span>呪術廻戦</span>
+        <span class="proof-tag"><span class="proof-tag__cat">EVENT</span>コミックマーケット</span>
+        <span class="proof-tag"><span class="proof-tag__cat">ARTIST</span>緑黄色社会</span>
+        <span class="proof-tag"><span class="proof-tag__cat">ARTIST</span>ゲスの極み乙女</span>
+        <span class="proof-tag"><span class="proof-tag__cat">ARTIST</span>さよなら青春の光</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--light2">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">OTHER SERVICES</span>
+      <h2>他のサービスも見る</h2>
+    </div>
+    <div class="related-grid">
+      <a href="tsuhan.html" class="related-card">
+        <div class="related-card__bg" style="background-image:url('assets/parts/pptx/hero-event.jpg')"></div>
+        <div class="related-card__overlay"></div>
+        <div class="related-card__content">
+          <span class="related-card__num">SERVICE 02</span>
+          <div class="related-card__title">通販運営</div>
+          <span class="related-card__cta">詳しく見る →</span>
+        </div>
+      </a>
+      <a href="seizou.html" class="related-card">
+        <div class="related-card__bg" style="background-image:url('assets/parts/pptx/hero-inventory.jpg')"></div>
+        <div class="related-card__overlay"></div>
+        <div class="related-card__content">
+          <span class="related-card__num">SERVICE 03</span>
+          <div class="related-card__title">グッズ製造提案</div>
+          <span class="related-card__cta">詳しく見る →</span>
+        </div>
+      </a>
+      <a href="system.html" class="related-card">
+        <div class="related-card__bg" style="background-image:url('assets/parts/pptx/hero-event.jpg')"></div>
+        <div class="related-card__overlay"></div>
+        <div class="related-card__content">
+          <span class="related-card__num">SERVICE 04</span>
+          <div class="related-card__title">システムレンタル</div>
+          <span class="related-card__cta">詳しく見る →</span>
+        </div>
+      </a>
+      <a href="genchi-report.html" class="related-card">
+        <div class="related-card__bg" style="background-image:url('assets/parts/pptx/hero-event.jpg')"></div>
+        <div class="related-card__overlay"></div>
+        <div class="related-card__content">
+          <span class="related-card__num">REPORT</span>
+          <div class="related-card__title">現地レポート</div>
+          <span class="related-card__cta">詳しく見る →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>物販のすべてを、<br><span class="accent">「最適化」</span>しませんか？</h2>
+  <p>システムだけの貸し出しから、全体最適化までお気軽にご相談ください。</p>
+  <div class="cta-buttons">
+    <a href="mailto:toiawase@saiteki-net.jp" class="cta-primary">お問い合わせ</a>
+    <a href="tel:0368685533" class="cta-secondary">03-6868-5533</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  © 株式会社サイテキ ｜ Operation × Technology<br>
+  <a href="hero-demo.html">ホームに戻る</a>
+</footer>
 
 </body>
 </html>

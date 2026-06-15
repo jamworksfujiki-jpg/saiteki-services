@@ -1,138 +1,978 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>株式会社サイテキ | 4サービス差し替えプレビュー</title>
-  <meta name="description" content="saiteki-net.jp のメインバナー下「○○のサイテキ化」4カード部分の差し替え案プレビュー。">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles-common.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>サイテキ HP 動画ヒーロー試作（ISSUE PANDA風）</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #000; color: white; font-family: "Hiragino Sans", "Yu Gothic UI", "Noto Sans JP", sans-serif; }
+
+  .hero {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(5,9,20,0.26) 0%, rgba(5,9,20,0.40) 45%, rgba(5,9,20,0.58) 100%);
+    z-index: 1;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 24px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 14px 36px;
+    border: 2px solid rgba(255,255,255,0.55);
+    border-radius: 999px;
+    font-size: clamp(16px, 2vw, 24px);
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    margin-bottom: 36px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 6px 28px rgba(0,0,0,0.25);
+    animation: fadein 1s ease-out;
+  }
+  .badge .x {
+    display: inline-block;
+    margin: 0 6px;
+    background: linear-gradient(90deg, #88b8ff, #ffaee0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+  }
+  h1 {
+    font-size: clamp(36px, 6vw, 84px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 32px;
+    animation: fadein 1.4s ease-out;
+  }
+  h1 .accent {
+    background: linear-gradient(90deg, #88b8ff, #ffaee0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .sub {
+    font-size: clamp(16px, 1.9vw, 26px);
+    font-weight: 600;
+    opacity: 0.95;
+    max-width: 1100px;
+    margin: 0 auto 44px;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    animation: fadein 1.8s ease-out;
+  }
+  @media (max-width: 900px) {
+    .sub {
+      white-space: normal;
+      font-size: clamp(15px, 4vw, 20px);
+    }
+  }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    background: white;
+    color: #0a4fa3;
+    text-decoration: none;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 15px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: fadein 2.2s ease-out;
+  }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(255,255,255,0.3); }
+
+  /* サイト共通ヘッダー（ヒーロー上の会社ロゴ） */
+  .site-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    padding: 26px 40px;
+  }
+  .site-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0));
+    z-index: -1;
+    pointer-events: none;
+  }
+  .site-header a { display: inline-flex; }
+  .site-header img {
+    display: block;
+    height: 46px;
+    width: auto;
+    filter: drop-shadow(0 2px 10px rgba(0,0,0,0.55));
+    transition: opacity 0.2s;
+  }
+  .site-header a:hover img { opacity: 0.82; }
+  @media (max-width: 720px) {
+    .site-header { padding: 16px 20px; }
+    .site-header img { height: 34px; }
+  }
+
+  @keyframes fadein {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .stats-section {
+    padding: 100px 24px;
+    background: #f5f7fb;
+    color: #1d1d1f;
+    text-align: center;
+  }
+  .stats-section h2 {
+    font-size: clamp(24px, 3vw, 40px);
+    font-weight: 800;
+    margin-bottom: 0;
+    color: #1d1d1f;
+  }
+  .stats-section .kicker {
+    color: #6e6e73 !important;
+  }
+  .stats-section > p {
+    color: #6e6e73 !important;
+    opacity: 1 !important;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .stat {
+    padding: 34px 18px;
+    border: 1px solid #e5e7ec;
+    border-radius: 18px;
+    background: white;
+    box-shadow: 0 6px 28px rgba(10, 79, 163, 0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  /* タブレット：中央寄せで折り返し（下段が左寄せで空かないように） */
+  @media (max-width: 900px) {
+    .stats-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .stat {
+      flex: 0 1 200px;
+      min-width: 170px;
+    }
+  }
+  /* スマホ：2列＋最後の1枚は中央（間延び解消・スクロール量を圧縮） */
+  @media (max-width: 560px) {
+    .stats-grid { gap: 14px; }
+    .stat {
+      flex-basis: calc(50% - 7px);
+      min-width: 0;
+      padding: 26px 14px;
+    }
+  }
+  .stat:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(10, 79, 163, 0.12);
+  }
+  .stat .num {
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 800;
+    background: linear-gradient(135deg, #0a4fa3 0%, #d63976 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+  .stat .num .small { font-size: 0.5em; font-weight: 700; }
+  .stat .label {
+    font-size: 13px;
+    color: #6e6e73;
+    margin-top: 12px;
+    line-height: 1.6;
+  }
+
+  /* ===== Service Cards ===== */
+  .services-section {
+    background: #0d1730;
+    padding: 100px 24px;
+  }
+  .services-head {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .kicker {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 16px;
+  }
+  .services-head h2 {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800;
+    line-height: 1.3;
+  }
+  .services-lead {
+    margin-top: 18px;
+    opacity: 0.65;
+    font-size: 14px;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  @media (max-width: 720px) {
+    .services-grid { grid-template-columns: 1fr; }
+  }
+  .svc-card {
+    position: relative;
+    display: block;
+    height: 380px;
+    border-radius: 20px;
+    overflow: hidden;
+    text-decoration: none;
+    color: white;
+    isolation: isolate;
+    transform: translateZ(0);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .svc-card video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    transition: transform 0.6s ease-out, filter 0.4s ease;
+    filter: brightness(0.85) saturate(1.05);
+  }
+  .svc-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(180deg,
+      rgba(5, 10, 20, 0.15) 0%,
+      rgba(5, 10, 20, 0.45) 50%,
+      rgba(5, 10, 20, 0.92) 100%);
+    transition: background 0.4s ease;
+  }
+  .svc-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 32px;
+    z-index: 2;
+  }
+  .svc-num {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    padding: 4px 12px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  /* システムロゴ（動画上のチップ） */
+  .svc-logos {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 9px 15px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.28);
+    backdrop-filter: blur(6px);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .svc-logos img {
+    display: block;
+    width: auto;
+    height: 19px;
+  }
+  .svc-logos .sep {
+    width: 1px;
+    height: 17px;
+    background: rgba(0,0,0,0.12);
+  }
+  .svc-card:hover .svc-logos {
+    transform: translateY(-2px);
+  }
+  @media (max-width: 720px) {
+    .svc-logos img { height: 17px; }
+    .svc-logos { gap: 11px; padding: 8px 13px; }
+  }
+  .svc-title {
+    font-size: clamp(24px, 2.5vw, 32px);
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -0.005em;
+  }
+  .svc-desc {
+    font-size: 13.5px;
+    opacity: 0.85;
+    line-height: 1.7;
+    margin-bottom: 18px;
+    max-width: 90%;
+  }
+  .svc-cta {
+    display: inline-flex;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 18px;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 999px;
+    transition: background 0.3s, border-color 0.3s, padding 0.3s;
+  }
+  .svc-card:hover {
+    transform: translateY(-6px);
+  }
+  .svc-card:hover video {
+    transform: scale(1.06);
+    filter: brightness(1.0) saturate(1.15);
+  }
+  .svc-card:hover .svc-overlay {
+    background: linear-gradient(180deg,
+      rgba(5, 10, 20, 0.10) 0%,
+      rgba(5, 10, 20, 0.45) 50%,
+      rgba(5, 10, 20, 0.95) 100%);
+  }
+  .svc-card:hover .svc-cta {
+    background: white;
+    color: #0a4fa3;
+    border-color: white;
+    padding: 8px 24px;
+  }
+  /* 5枚目「現地レポート」全幅バナー型カード */
+  .svc-card-wide {
+    grid-column: 1 / -1;
+    display: block;
+    border-radius: 20px;
+    overflow: hidden;
+    text-decoration: none;
+    color: white;
+    isolation: isolate;
+    box-shadow: 0 10px 32px rgba(10, 79, 163, 0.18);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+  }
+  .svc-card-wide img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .svc-card-wide:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 48px rgba(10, 79, 163, 0.28);
+  }
+
+  /* video-band removed */
+
+  /* ===== Logistics Backbone ===== */
+  .logistics-section {
+    position: relative;
+    background: #f4f6fb;
+    padding: 110px 24px;
+    overflow: hidden;
+    color: #1d1d1f;
+  }
+  .logi-bg {
+    position: absolute;
+    inset: 0;
+    background: none;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .logi-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1180px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .logistics-section h2 {
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 900;
+    line-height: 1.4;
+    margin: 14px 0 22px;
+    letter-spacing: -0.005em;
+  }
+  .logi-gradient {
+    background: linear-gradient(90deg, #88b8ff, #ffaee0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+  }
+  .logi-lead {
+    max-width: 760px;
+    margin: 0 auto 56px;
+    font-size: 14px;
+    line-height: 2;
+    color: #5b6675;
+  }
+  /* 2カラム：左=ピラー（01/02/03テキスト）、右=倉庫写真縦積み */
+  .logi-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 1180px;
+    margin: 64px auto 0;
+    text-align: left;
+    align-items: start;
+  }
+  @media (max-width: 880px) {
+    .logi-split { grid-template-columns: 1fr; gap: 48px; margin-top: 48px; }
+  }
+  .logi-pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    padding-top: 12px;
+  }
+  .logi-pillar { position: relative; }
+  .logi-pillar-num {
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1;
+    background: linear-gradient(135deg, #88b8ff, #d63976);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+    letter-spacing: -0.03em;
+  }
+  .logi-pill {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    padding: 5px 14px;
+    background: rgba(10,79,163,0.08);
+    border: 1px solid rgba(10,79,163,0.22);
+    color: #0a4fa3;
+    border-radius: 999px;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+  .logi-pillar h3 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 14px;
+    letter-spacing: -0.005em;
+    color: #1d1d1f;
+  }
+  .logi-pillar p {
+    font-size: 14px;
+    line-height: 1.95;
+    color: #5b6675;
+  }
+  .logi-photos {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .logi-photo {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 18px;
+    display: block;
+    box-shadow: 0 14px 36px rgba(10, 79, 163, 0.12);
+    transition: transform 0.3s ease;
+  }
+  .logi-photo:hover { transform: translateY(-3px) scale(1.01); }
+  @media (max-width: 880px) {
+    .logi-photo { height: 220px; }
+  }
+  .logi-locations {
+    margin-top: 44px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  .loc-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: #6e6e73;
+    margin-right: 6px;
+  }
+  .loc-tag {
+    display: inline-block;
+    font-size: 12px;
+    padding: 6px 14px;
+    background: #ffffff;
+    border: 1px solid #e5e7ec;
+    border-radius: 999px;
+    color: #1d1d1f;
+    box-shadow: 0 2px 10px rgba(10,79,163,0.05);
+  }
+
+  /* ===== Flow Process ===== */
+  .flow-section {
+    background: #0b1426;
+    padding: 100px 24px;
+    text-align: center;
+  }
+  .flow-section .kicker { color: rgba(255,255,255,0.5) !important; }
+  .flow-head { margin-bottom: 56px; }
+  .flow-head h2 {
+    font-size: clamp(26px, 3.5vw, 42px);
+    font-weight: 800;
+    line-height: 1.3;
+  }
+  .flow-grid {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 0;
+    max-width: 1180px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  .flow-step {
+    flex: 1 1 260px;
+    max-width: 340px;
+    padding: 40px 28px 32px;
+    background:
+      linear-gradient(#ffffff, #ffffff) padding-box,
+      linear-gradient(135deg, #88b8ff, #ffaee0) border-box;
+    border: 2px solid transparent;
+    border-radius: 18px;
+    text-align: center;
+    color: #1d1d1f;
+    box-shadow: 0 10px 30px rgba(10, 79, 163, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .flow-step:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 44px rgba(10, 79, 163, 0.16);
+  }
+  .flow-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 22px;
+    display: block;
+  }
+  .flow-icon svg { width: 100%; height: 100%; display: block; }
+  .flow-title {
+    font-size: 21px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: #1d1d1f;
+    letter-spacing: -0.005em;
+  }
+  .flow-desc {
+    font-size: 13.5px;
+    line-height: 1.8;
+    color: #5b6675;
+    opacity: 1;
+  }
+  /* ステップ間の接続バー（矢印の置換） */
+  .flow-arrow {
+    align-self: center;
+    width: 56px;
+    height: 10px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(136,184,255,0.85), rgba(255,174,224,0.85));
+    color: transparent;
+    font-size: 0;
+    flex-shrink: 0;
+    margin: 0 8px;
+  }
+  @media (max-width: 1100px) {
+    .flow-arrow { display: none; }
+    .flow-grid { gap: 18px; padding: 0 8px; }
+  }
+
+  /* ===== Message / Manifesto ===== */
+  .message-section {
+    position: relative;
+    background: #050a14;
+    padding: 140px 24px;
+    overflow: hidden;
+    color: white;
+    text-align: center;
+  }
+  .msg-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 40%, rgba(10,79,163,0.45), transparent 55%),
+      radial-gradient(circle at 70% 60%, rgba(214,57,118,0.35), transparent 55%);
+    z-index: 0;
+    pointer-events: none;
+    animation: msgBg 18s ease-in-out infinite alternate;
+  }
+  @keyframes msgBg {
+    0%   { transform: scale(1) translate(0,0); }
+    100% { transform: scale(1.1) translate(2%, -2%); }
+  }
+  .msg-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .msg-headline {
+    font-size: clamp(40px, 8vw, 120px);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 18px 0 48px;
+  }
+  .msg-gradient {
+    background: linear-gradient(90deg, #88b8ff, #ffaee0, #ffd47e);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: msgGrad 6s ease infinite;
+    display: inline-block;
+  }
+  @keyframes msgGrad {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+  }
+  .msg-sub {
+    font-size: clamp(18px, 2.6vw, 32px);
+    line-height: 1.7;
+    font-weight: 700;
+    letter-spacing: 0.005em;
+    opacity: 0.96;
+  }
+  .msg-strong {
+    display: inline-block;
+    padding: 0;
+    background: linear-gradient(180deg, transparent 62%, rgba(255,174,224,0.35) 62%);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+
+  /* ===== Final CTA ===== */
+  .cta-section {
+    padding: 100px 24px;
+    text-align: center;
+    background: #0a4fa3;
+    color: white;
+  }
+  .cta-section h2 {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 18px;
+  }
+  .cta-section p { opacity: 0.95; margin-bottom: 36px; font-size: 15px; }
+  .cta-buttons {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cta-primary, .cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 14px 36px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .cta-primary {
+    background: white;
+    color: #0a4fa3;
+  }
+  .cta-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+  .cta-primary:hover, .cta-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+  }
+
+  footer {
+    text-align: center;
+    padding: 60px 24px;
+    background: #050a14;
+    color: rgba(255,255,255,0.5);
+    font-size: 12px;
+  }
+</style>
 </head>
 <body>
 
-  <header class="l-header">
-    <div class="l-header__inner">
-      <div class="l-header__logo">
-        <a href="https://saiteki-net.jp/"><img src="assets/brand/logo-dark.png" alt="株式会社サイテキ"></a>
+<header class="site-header">
+  <a href="https://saiteki-net.jp/" aria-label="株式会社サイテキ">
+    <img src="assets/brand/saiteki-white.png" alt="株式会社サイテキ">
+  </a>
+</header>
+
+<section class="hero">
+  <video autoplay muted loop playsinline poster="">
+    <source src="assets/videos/concert-13082773.mp4" type="video/mp4">
+  </video>
+  <div class="hero-inner">
+    <span class="badge">OPERATION <span class="x">×</span> TECHNOLOGY</span>
+    <h1>
+      物販の売上と利益を、<br>
+      <span class="accent">最大化する。</span>
+    </h1>
+    <p class="sub">
+      並ぶ苦痛を、選ぶ楽しさへ。最強のファンサービスが、最大の売上と利益を呼ぶ。
+    </p>
+    <a href="#stats" class="cta">サービスを見る →</a>
+  </div>
+</section>
+
+<section class="stats-section" id="stats">
+  <span class="kicker" style="color:rgba(255,255,255,0.5);">RESULTS</span>
+  <h2>各システムを連携させて<br><span style="background:linear-gradient(90deg,#88b8ff,#ffaee0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">掛け算で効果を発揮</span></h2>
+  <p style="opacity:0.65;margin:14px auto 50px;font-size:14px;max-width:640px;">課題解決で得られる結果——ファンと運営双方に嬉しい体験を、数字で。</p>
+  <div class="stats-grid">
+    <div class="stat"><div class="num">150<span class="small">%UP</span></div><div class="label">1人あたり平均購入金額<br>¥4,713 → ¥7,359</div></div>
+    <div class="stat"><div class="num">1/3</div><div class="label">レジ対応時間<br>事前選択＋QR提示で短縮</div></div>
+    <div class="stat"><div class="num">18<span class="small">万</span></div><div class="label">OPT!M<br>ユーザーDL数突破</div></div>
+    <div class="stat"><div class="num">100<span class="small">+</span></div><div class="label">年間稼働案件数<br>エンタメ業界を支える</div></div>
+    <div class="stat"><div class="num">0</div><div class="label">通信障害<br>完全オフライン対応</div></div>
+  </div>
+</section>
+
+<section class="services-section">
+  <div class="services-head">
+    <span class="kicker">SERVICES</span>
+    <h2>企画から販売まで。<br>物販のすべてを<span style="background:linear-gradient(90deg,#88b8ff,#ffaee0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">「最適化」</span>します。</h2>
+    <p class="services-lead">システムだけの貸し出しから全体最適化まで。<br>イベント物販の問題や課題の解決が得意な会社です。</p>
+  </div>
+  <div class="services-grid">
+    <a href="genchi-busshou.html" class="svc-card">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="assets/videos/service01-genchi.mp4" type="video/mp4">
+      </video>
+      <div class="svc-overlay"></div>
+      <div class="svc-logos">
+        <img src="assets/brand/optim.png" alt="OPT!M">
+        <span class="sep"></span>
+        <img src="assets/brand/postim.png" alt="POST!M">
       </div>
-      <nav class="l-header__gnav">
-        <ul class="c-gnav">
-          <li><a href="https://saiteki-net.jp/activity/">私たちの取り組み</a></li>
-          <li><a href="https://saiteki-net.jp/topic/">新着情報</a></li>
-          <li><a href="https://saiteki-net.jp/interview/">インタビュー</a></li>
-          <li><a href="https://saiteki-net.jp/history/">会社の沿革</a></li>
-          <li><a href="https://saiteki-net.jp/company-info/">会社概要</a></li>
-        </ul>
-      </nav>
-      <div class="w-header">
-        <a class="w-header__cta" href="http://saiteki-net.jp/wordpress/contact-from/">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v12H4z"/><path d="M4 6l8 7 8-7"/></svg>
-          <span>お問い合わせ</span>
-        </a>
+      <div class="svc-content">
+        <span class="svc-num">SERVICE 01</span>
+        <h3 class="svc-title">現地物販運営</h3>
+        <p class="svc-desc">売り場効率 × 動きの設計で、待機時間を「買い物時間」に。<br>従来の3倍の回転スピードを実現。</p>
+        <span class="svc-cta">詳しく見る →</span>
+      </div>
+    </a>
+
+    <a href="tsuhan.html" class="svc-card">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="assets/videos/service02-tsuhan.mp4" type="video/mp4">
+      </video>
+      <div class="svc-overlay"></div>
+      <div class="svc-logos">
+        <img src="assets/brand/ectim.png" alt="ECT!M">
+      </div>
+      <div class="svc-content">
+        <span class="svc-num">SERVICE 02</span>
+        <h3 class="svc-title">通販運営</h3>
+        <p class="svc-desc">事前 / 引き取り / ファストパスの3販売チャネルで取りこぼしゼロ。<br>世界約120の国と地域に配送対応。</p>
+        <span class="svc-cta">詳しく見る →</span>
+      </div>
+    </a>
+
+    <a href="seizou.html" class="svc-card">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="assets/videos/service03-seizou.mp4" type="video/mp4">
+      </video>
+      <div class="svc-overlay"></div>
+      <div class="svc-content">
+        <span class="svc-num">SERVICE 03</span>
+        <h3 class="svc-title">グッズ製造提案</h3>
+        <p class="svc-desc">過去の販売データに基づく「売れる」グッズの企画提案。<br>需要予測で在庫ロスを削減。</p>
+        <span class="svc-cta">詳しく見る →</span>
+      </div>
+    </a>
+
+    <a href="system.html" class="svc-card">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="assets/videos/service04-system.mp4" type="video/mp4">
+      </video>
+      <div class="svc-overlay"></div>
+      <div class="svc-content">
+        <span class="svc-num">SERVICE 04</span>
+        <h3 class="svc-title">システムレンタル</h3>
+        <p class="svc-desc">OPT!M / POST!M / ECT!M ——<br>3つの独自システムを単体貸出から組み合わせまで。</p>
+        <span class="svc-cta">詳しく見る →</span>
+      </div>
+    </a>
+
+    <a href="#" class="svc-card-wide" aria-label="現地レポート — イベント物販での取り組みから分かるサイテキのこだわりと強み">
+      <img src="assets/brand/genchi-report-banner.png" alt="現地レポート — イベント物販での取り組みから分かるサイテキのこだわりと強み" loading="lazy">
+    </a>
+  </div>
+</section>
+
+<section class="logistics-section">
+  <div class="logi-bg"></div>
+  <div class="logi-inner">
+    <span class="kicker" style="color:#8a94a6;">OUR BACKBONE</span>
+    <h2>
+      バックボーンは、<span class="logi-gradient">物流のプロ</span>。<br>
+      だから、<span class="logi-gradient">速くて</span>、<span class="logi-gradient">安くて</span>、<span class="logi-gradient">正確</span>。
+    </h2>
+    <p class="logi-lead">
+      創業2011年、首都圏4拠点の物流ネットワークで培った現場力。<br>
+      "売り場のプロ"ではなく、"運ぶプロ"が物販の現場を設計しているから、<br>
+      他にない3つの強さが生まれます。
+    </p>
+
+    <div class="logi-split">
+      <div class="logi-pillars">
+        <div class="logi-pillar">
+          <div class="logi-pillar-num">01</div>
+          <div class="logi-pill">SPEED</div>
+          <h3>止まらないスピード感</h3>
+          <p>
+            搬入から撤収まで、物流オペレーションがそのまま現場に。<br>
+            公演前の駆け込み手配にも、4拠点の機動力でリアルタイム対応。
+          </p>
+        </div>
+        <div class="logi-pillar">
+          <div class="logi-pillar-num">02</div>
+          <div class="logi-pill">COST</div>
+          <h3>中間業者ゼロのコスト感</h3>
+          <p>
+            製造・倉庫・配送までを自社一気通貫で対応。<br>
+            外注を挟まない構造で、見えないコストを徹底排除します。
+          </p>
+        </div>
+        <div class="logi-pillar">
+          <div class="logi-pillar-num">03</div>
+          <div class="logi-pill">ACCURACY</div>
+          <h3>1点も取り違えない正確性</h3>
+          <p>
+            検品 → 梱包 → 配送 → 在庫照合まで、すべて物流品質で運用。<br>
+            売り場での「品違い」「数違い」を、構造から発生させません。
+          </p>
+        </div>
+      </div>
+      <div class="logi-photos">
+        <img class="logi-photo" src="assets/brand/warehouse-1.jpg" alt="整理整頓された倉庫の棚と商品在庫" loading="lazy">
+        <img class="logi-photo" src="assets/brand/warehouse-2.jpg" alt="検品作業を行うスタッフ" loading="lazy">
+        <img class="logi-photo" src="assets/brand/warehouse-3.jpg" alt="公演用に梱包・出荷準備された段ボール" loading="lazy">
       </div>
     </div>
-  </header>
 
-  <!-- タグライン -->
-  <section class="tagline-block">
-    <div class="tagline-inner">
-      <span class="tagline-tag">OPERATION × TECHNOLOGY</span>
-      <h1>イベント物販のすべてを、<br>まるごとお任せ。</h1>
-      <p>サイテキは、グッズ販売の「めんどう」を引き受ける運営会社です。<br>会場販売・通販・グッズの企画まで、ぜんぶサイテキにお任せください。</p>
+    <div class="logi-locations">
+      <span class="loc-label">物流センター</span>
+      <span class="loc-tag">千葉県市川市</span>
+      <span class="loc-tag">東京都江戸川区</span>
+      <span class="loc-tag">千葉県大多喜町</span>
+      <span class="loc-tag">千葉県匝瑳市</span>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 差し替え対象：saiteki-net.jp メインバナー下の「○○のサイテキ化」4カード部分のみ -->
-  <section class="replace-section" id="service">
-    <div class="replace-inner">
-      <div class="replace-head">
-        <span class="tag">SERVICE</span>
-        <h2>ファンが快適に楽しめば、<br>主催者の売上・利益も自然と上がる。</h2>
-        <p class="replace-lead">行列で開演に間に合わない焦り、お目当てが売り切れた落胆、会場に行けないもどかしさ。</p>
-        <p class="replace-answer">その「不満」を一つずつ取り除くことが、<strong>主催者の売上・利益アップ</strong>に直結します。<br>サイテキの4つのサービスは、すべて<strong>「ファン体験を快適にする」</strong>ためにあります。</p>
-        <div class="replace-divider"></div>
-        <p class="replace-sub">困っていることに合わせて、必要な分だけお選びいただけます。</p>
+<section class="flow-section">
+  <div class="flow-head">
+    <span class="kicker">PROCESS</span>
+    <h2>企画から販売まで、<br><span style="background:linear-gradient(90deg,#88b8ff,#ffaee0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">一気通貫</span>で最適化</h2>
+  </div>
+  <div class="flow-grid">
+    <div class="flow-step">
+      <div class="flow-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <defs><linearGradient id="flow-g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#88b8ff"/><stop offset="1" stop-color="#d63976"/></linearGradient></defs>
+          <path d="M14 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10" stroke="url(#flow-g1)"/>
+          <path d="M14 4v5a1 1 0 0 0 1 1h5" stroke="url(#flow-g1)"/>
+          <path d="M16.5 12.5l-5.5 5.5-3 1 1-3 5.5-5.5a1.414 1.414 0 0 1 2 2z" stroke="url(#flow-g1)"/>
+        </svg>
       </div>
-      <div class="service-grid grid-4">
-
-        <a href="genchi-busshou.html" class="service-card c1">
-          <span class="no">SERVICE 01</span>
-          <h3>現地物販運営</h3>
-          <p>会場での販売を、<br>ぜんぶサイテキが<br>代わりにやります</p>
-          <span class="arrow">詳しく見る →</span>
-        </a>
-
-        <a href="tsuhan.html" class="service-card c2">
-          <span class="no">SERVICE 02</span>
-          <h3>通販運営</h3>
-          <p>サイト制作から発送まで、<br>初期費用0円で<br>まるごとお任せ</p>
-          <span class="arrow">詳しく見る →</span>
-        </a>
-
-        <a href="seizou.html" class="service-card c3">
-          <span class="no">SERVICE 03</span>
-          <h3>グッズ製造提案</h3>
-          <p>「売れるグッズ」を<br>データに基づいて<br>企画・製造します</p>
-          <span class="arrow">詳しく見る →</span>
-        </a>
-
-        <a href="system.html" class="service-card c4">
-          <span class="no">SERVICE 04</span>
-          <h3>システムレンタル</h3>
-          <p>自社で運営したい方へ、<br>サイテキの仕組みだけを<br>お貸しします</p>
-          <span class="arrow">詳しく見る →</span>
-        </a>
-
-      </div>
+      <div class="flow-title">企画・デザイン提案</div>
+      <div class="flow-desc">過去のデータに基づいた<br>「売れる」グッズの提案</div>
     </div>
-  </section>
-
-  <!-- 定量的効果（4カード下部） -->
-  <section class="stats-strip">
-    <div class="stats-strip__inner">
-      <div class="stat">
-        <div class="stat__num">156<span>%</span></div>
-        <div class="stat__label">平均購入単価UP</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <defs><linearGradient id="flow-g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#88b8ff"/><stop offset="1" stop-color="#d63976"/></linearGradient></defs>
+          <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" stroke="url(#flow-g2)"/>
+          <path d="M9.5 12l2 2 3.5-3.5" stroke="url(#flow-g2)"/>
+        </svg>
       </div>
-      <div class="stat">
-        <div class="stat__num">3<span>倍</span></div>
-        <div class="stat__label">販売回転率</div>
-      </div>
-      <div class="stat">
-        <div class="stat__num">1/3</div>
-        <div class="stat__label">会計時間に短縮</div>
-      </div>
-      <div class="stat">
-        <div class="stat__num">18<span>万+</span></div>
-        <div class="stat__label">アプリDL数</div>
-      </div>
-      <div class="stat">
-        <div class="stat__num">100<span>+</span></div>
-        <div class="stat__label">年間稼働実績</div>
-      </div>
+      <div class="flow-title">製造・生産管理</div>
+      <div class="flow-desc">データに基づく需要予測で<br>リスクのない製造数管理</div>
     </div>
-  </section>
-
-  <footer class="l-footer">
-    <div class="l-footer__foot">
-      <div class="l-footer__inner">
-        <ul class="l-footer__nav">
-          <li><a href="https://saiteki-net.jp/">TOP</a></li>
-          <li><a href="https://saiteki-net.jp/activity/">私たちの取り組み</a></li>
-          <li><a href="https://saiteki-net.jp/topic/">新着情報</a></li>
-          <li><a href="https://saiteki-net.jp/report/">実績</a></li>
-          <li><a href="https://saiteki-net.jp/interview/">インタビュー</a></li>
-          <li><a href="https://saiteki-net.jp/history/">会社の沿革</a></li>
-          <li><a href="https://saiteki-net.jp/company-info/">会社概要</a></li>
-          <li><a href="http://saiteki-net.jp/wordpress/contact-from/">お問い合わせ</a></li>
-          <li><a href="https://saiteki-net.jp/privacy-policy/">プライバシーポリシー</a></li>
-        </ul>
-        <p class="l-footer__copyright">&copy; 株式会社サイテキ 2023</p>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <defs><linearGradient id="flow-g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#88b8ff"/><stop offset="1" stop-color="#d63976"/></linearGradient></defs>
+          <path d="M3 8.5h6l-.6 9.5H3.6z" stroke="url(#flow-g3)"/>
+          <path d="M4.5 8.5V7a1.5 1.5 0 0 1 3 0v1.5" stroke="url(#flow-g3)"/>
+          <path d="M9 11.5h11l-1 10.5H10z" stroke="url(#flow-g3)"/>
+          <path d="M12 11.5v-2a2.5 2.5 0 0 1 5 0v2" stroke="url(#flow-g3)"/>
+        </svg>
       </div>
+      <div class="flow-title">現地・EC販売</div>
+      <div class="flow-desc">Operation × Technologyで<br>売上と利益を最大化</div>
     </div>
-  </footer>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>物販のすべてを、<br><span style="background:linear-gradient(90deg,#ffffff,#ffc8e6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">「最適化」</span>しませんか？</h2>
+  <p>システムだけの貸し出しから、全体最適化までお気軽にご相談ください。</p>
+  <div class="cta-buttons">
+    <a href="mailto:toiawase@saiteki-net.jp" class="cta-primary">お問い合わせ</a>
+    <a href="tel:0368685533" class="cta-secondary">03-6868-5533</a>
+  </div>
+</section>
+
+<footer>
+  © 株式会社サイテキ ｜ Operation × Technology<br>
+  動画素材: Pexels（無料・商用利用可）
+</footer>
 
 </body>
 </html>

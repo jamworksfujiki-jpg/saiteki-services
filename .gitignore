@@ -1,1 +1,57 @@
+# Vercel
 .vercel
+
+# Node
+node_modules/
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+
+# 検証用スクショ・スクリプト（ローカルでのみ生成）
+verify-*.png
+verify-*.mjs
+shot-*.mjs
+check-*.png
+preview-*.png
+composite-*.png
+composite-*.mjs
+composite-*.html
+
+# 検証・実験用スクリプト
+inspect.mjs
+inspect2.mjs
+fix-*.cjs
+overflow-check.mjs
+
+# 過去のバックアップ・実験成果物
+index-pre-figma-backup.html
+saiteki-*.png
+make-white-logo.mjs
+
+# 内部資料（GitHub公開しない）
+docs/
+
+# Figmaから抽出した中間ファイル（assets/parts/pptx/ に既に整理済み）
+figma/
+
+# Sales-list 等の社内データ
+sales-list/
+
+# 設計レポート（PDF・HTML成果物）
+design-report.html
+design-report.pdf
+gen-pdf.mjs
+
+# Apply / fix 系の一時スクリプト
+apply-*.mjs
+update-*.mjs
+fix-*.mjs
+grab-*.mjs
+crop.mjs
