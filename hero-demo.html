@@ -545,34 +545,36 @@
     padding-top: 12px;
   }
   .logi-pillar { position: relative; }
+  .logi-num-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
   .logi-pillar-num {
-    font-size: 64px;
+    font-size: 68px;
     font-weight: 900;
     line-height: 1;
-    background: linear-gradient(135deg, #88b8ff, #d63976);
+    background: linear-gradient(90deg, #9ab1fa, #edafe5);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 12px;
     letter-spacing: -0.03em;
   }
   .logi-pill {
-    display: inline-block;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    padding: 5px 14px;
-    background: rgba(10,79,163,0.08);
-    border: 1px solid rgba(10,79,163,0.22);
-    color: #0a4fa3;
-    border-radius: 999px;
-    margin-bottom: 16px;
-    font-weight: 600;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    background: linear-gradient(90deg, #9ab1fa, #edafe5);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   .logi-pillar h3 {
-    font-size: 24px;
+    font-size: clamp(22px, 2.5vw, 32px);
     font-weight: 800;
     margin-bottom: 14px;
-    letter-spacing: -0.005em;
+    letter-spacing: -0.01em;
     color: #1d1d1f;
   }
   .logi-pillar p {
@@ -583,44 +585,53 @@
   .logi-photos {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 32px;
   }
   .logi-photo {
     width: 100%;
-    height: 280px;
+    height: 220px;
     object-fit: cover;
-    border-radius: 18px;
+    border-radius: 10px;
     display: block;
-    box-shadow: 0 14px 36px rgba(10, 79, 163, 0.12);
+    box-shadow: 0 8px 28px rgba(10, 79, 163, 0.10);
     transition: transform 0.3s ease;
   }
   .logi-photo:hover { transform: translateY(-3px) scale(1.01); }
   @media (max-width: 880px) {
-    .logi-photo { height: 220px; }
+    .logi-photo { height: 200px; }
   }
   .logi-locations {
-    margin-top: 44px;
+    margin-top: 56px;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #9ab1fa;
+    border-radius: 10px;
+    padding: 22px 28px;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
     align-items: center;
+    background: #f5f6fb;
   }
   .loc-label {
+    width: 100%;
+    text-align: center;
     font-size: 11px;
     letter-spacing: 0.2em;
     color: #6e6e73;
-    margin-right: 6px;
+    margin-bottom: 4px;
   }
   .loc-tag {
     display: inline-block;
     font-size: 12px;
-    padding: 6px 14px;
+    padding: 6px 16px;
     background: #ffffff;
-    border: 1px solid #e5e7ec;
+    border: 1px solid #d0d8f0;
     border-radius: 999px;
     color: #1d1d1f;
-    box-shadow: 0 2px 10px rgba(10,79,163,0.05);
+    box-shadow: 0 2px 8px rgba(154,177,250,0.12);
   }
 
   /* ===== Flow Process ===== */
@@ -952,8 +963,10 @@
     <div class="logi-split">
       <div class="logi-pillars">
         <div class="logi-pillar">
-          <div class="logi-pillar-num">01</div>
-          <div class="logi-pill">SPEED</div>
+          <div class="logi-num-row">
+            <span class="logi-pillar-num">01</span>
+            <span class="logi-pill">SPEED</span>
+          </div>
           <h3>止まらないスピード感</h3>
           <p>
             搬入から撤収まで、物流オペレーションがそのまま現場に。<br>
@@ -961,8 +974,10 @@
           </p>
         </div>
         <div class="logi-pillar">
-          <div class="logi-pillar-num">02</div>
-          <div class="logi-pill">COST</div>
+          <div class="logi-num-row">
+            <span class="logi-pillar-num">02</span>
+            <span class="logi-pill">COST</span>
+          </div>
           <h3>中間業者ゼロのコスト感</h3>
           <p>
             製造・倉庫・配送までを自社一気通貫で対応。<br>
@@ -970,8 +985,10 @@
           </p>
         </div>
         <div class="logi-pillar">
-          <div class="logi-pillar-num">03</div>
-          <div class="logi-pill">ACCURACY</div>
+          <div class="logi-num-row">
+            <span class="logi-pillar-num">03</span>
+            <span class="logi-pill">ACCURACY</span>
+          </div>
           <h3>1点も取り違えない正確性</h3>
           <p>
             検品 → 梱包 → 配送 → 在庫照合まで、すべて物流品質で運用。<br>
@@ -980,9 +997,9 @@
         </div>
       </div>
       <div class="logi-photos">
-        <img class="logi-photo" src="assets/brand/warehouse-1.jpg" alt="整理整頓された倉庫の棚と商品在庫" loading="lazy">
-        <img class="logi-photo" src="assets/brand/warehouse-2.jpg" alt="検品作業を行うスタッフ" loading="lazy">
-        <img class="logi-photo" src="assets/brand/warehouse-3.jpg" alt="公演用に梱包・出荷準備された段ボール" loading="lazy">
+        <img class="logi-photo" src="assets/brand/logi-speed.jpg" alt="整理整頓された倉庫の棚と商品在庫" loading="lazy">
+        <img class="logi-photo" src="assets/brand/logi-cost.jpg" alt="仕分け・梱包された商品" loading="lazy">
+        <img class="logi-photo" src="assets/brand/logi-accuracy.jpg" alt="検品作業を行うスタッフ" loading="lazy">
       </div>
     </div>
 
