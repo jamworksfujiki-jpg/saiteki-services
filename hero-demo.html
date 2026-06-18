@@ -542,34 +542,40 @@
     line-height: 2;
     color: #5b6675;
   }
-  /* 2カラム：左=ピラー（01/02/03テキスト）、右=倉庫写真縦積み */
-  .logi-split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    max-width: 1180px;
-    margin: 64px auto 0;
-    text-align: left;
-    align-items: start;
-  }
-  @media (max-width: 880px) {
-    .logi-split { grid-template-columns: 1fr; gap: 48px; margin-top: 48px; }
-  }
-  .logi-pillars {
+  /* 交互レイアウト（Figmaデザイン準拠） */
+  .logi-items {
     display: flex;
     flex-direction: column;
-    gap: 64px;
-    padding-top: 12px;
+    gap: 60px;
+    margin-top: 64px;
+    text-align: left;
   }
-  .logi-pillar { position: relative; }
+  .logi-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .logi-item-img {
+    border-radius: 10px;
+    overflow: hidden;
+    height: 280px;
+    box-shadow: 0 8px 28px rgba(10, 79, 163, 0.10);
+  }
+  .logi-item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
   .logi-num-row {
     display: flex;
     align-items: baseline;
     gap: 16px;
-    margin-bottom: 14px;
+    margin-bottom: 8px;
   }
   .logi-pillar-num {
-    font-size: 68px;
+    font-size: clamp(48px, 5.5vw, 68px);
     font-weight: 900;
     line-height: 1;
     background: linear-gradient(90deg, #9ab1fa, #edafe5);
@@ -579,7 +585,7 @@
     letter-spacing: -0.03em;
   }
   .logi-pill {
-    font-size: 28px;
+    font-size: clamp(20px, 2.5vw, 32px);
     font-weight: 800;
     letter-spacing: 0.05em;
     background: linear-gradient(90deg, #9ab1fa, #edafe5);
@@ -587,33 +593,26 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  .logi-pillar h3 {
-    font-size: clamp(22px, 2.5vw, 32px);
+  .logi-item-title {
+    font-size: clamp(22px, 3vw, 38px);
     font-weight: 800;
-    margin-bottom: 14px;
-    letter-spacing: -0.01em;
     color: #1d1d1f;
+    margin: 4px 0 18px;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
   }
-  .logi-pillar p {
-    font-size: 14px;
-    line-height: 1.95;
+  .logi-item-desc {
+    font-size: 15px;
+    line-height: 1.9;
     color: #5b6675;
   }
-  .logi-photos {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-  }
-  .logi-photo {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 10px;
-    display: block;
-    box-shadow: 0 8px 28px rgba(10, 79, 163, 0.10);
-  }
   @media (max-width: 880px) {
-    .logi-photo { height: 200px; }
+    .logi-item {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .logi-item-img { height: 220px; }
+    .logi-item.reverse .logi-item-img { order: -1; }
   }
   .logi-locations {
     margin-top: 56px;
@@ -1082,8 +1081,8 @@
   <div class="logi-inner">
     <span class="kicker" style="color:#8a94a6;">OUR BACKBONE</span>
     <h2>
-      バックボーンは、<span class="logi-gradient">物流のプロ</span>。<br>
-      だから、<span class="logi-gradient">速くて</span>、<span class="logi-gradient">安くて</span>、<span class="logi-gradient">正確</span>。
+      バックボーンは、<span class="logi-gradient">物流のプロ。</span><br>
+      だから、<span class="logi-gradient">速くて、安くて、正確。</span>
     </h2>
     <p class="logi-lead">
       創業2011年、首都圏4拠点の物流ネットワークで培った現場力。<br>
@@ -1091,47 +1090,62 @@
       他にない3つの強さが生まれます。
     </p>
 
-    <div class="logi-split">
-      <div class="logi-pillars">
-        <div class="logi-pillar">
+    <div class="logi-items">
+
+      <!-- 01 SPEED：写真左・テキスト右 -->
+      <div class="logi-item">
+        <div class="logi-item-img">
+          <img src="assets/brand/logi-speed.jpg" alt="整理整頓された倉庫の棚と商品在庫" loading="lazy">
+        </div>
+        <div class="logi-item-text">
           <div class="logi-num-row">
             <span class="logi-pillar-num">01</span>
             <span class="logi-pill">SPEED</span>
           </div>
-          <h3>止まらないスピード感</h3>
-          <p>
+          <p class="logi-item-title">止まらないスピード感</p>
+          <p class="logi-item-desc">
             搬入から撤収まで、物流オペレーションがそのまま現場に。<br>
             公演前の駆け込み手配にも、4拠点の機動力でリアルタイム対応。
           </p>
         </div>
-        <div class="logi-pillar">
+      </div>
+
+      <!-- 02 COST：テキスト左・写真右 -->
+      <div class="logi-item reverse">
+        <div class="logi-item-text">
           <div class="logi-num-row">
             <span class="logi-pillar-num">02</span>
             <span class="logi-pill">COST</span>
           </div>
-          <h3>中間業者ゼロのコスト感</h3>
-          <p>
+          <p class="logi-item-title">中間業者ゼロのコスト感</p>
+          <p class="logi-item-desc">
             製造・倉庫・配送までを自社一気通貫で対応。<br>
             外注を挟まない構造で、見えないコストを徹底排除します。
           </p>
         </div>
-        <div class="logi-pillar">
+        <div class="logi-item-img">
+          <img src="assets/brand/logi-cost.jpg" alt="仕分け・梱包された商品" loading="lazy">
+        </div>
+      </div>
+
+      <!-- 03 ACCURACY：写真左・テキスト右 -->
+      <div class="logi-item">
+        <div class="logi-item-img">
+          <img src="assets/brand/logi-accuracy.jpg" alt="検品作業を行うスタッフ" loading="lazy">
+        </div>
+        <div class="logi-item-text">
           <div class="logi-num-row">
             <span class="logi-pillar-num">03</span>
             <span class="logi-pill">ACCURACY</span>
           </div>
-          <h3>1点も取り違えない正確性</h3>
-          <p>
+          <p class="logi-item-title">1点も取り違えない正確性</p>
+          <p class="logi-item-desc">
             検品 → 梱包 → 配送 → 在庫照合まで、すべて物流品質で運用。<br>
             売り場での「品違い」「数違い」を、構造から発生させません。
           </p>
         </div>
       </div>
-      <div class="logi-photos">
-        <img class="logi-photo" src="assets/brand/logi-speed.jpg" alt="整理整頓された倉庫の棚と商品在庫" loading="lazy">
-        <img class="logi-photo" src="assets/brand/logi-cost.jpg" alt="仕分け・梱包された商品" loading="lazy">
-        <img class="logi-photo" src="assets/brand/logi-accuracy.jpg" alt="検品作業を行うスタッフ" loading="lazy">
-      </div>
+
     </div>
 
     <div class="logi-locations">
