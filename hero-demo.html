@@ -803,10 +803,34 @@
 
   /* ===== Final CTA ===== */
   .cta-section {
+    position: relative;
     padding: 100px 24px;
     text-align: center;
-    background: #0a4fa3;
+    background: #0c1426;
     color: white;
+    overflow: hidden;
+  }
+  .cta-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .cta-bg img {
+    width: 110%;
+    height: 110%;
+    object-fit: cover;
+    object-position: center top;
+    position: absolute;
+    top: -5%;
+    left: -5%;
+    opacity: 0.8;
+  }
+  .cta-section h2,
+  .cta-section p,
+  .cta-buttons {
+    position: relative;
+    z-index: 1;
   }
   .cta-section h2 {
     font-size: clamp(28px, 4vw, 48px);
@@ -1091,6 +1115,9 @@
 </section>
 
 <section class="cta-section">
+  <div class="cta-bg">
+    <img src="assets/brand/cta-bg.jpg" alt="" loading="lazy">
+  </div>
   <h2>物販のすべてを、<br><span style="background:linear-gradient(90deg,#ffffff,#ffc8e6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">「最適化」</span>しませんか？</h2>
   <p>システムだけの貸し出しから、全体最適化までお気軽にご相談ください。</p>
   <div class="cta-buttons">
