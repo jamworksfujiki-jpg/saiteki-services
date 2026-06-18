@@ -177,7 +177,6 @@
     border-radius: 18px;
     background: white;
     box-shadow: 0 6px 28px rgba(10, 79, 163, 0.06);
-    transition: transform 0.3s, box-shadow 0.3s;
   }
   /* タブレット：中央寄せで折り返し（下段が左寄せで空かないように） */
   @media (max-width: 900px) {
@@ -199,10 +198,6 @@
       min-width: 0;
       padding: 26px 14px;
     }
-  }
-  .stat:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 40px rgba(10, 79, 163, 0.12);
   }
   .stat .num {
     font-size: clamp(36px, 5vw, 58px);
@@ -616,9 +611,7 @@
     border-radius: 10px;
     display: block;
     box-shadow: 0 8px 28px rgba(10, 79, 163, 0.10);
-    transition: transform 0.3s ease;
   }
-  .logi-photo:hover { transform: translateY(-3px) scale(1.01); }
   @media (max-width: 880px) {
     .logi-photo { height: 200px; }
   }
@@ -689,13 +682,8 @@
     text-align: center;
     color: #1d1d1f;
     box-shadow: 0 10px 30px rgba(10, 79, 163, 0.08);
-    transition: transform 0.3s, box-shadow 0.3s;
     position: relative;
     z-index: 1;
-  }
-  .flow-step:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 44px rgba(154, 177, 250, 0.22);
   }
   .flow-icon {
     width: 72px;
