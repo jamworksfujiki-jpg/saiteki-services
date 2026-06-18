@@ -363,6 +363,22 @@
     border-radius: 999px;
     transition: background 0.3s, border-color 0.3s, padding 0.3s;
   }
+  .svc-arrow-btn {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    z-index: 3;
+    transition: background 0.3s, border-color 0.3s, transform 0.3s;
+  }
   .svc-card:hover {
     transform: translateY(-6px);
   }
@@ -382,11 +398,17 @@
     border-color: white;
     padding: 8px 24px;
   }
+  .svc-card:hover .svc-arrow-btn {
+    background: rgba(255,255,255,0.28);
+    border-color: rgba(255,255,255,0.6);
+    transform: translate(2px, -2px);
+  }
   /* 5枚目「現地レポート」全幅バナー型カード */
   .svc-card-wide {
     grid-column: 1 / -1;
-    display: block;
-    border-radius: 20px;
+    display: flex;
+    height: 275px;
+    border-radius: 16px;
     overflow: hidden;
     text-decoration: none;
     color: white;
@@ -394,14 +416,68 @@
     box-shadow: 0 10px 32px rgba(10, 79, 163, 0.18);
     transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
   }
-  .svc-card-wide img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
   .svc-card-wide:hover {
     transform: translateY(-4px);
     box-shadow: 0 18px 48px rgba(10, 79, 163, 0.28);
+  }
+  .svc-banner-left {
+    flex: 0 0 50%;
+    background: linear-gradient(135deg, #9ab1fa 0%, #edafe5 100%);
+    padding: 40px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    position: relative;
+  }
+  .svc-banner-left h3 {
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .svc-banner-left p {
+    font-size: clamp(13px, 1.4vw, 16px);
+    opacity: 0.92;
+    line-height: 1.7;
+  }
+  .svc-banner-arrow {
+    position: absolute;
+    right: 40px;
+    bottom: 36px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    border: 1px solid rgba(255,255,255,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .svc-card-wide:hover .svc-banner-arrow {
+    background: rgba(255,255,255,0.4);
+    transform: translate(2px, -2px);
+  }
+  .svc-banner-right {
+    flex: 1;
+    overflow: hidden;
+  }
+  .svc-banner-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease-out;
+  }
+  .svc-card-wide:hover .svc-banner-right img {
+    transform: scale(1.04);
+  }
+  @media (max-width: 720px) {
+    .svc-card-wide { height: auto; flex-direction: column; }
+    .svc-banner-left { flex: none; padding: 32px 28px 48px; }
+    .svc-banner-right { height: 200px; }
   }
 
   /* video-band removed */
@@ -800,8 +876,8 @@
         <span class="svc-num">SERVICE 01</span>
         <h3 class="svc-title">現地物販運営</h3>
         <p class="svc-desc">売り場効率 × 動きの設計で、待機時間を「買い物時間」に。<br>従来の3倍の回転スピードを実現。</p>
-        <span class="svc-cta">詳しく見る →</span>
       </div>
+      <div class="svc-arrow-btn" aria-hidden="true">→</div>
     </a>
 
     <a href="tsuhan.html" class="svc-card">
@@ -816,8 +892,8 @@
         <span class="svc-num">SERVICE 02</span>
         <h3 class="svc-title">通販運営</h3>
         <p class="svc-desc">事前 / 引き取り / ファストパスの3販売チャネルで取りこぼしゼロ。<br>世界約120の国と地域に配送対応。</p>
-        <span class="svc-cta">詳しく見る →</span>
       </div>
+      <div class="svc-arrow-btn" aria-hidden="true">→</div>
     </a>
 
     <a href="seizou.html" class="svc-card">
@@ -829,8 +905,8 @@
         <span class="svc-num">SERVICE 03</span>
         <h3 class="svc-title">グッズ製造提案</h3>
         <p class="svc-desc">過去の販売データに基づく「売れる」グッズの企画提案。<br>需要予測で在庫ロスを削減。</p>
-        <span class="svc-cta">詳しく見る →</span>
       </div>
+      <div class="svc-arrow-btn" aria-hidden="true">→</div>
     </a>
 
     <a href="system.html" class="svc-card">
@@ -842,12 +918,19 @@
         <span class="svc-num">SERVICE 04</span>
         <h3 class="svc-title">システムレンタル</h3>
         <p class="svc-desc">OPT!M / POST!M / ECT!M ——<br>3つの独自システムを単体貸出から組み合わせまで。</p>
-        <span class="svc-cta">詳しく見る →</span>
       </div>
+      <div class="svc-arrow-btn" aria-hidden="true">→</div>
     </a>
 
     <a href="#" class="svc-card-wide" aria-label="現地レポート — イベント物販での取り組みから分かるサイテキのこだわりと強み">
-      <img src="assets/brand/genchi-report-banner.png" alt="現地レポート — イベント物販での取り組みから分かるサイテキのこだわりと強み" loading="lazy">
+      <div class="svc-banner-left">
+        <h3>現地レポート</h3>
+        <p>イベント物販での取り組みから分かる<br>サイテキのこだわりと強み</p>
+        <div class="svc-banner-arrow" aria-hidden="true">→</div>
+      </div>
+      <div class="svc-banner-right">
+        <img src="assets/brand/genchi-report-banner.png" alt="" loading="lazy">
+      </div>
     </a>
   </div>
 </section>
