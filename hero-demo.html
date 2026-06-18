@@ -958,16 +958,18 @@
   }
   /* Instagram PR */
   .insta-section {
+    background: #f5f6fb;
+  }
+  .insta-card {
     background: white;
     border-radius: 60px 60px 0 0;
     padding: 64px 24px 80px;
-    margin-top: -2px;
   }
   .insta-inner {
-    max-width: 1040px;
+    max-width: 1080px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1.6fr;
+    grid-template-columns: auto 1fr;
     gap: 56px;
     align-items: center;
   }
@@ -980,21 +982,21 @@
     -webkit-text-fill-color: transparent;
     margin-bottom: 4px;
   }
+  .insta-title-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
   .insta-heading {
-    font-size: clamp(40px, 5vw, 60px);
+    font-size: 60px;
     font-weight: 900;
-    line-height: 1.1;
+    line-height: 1;
     background: linear-gradient(90deg, #9ab1fa, #edafe5);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 16px;
-  }
-  .insta-link-row {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 20px;
+    white-space: nowrap;
   }
   .insta-arrow-btn {
     width: 48px;
@@ -1018,6 +1020,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 14px;
+    overflow: visible;
   }
   .insta-photo {
     border-radius: 18px;
@@ -1031,8 +1034,8 @@
     object-fit: cover;
     display: block;
   }
-  @media (max-width: 720px) {
-    .insta-section { border-radius: 36px 36px 0 0; padding: 48px 20px 64px; }
+  @media (max-width: 800px) {
+    .insta-card { border-radius: 36px 36px 0 0; padding: 48px 20px 64px; }
     .insta-inner { grid-template-columns: 1fr; gap: 36px; }
     .insta-heading { font-size: 48px; }
   }
@@ -1306,25 +1309,27 @@
 </section>
 
 <section class="insta-section">
-  <div class="insta-inner">
-    <div class="insta-left">
-      <p class="insta-tagline">ユーザーの#推し活を応援！</p>
-      <p class="insta-heading">Instagram</p>
-      <div class="insta-link-row">
-        <a href="https://www.instagram.com/saiteki.sns" class="insta-arrow-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagramを見る">→</a>
+  <div class="insta-card">
+    <div class="insta-inner">
+      <div class="insta-left">
+        <p class="insta-tagline">ユーザーの#推し活を応援！</p>
+        <div class="insta-title-row">
+          <p class="insta-heading">Instagram</p>
+          <a href="https://www.instagram.com/saiteki.sns" class="insta-arrow-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagramを見る">→</a>
+        </div>
+        <p class="insta-desc">フェスの攻略法・参加者インタビュー・実績紹介など<br>さまざまなコンテンツを発信中！</p>
       </div>
-      <p class="insta-desc">フェスの攻略法・参加者インタビュー・実績紹介など<br>さまざまなコンテンツを発信中！</p>
-    </div>
-    <div class="insta-photos">
-      <a href="https://www.instagram.com/saiteki.sns" class="insta-photo" target="_blank" rel="noopener noreferrer">
-        <img src="assets/brand/insta-photo1.jpg" alt="Instagramの投稿1" loading="lazy">
-      </a>
-      <a href="https://www.instagram.com/saiteki.sns" class="insta-photo" target="_blank" rel="noopener noreferrer">
-        <img src="assets/brand/insta-photo2.jpg" alt="Instagramの投稿2" loading="lazy">
-      </a>
-      <a href="https://www.instagram.com/saiteki.sns" class="insta-photo" target="_blank" rel="noopener noreferrer">
-        <img src="assets/brand/insta-photo3.jpg" alt="Instagramの投稿3" loading="lazy">
-      </a>
+      <div class="insta-photos">
+        <a href="https://www.instagram.com/saiteki.sns" class="insta-photo" target="_blank" rel="noopener noreferrer">
+          <img src="assets/brand/insta-photo1.jpg" alt="Instagramの投稿1" loading="lazy">
+        </a>
+        <a href="https://www.instagram.com/saiteki.sns" class="insta-photo" target="_blank" rel="noopener noreferrer">
+          <img src="assets/brand/insta-photo2.jpg" alt="Instagramの投稿2" loading="lazy">
+        </a>
+        <a href="https://www.instagram.com/saiteki.sns" class="insta-photo" target="_blank" rel="noopener noreferrer">
+          <img src="assets/brand/insta-photo3.jpg" alt="Instagramの投稿3" loading="lazy">
+        </a>
+      </div>
     </div>
   </div>
 </section>
