@@ -959,18 +959,20 @@
   /* Instagram PR */
   .insta-section {
     background: #f5f6fb;
+    overflow: hidden;
   }
   .insta-card {
     background: white;
     border-radius: 60px 60px 0 0;
-    padding: 64px 24px 80px;
+    padding: 64px 5% 80px;
+    overflow: hidden;
   }
   .insta-inner {
-    max-width: 1080px;
+    max-width: 960px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 56px;
+    grid-template-columns: 360px 1fr;
+    gap: 48px;
     align-items: center;
   }
   .insta-tagline {
@@ -991,7 +993,8 @@
   .insta-heading {
     font-size: 60px;
     font-weight: 900;
-    line-height: 1;
+    line-height: 1.2;
+    padding-bottom: 0.1em;
     background: linear-gradient(90deg, #9ab1fa, #edafe5);
     -webkit-background-clip: text;
     background-clip: text;
