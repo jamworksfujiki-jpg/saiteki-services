@@ -109,35 +109,98 @@
 
   /* サイト共通ヘッダー（ヒーロー上の会社ロゴ） */
   .site-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 5;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
     display: flex;
     align-items: center;
-    padding: 26px 40px;
+    justify-content: space-between;
+    padding: 22px 40px;
+    transition: background 0.35s, padding 0.35s;
   }
   .site-header::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0));
+    background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0));
     z-index: -1;
     pointer-events: none;
+    transition: opacity 0.35s;
   }
-  .site-header a { display: inline-flex; }
+  .site-header.scrolled::before { opacity: 0; }
+  .site-header.scrolled {
+    background: rgba(8,15,30,0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 14px 40px;
+  }
+  .site-header .logo-link { display: inline-flex; }
   .site-header img {
     display: block;
-    height: 46px;
+    height: 40px;
     width: auto;
     filter: drop-shadow(0 2px 10px rgba(0,0,0,0.55));
     transition: opacity 0.2s;
   }
-  .site-header a:hover img { opacity: 0.82; }
-  @media (max-width: 720px) {
+  .site-header .logo-link:hover img { opacity: 0.82; }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: white; }
+  .nav-cta {
+    background: white !important;
+    color: #0a4fa3 !important;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+  }
+  .nav-cta:hover { opacity: 0.9; color: #0a4fa3 !important; }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px; height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  @media (max-width: 900px) {
     .site-header { padding: 16px 20px; }
+    .site-header.scrolled { padding: 12px 20px; }
     .site-header img { height: 34px; }
+    .hamburger { display: flex; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      background: rgba(8,15,30,0.97);
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px 24px 28px;
+      gap: 20px;
+    }
+    .nav-links.open { display: flex; }
   }
 
   @keyframes fadein {
@@ -861,12 +924,69 @@
     box-shadow: 0 12px 32px rgba(0,0,0,0.25);
   }
 
-  footer {
-    text-align: center;
-    padding: 60px 24px;
+  .site-footer {
     background: #050a14;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.55);
+    padding: 64px 24px 0;
+  }
+  .footer-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .footer-logo { margin-bottom: 48px; }
+  .footer-logo img { height: 34px; width: auto; opacity: 0.85; }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .footer-col-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .footer-col ul {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .footer-col a {
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: white; }
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 0;
     font-size: 12px;
+    color: rgba(255,255,255,0.28);
+  }
+  .footer-sns {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .footer-sns a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .footer-sns a:hover { color: white; }
+  @media (max-width: 680px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
   }
   /* 新着情報 */
   .news-section {
@@ -1046,10 +1166,21 @@
 </head>
 <body>
 
-<header class="site-header">
-  <a href="https://saiteki-net.jp/" aria-label="株式会社サイテキ">
+<header class="site-header" id="site-header">
+  <a href="https://saiteki-net.jp/" class="logo-link" aria-label="株式会社サイテキ">
     <img src="assets/brand/saiteki-white.png" alt="株式会社サイテキ">
   </a>
+  <button class="hamburger" id="hamburger" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="https://saiteki-net.jp/activity/">私たちの取り組み</a></li>
+    <li><a href="https://saiteki-net.jp/topic/">新着情報</a></li>
+    <li><a href="https://saiteki-net.jp/report/">実績</a></li>
+    <li><a href="https://saiteki-net.jp/interview/">インタビュー</a></li>
+    <li><a href="https://saiteki-net.jp/company-info/">会社概要</a></li>
+    <li><a href="https://saiteki-net.jp/contact-from/" class="nav-cta">お問い合わせ</a></li>
+  </ul>
 </header>
 
 <section class="hero">
@@ -1349,9 +1480,64 @@
   </div>
 </section>
 
-<footer>
-  © 株式会社サイテキ
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <a href="https://saiteki-net.jp/">
+        <img src="assets/brand/saiteki-white.png" alt="株式会社サイテキ">
+      </a>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <p class="footer-col-title">SERVICE</p>
+        <ul>
+          <li><a href="genchi-busshou.html">現地・EC物販</a></li>
+          <li><a href="tsuhan.html">通販・EC</a></li>
+          <li><a href="seizou.html">企画・製造</a></li>
+          <li><a href="system.html">システム開発</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">CONTENTS</p>
+        <ul>
+          <li><a href="https://saiteki-net.jp/activity/" target="_blank" rel="noopener">私たちの取り組み</a></li>
+          <li><a href="https://saiteki-net.jp/topic/" target="_blank" rel="noopener">新着情報</a></li>
+          <li><a href="https://saiteki-net.jp/report/" target="_blank" rel="noopener">実績</a></li>
+          <li><a href="https://saiteki-net.jp/interview/" target="_blank" rel="noopener">インタビュー</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">COMPANY</p>
+        <ul>
+          <li><a href="https://saiteki-net.jp/history/" target="_blank" rel="noopener">会社の沿革</a></li>
+          <li><a href="https://saiteki-net.jp/company-info/" target="_blank" rel="noopener">会社概要</a></li>
+          <li><a href="https://saiteki-net.jp/privacy-policy/" target="_blank" rel="noopener">プライバシーポリシー</a></li>
+          <li><a href="https://saiteki-net.jp/contact-from/" target="_blank" rel="noopener">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 株式会社サイテキ</span>
+      <div class="footer-sns">
+        <a href="https://www.instagram.com/saiteki.sns" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </div>
+    </div>
+  </div>
 </footer>
 
+<script>
+  const header = document.getElementById('site-header');
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  });
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+</script>
 </body>
 </html>
