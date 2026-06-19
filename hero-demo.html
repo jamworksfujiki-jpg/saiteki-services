@@ -41,7 +41,7 @@
     display: inline-block;
     padding: 14px 36px;
     border: 2px solid rgba(255,255,255,0.55);
-    border-radius: 999px;
+    border-radius: 0;
     font-size: clamp(16px, 2vw, 24px);
     font-weight: 700;
     letter-spacing: 0.28em;
@@ -1126,10 +1126,15 @@
     color: white;
     font-size: 19px;
   }
+  .sp-br { display: none; }
+  .pc-br { display: inline; }
   @media (max-width: 600px) {
-    .news-item { flex-wrap: wrap; gap: 8px; }
+    .sp-br { display: inline; }
+    .pc-br { display: none; }
+    .news-item { flex-wrap: wrap; gap: 6px 12px; }
     .news-date { min-width: unset; }
-    .news-text { width: 100%; }
+    .news-badge { flex-shrink: 0; }
+    .news-text { width: 100%; order: 3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   }
   /* Instagram PR */
   .insta-section {
@@ -1268,11 +1273,11 @@
   <div class="hero-inner">
     <span class="badge">OPERATION <span class="x">×</span> TECHNOLOGY</span>
     <h1>
-      物販の売上と利益を、<br>
+      物販の売上と利益を、<br class="pc-br">
       <span class="accent">最大化する。</span>
     </h1>
     <p class="sub">
-      並ぶ苦痛を、選ぶ楽しさへ。最強のファンサービスが、最大の売上と利益を呼ぶ。
+      並ぶ苦痛を、選ぶ楽しさへ。<br class="sp-br">最強のファンサービスが、<br class="sp-br">最大の売上と利益を呼ぶ。
     </p>
   </div>
 </section>
@@ -1280,7 +1285,7 @@
 <section class="stats-section" id="stats">
   <span class="kicker" style="color:rgba(255,255,255,0.5);">RESULTS</span>
   <h2>各システムを連携させて<br><span style="background:linear-gradient(90deg,#60a0ff,#ff78cc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">掛け算で効果を発揮</span></h2>
-  <p style="opacity:0.65;margin:14px auto 36px;font-size:17px;max-width:640px;">課題解決で得られる結果——ファンと運営双方に嬉しい体験を、数字で。</p>
+  <p style="opacity:0.65;margin:14px auto 36px;font-size:17px;max-width:640px;">課題解決で得られる結果——<br class="sp-br">ファンと運営双方に嬉しい体験を、数字で。</p>
   <div style="width:100%;max-width:600px;margin:0 auto 56px;">
     <img src="assets/brand/results-mockup.png" alt="OPT!M / POST!M システムイメージ" style="width:100%;height:auto;display:block;">
   </div>
@@ -1298,7 +1303,7 @@
     <div class="stat">
       <div class="stat-title">OPT!MのDL数</div>
       <div class="num">20<span class="small">万</span></div>
-      <div class="label">ユーザーDL数増加中</div>
+      <div class="label">ユーザーDL数<br class="sp-br">増加中</div>
     </div>
     <div class="stat">
       <div class="stat-title">年間稼働案件数</div>
@@ -1317,7 +1322,7 @@
   <div class="services-head">
     <span class="kicker">SERVICES</span>
     <h2>企画から販売まで。<br>物販のすべてを<span style="background:linear-gradient(90deg,#60a0ff,#ff78cc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">「最適化」</span>します。</h2>
-    <p class="services-lead">システムだけの貸し出しから全体最適化まで。<br>イベント物販の問題や課題の解決が得意な会社です。</p>
+    <p class="services-lead">システムだけの貸し出しから全体最適化まで。<br class="pc-br">イベント物販の問題や課題の解決が得意な会社です。</p>
   </div>
   <div class="services-grid">
     <a href="genchi-busshou.html" class="svc-card">
@@ -1398,12 +1403,11 @@
   <div class="logi-inner">
     <span class="kicker" style="color:#8a94a6;">OUR BACKBONE</span>
     <h2>
-      バックボーンは、<span class="logi-gradient">物流のプロ。</span><br>
-      だから、<span class="logi-gradient">速くて、安くて、正確。</span>
+      バックボーンは、<br class="sp-br"><span class="logi-gradient">物流のプロ。</span><br class="pc-br">だから、<br class="sp-br"><span class="logi-gradient">速くて、安くて、正確。</span>
     </h2>
     <p class="logi-lead">
-      創業2011年、首都圏4拠点の物流ネットワークで培った現場力。<br>
-      "売り場のプロ"ではなく、"運ぶプロ"が物販の現場を設計しているから、<br>
+      創業2011年、首都圏4拠点の物流ネットワークで培った現場力。<br class="pc-br">
+      "売り場のプロ"ではなく、"運ぶプロ"が物販の現場を設計しているから、<br class="pc-br">
       他にない3つの強さが生まれます。
     </p>
 
@@ -1551,7 +1555,7 @@
           <p class="insta-heading">Instagram</p>
           <a href="https://www.instagram.com/saiteki.sns" class="insta-arrow-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagramを見る">→</a>
         </div>
-        <p class="insta-desc">フェス攻略法・参加者インタビュー・実績紹介など<br>さまざまなコンテンツを発信中！</p>
+        <p class="insta-desc">フェス攻略法・参加者インタビュー・実績紹介など<br class="pc-br">さまざまなコンテンツを発信中！</p>
       </div>
       <div class="insta-photos">
         <a href="https://www.instagram.com/saiteki.sns" class="insta-photo" target="_blank" rel="noopener noreferrer">
