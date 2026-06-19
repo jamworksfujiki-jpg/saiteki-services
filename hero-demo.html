@@ -406,7 +406,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 32px;
+    padding: 32px 32px 44px;
     z-index: 2;
   }
   .svc-num {
@@ -708,6 +708,7 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    opacity: 0.7;
   }
   .logi-item-title {
     font-size: clamp(22px, 3vw, 38px);
@@ -749,6 +750,7 @@
     width: 100%;
     text-align: center;
     font-size: 16px;
+    font-weight: 700;
     letter-spacing: 0.2em;
     color: #4a4a52;
     margin-bottom: 6px;
@@ -1206,7 +1208,9 @@
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: opacity 0.25s;
   }
+  .insta-photo:hover img { opacity: 0.72; }
   .insta-photo:last-child img {
     object-position: 30% center;
   }
@@ -1270,7 +1274,6 @@
     <p class="sub">
       並ぶ苦痛を、選ぶ楽しさへ。最強のファンサービスが、最大の売上と利益を呼ぶ。
     </p>
-    <a href="#stats" class="cta">サービスを見る →</a>
   </div>
 </section>
 
@@ -1463,7 +1466,7 @@
     </div>
 
     <div class="logi-locations">
-      <span class="loc-label">物流センター</span>
+      <span class="loc-label">物流センター一覧</span>
       <span class="loc-tag">千葉県市川市</span>
       <span class="loc-tag">東京都江戸川区</span>
       <span class="loc-tag">千葉県大多喜町</span>
@@ -1569,7 +1572,7 @@
   <div class="cta-bg">
     <img src="assets/brand/cta-bg.jpg" alt="" loading="lazy">
   </div>
-  <h2>物販のすべてを、<br><span style="background:linear-gradient(90deg,#ffffff,#ffc8e6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">「最適化」</span>しませんか？</h2>
+  <h2>物販のすべてを、<br><span style="background:linear-gradient(90deg,#60a0ff,#ff78cc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">「最適化」</span>しませんか？</h2>
   <p>システムだけの貸し出しから、全体最適化までお気軽にご相談ください。</p>
   <div class="cta-buttons">
     <a href="mailto:toiawase@saiteki-net.jp" class="cta-primary">お問い合わせ</a>
@@ -1579,10 +1582,14 @@
 
 <footer class="site-footer">
   <div class="footer-inner">
-    <div class="footer-logo">
+    <div class="footer-logo" style="display:flex;align-items:center;gap:32px;flex-wrap:wrap;">
       <a href="https://saiteki-net.jp/">
         <img src="assets/brand/logo-white.png" alt="株式会社サイテキ">
       </a>
+      <address style="font-style:normal;font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;">
+        本社所在地<br>
+        〒104-0033 東京都中央区新川1-3-21
+      </address>
     </div>
     <div class="footer-grid">
       <div class="footer-col">
