@@ -143,6 +143,25 @@
     transition: opacity 0.2s;
   }
   .site-header .logo-link:hover img { opacity: 0.82; }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .header-cta {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border: 1px solid rgba(255,255,255,0.55);
+    padding: 8px 20px;
+    border-radius: 999px;
+    transition: background 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  .header-cta:hover { background: rgba(255,255,255,0.12); border-color: white; }
+  @media (max-width: 500px) { .header-cta { display: none; } }
   .hamburger {
     display: flex;
     flex-direction: column;
@@ -171,10 +190,11 @@
     position: fixed;
     inset: 0;
     z-index: 99;
-    background: rgba(6,12,26,0.98);
+    background: rgba(6,12,26,0.90);
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     padding: 100px 8% 60px;
     opacity: 0;
     pointer-events: none;
@@ -1220,9 +1240,12 @@
   <a href="https://saiteki-net.jp/" class="logo-link" aria-label="株式会社サイテキ">
     <img src="assets/brand/logo-white.png" alt="株式会社サイテキ">
   </a>
-  <button class="hamburger" id="hamburger" aria-label="メニューを開く">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="header-right">
+    <a href="https://saiteki-net.jp/contact-from/" class="header-cta" target="_blank" rel="noopener">お問い合わせ</a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </header>
 
 <nav class="nav-overlay" id="nav-overlay" aria-hidden="true">
