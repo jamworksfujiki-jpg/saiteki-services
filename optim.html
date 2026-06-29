@@ -12,12 +12,43 @@
 </head>
 <body>
 
-<header class="site-header">
-  <a href="/" class="site-header__logo" aria-label="株式会社サイテキ">
-    <img src="assets/brand/saiteki-white.png" alt="株式会社サイテキ">
+<header class="site-header" id="site-header">
+  <a href="/" class="logo-link" aria-label="株式会社サイテキ">
+    <img src="assets/brand/logo-white.png" alt="株式会社サイテキ">
   </a>
-  <a href="/" class="site-header__home">← ホームに戻る</a>
+  <div class="header-right">
+    <a href="https://saiteki-net.jp/contact-from/" class="header-cta" target="_blank" rel="noopener">お問い合わせ</a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </header>
+
+<nav class="nav-overlay" id="nav-overlay" aria-hidden="true">
+  <div class="nav-overlay-grid">
+    <div class="nav-overlay-col">
+      <p class="nav-overlay-col-title">SERVICE</p>
+      <a href="genchi-busshou.html">現地物販運営</a>
+      <a href="tsuhan.html">通販運営</a>
+      <a href="seizou.html">グッズ製造提案</a>
+      <a href="system.html">システムレンタル</a>
+    </div>
+    <div class="nav-overlay-col">
+      <p class="nav-overlay-col-title">CONTENTS</p>
+      <a href="https://saiteki-net.jp/activity/" target="_blank" rel="noopener">私たちの取り組み</a>
+      <a href="https://saiteki-net.jp/topic/" target="_blank" rel="noopener">新着情報</a>
+      <a href="https://saiteki-net.jp/interview/" target="_blank" rel="noopener">インタビュー</a>
+      <a href="genchi-report.html">現地レポート</a>
+    </div>
+    <div class="nav-overlay-col">
+      <p class="nav-overlay-col-title">COMPANY</p>
+      <a href="https://saiteki-net.jp/history/" target="_blank" rel="noopener">会社の沿革</a>
+      <a href="https://saiteki-net.jp/company-info/" target="_blank" rel="noopener">会社概要</a>
+      <a href="https://saiteki-net.jp/privacy-policy/" target="_blank" rel="noopener">プライバシーポリシー</a>
+      <a href="https://saiteki-net.jp/contact-from/" target="_blank" rel="noopener">お問い合わせ</a>
+    </div>
+  </div>
+</nav>
 
 <section class="page-hero">
   <div class="page-hero__bg"></div>
@@ -229,6 +260,7 @@
 </section>
 
 <section class="cta-section">
+  <div class="cta-bg"><img src="assets/brand/cta-bg.jpg" alt="" loading="lazy"></div>
   <h2>物販のすべてを、<br><span class="accent">「最適化」</span>しませんか？</h2>
   <p>システムだけの貸し出しから、全体最適化までお気軽にご相談ください。</p>
   <div class="cta-buttons">
@@ -238,9 +270,77 @@
 </section>
 
 <footer class="site-footer">
-  © 株式会社サイテキ ｜ Operation × Technology<br>
-  <a href="/">ホームに戻る</a>
+  <div class="footer-inner">
+    <div class="footer-logo" style="display:flex;align-items:center;gap:32px;flex-wrap:wrap;">
+      <a href="/">
+        <img src="assets/brand/logo-white.png" alt="株式会社サイテキ">
+      </a>
+      <address style="font-style:normal;font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;">
+        本社所在地<br>
+        〒104-0033 東京都中央区新川1-3-21
+      </address>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <p class="footer-col-title">SERVICE</p>
+        <ul>
+          <li><a href="genchi-busshou.html">現地物販運営</a></li>
+          <li><a href="tsuhan.html">通販運営</a></li>
+          <li><a href="seizou.html">グッズ製造提案</a></li>
+          <li><a href="system.html">システムレンタル</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">CONTENTS</p>
+        <ul>
+          <li><a href="https://saiteki-net.jp/activity/" target="_blank" rel="noopener">私たちの取り組み</a></li>
+          <li><a href="https://saiteki-net.jp/topic/" target="_blank" rel="noopener">新着情報</a></li>
+          <li><a href="https://saiteki-net.jp/interview/" target="_blank" rel="noopener">インタビュー</a></li>
+          <li><a href="genchi-report.html">現地レポート</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">COMPANY</p>
+        <ul>
+          <li><a href="https://saiteki-net.jp/history/" target="_blank" rel="noopener">会社の沿革</a></li>
+          <li><a href="https://saiteki-net.jp/company-info/" target="_blank" rel="noopener">会社概要</a></li>
+          <li><a href="https://saiteki-net.jp/privacy-policy/" target="_blank" rel="noopener">プライバシーポリシー</a></li>
+          <li><a href="https://saiteki-net.jp/contact-from/" target="_blank" rel="noopener">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 株式会社サイテキ</span>
+      <div class="footer-sns">
+        <a href="https://www.instagram.com/saiteki.sns" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </div>
+    </div>
+  </div>
 </footer>
+
+<script>
+  const header = document.getElementById('site-header');
+  const hamburger = document.getElementById('hamburger');
+  const navOverlay = document.getElementById('nav-overlay');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  });
+  function toggleMenu(open) {
+    hamburger.classList.toggle('open', open);
+    navOverlay.classList.toggle('open', open);
+    navOverlay.setAttribute('aria-hidden', String(!open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  hamburger.addEventListener('click', () => {
+    toggleMenu(!hamburger.classList.contains('open'));
+  });
+  navOverlay.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => toggleMenu(false));
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') toggleMenu(false);
+  });
+</script>
 
 </body>
 </html>
