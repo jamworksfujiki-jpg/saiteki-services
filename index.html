@@ -41,7 +41,7 @@
     display: inline-block;
     padding: 14px 36px;
     border: 2px solid rgba(255,255,255,0.55);
-    border-radius: 999px;
+    border-radius: 0;
     font-size: clamp(16px, 2vw, 24px);
     font-weight: 700;
     letter-spacing: 0.28em;
@@ -54,7 +54,7 @@
   .badge .x {
     display: inline-block;
     margin: 0 6px;
-    background: linear-gradient(90deg, #88b8ff, #ffaee0);
+    background: linear-gradient(90deg, #60a0ff, #ff78cc);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -69,7 +69,7 @@
     animation: fadein 1.4s ease-out;
   }
   h1 .accent {
-    background: linear-gradient(90deg, #88b8ff, #ffaee0);
+    background: linear-gradient(90deg, #60a0ff, #ff78cc);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -101,7 +101,7 @@
     text-decoration: none;
     border-radius: 999px;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 18px;
     transition: transform 0.2s, box-shadow 0.2s;
     animation: fadein 2.2s ease-out;
   }
@@ -109,35 +109,140 @@
 
   /* サイト共通ヘッダー（ヒーロー上の会社ロゴ） */
   .site-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 5;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
     display: flex;
     align-items: center;
-    padding: 26px 40px;
+    justify-content: space-between;
+    padding: 22px 40px;
+    transition: background 0.35s, padding 0.35s;
   }
   .site-header::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0));
+    background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0));
     z-index: -1;
     pointer-events: none;
+    transition: opacity 0.35s;
   }
-  .site-header a { display: inline-flex; }
+  .site-header.scrolled::before { opacity: 0; }
+  .site-header.scrolled {
+    background: rgba(8,15,30,0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 14px 40px;
+  }
+  .site-header .logo-link { display: inline-flex; }
   .site-header img {
     display: block;
-    height: 46px;
+    height: 48px;
     width: auto;
     filter: drop-shadow(0 2px 10px rgba(0,0,0,0.55));
     transition: opacity 0.2s;
   }
-  .site-header a:hover img { opacity: 0.82; }
-  @media (max-width: 720px) {
+  .site-header .logo-link:hover img { opacity: 0.82; }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .header-cta {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border: 1px solid rgba(255,255,255,0.55);
+    padding: 8px 20px;
+    border-radius: 999px;
+    transition: background 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  .header-cta:hover { background: rgba(255,255,255,0.12); border-color: white; }
+  @media (max-width: 500px) { .header-cta { display: none; } }
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 8px;
+    z-index: 200;
+  }
+  .hamburger span {
+    display: block;
+    width: 28px; height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: transform 0.35s cubic-bezier(.4,0,.2,1), opacity 0.25s;
+    transform-origin: center;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* ===== Nav Overlay ===== */
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: rgba(6,12,26,0.90);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 8% 60px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-12px);
+    transition: opacity 0.35s, transform 0.35s;
+  }
+  .nav-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  .nav-overlay-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px 60px;
+    max-width: 1000px;
+    width: 100%;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 48px;
+  }
+  .nav-overlay-col-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.38);
+    margin-bottom: 18px;
+  }
+  .nav-overlay-col a {
+    display: block;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 500;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    transition: color 0.2s, padding-left 0.2s;
+  }
+  .nav-overlay-col a:first-of-type { border-top: 1px solid rgba(255,255,255,0.07); }
+  .nav-overlay-col a:hover { color: white; padding-left: 6px; }
+
+  @media (max-width: 900px) {
     .site-header { padding: 16px 20px; }
-    .site-header img { height: 34px; }
+    .site-header.scrolled { padding: 12px 20px; }
+    .site-header img { height: 41px; }
+  }
+  @media (max-width: 700px) {
+    .nav-overlay { padding: 90px 24px 48px; justify-content: flex-start; overflow-y: auto; }
+    .nav-overlay-grid { grid-template-columns: 1fr; gap: 32px; }
   }
 
   @keyframes fadein {
@@ -152,16 +257,16 @@
     text-align: center;
   }
   .stats-section h2 {
-    font-size: clamp(24px, 3vw, 40px);
+    font-size: clamp(28px, 3.5vw, 52px);
     font-weight: 800;
     margin-bottom: 0;
     color: #1d1d1f;
   }
   .stats-section .kicker {
-    color: #6e6e73 !important;
+    color: #1d1d1f !important;
   }
   .stats-section > p {
-    color: #6e6e73 !important;
+    color: #1d1d1f !important;
     opacity: 1 !important;
   }
   .stats-grid {
@@ -177,7 +282,6 @@
     border-radius: 18px;
     background: white;
     box-shadow: 0 6px 28px rgba(10, 79, 163, 0.06);
-    transition: transform 0.3s, box-shadow 0.3s;
   }
   /* タブレット：中央寄せで折り返し（下段が左寄せで空かないように） */
   @media (max-width: 900px) {
@@ -200,10 +304,6 @@
       padding: 26px 14px;
     }
   }
-  .stat:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 40px rgba(10, 79, 163, 0.12);
-  }
   .stat .num {
     font-size: clamp(36px, 5vw, 58px);
     font-weight: 800;
@@ -214,10 +314,22 @@
     line-height: 1;
   }
   .stat .num .small { font-size: 0.5em; font-weight: 700; }
+  .stat-title {
+    font-size: 16px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #0a4fa3 0%, #d63976 100%);
+    color: white;
+    -webkit-text-fill-color: white;
+    padding: 4px 12px;
+    border-radius: 999px;
+    display: inline-block;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
   .stat .label {
-    font-size: 13px;
-    color: #6e6e73;
-    margin-top: 12px;
+    font-size: 14px;
+    color: #1d1d1f;
+    margin-top: 6px;
     line-height: 1.6;
   }
 
@@ -232,25 +344,25 @@
   }
   .kicker {
     display: inline-block;
-    font-size: 11px;
+    font-size: 14px;
     letter-spacing: 0.3em;
     color: rgba(255,255,255,0.5);
     margin-bottom: 16px;
   }
   .services-head h2 {
-    font-size: clamp(28px, 4vw, 48px);
+    font-size: clamp(28px, 4vw, 52px);
     font-weight: 800;
     line-height: 1.3;
   }
   .services-lead {
     margin-top: 18px;
     opacity: 0.65;
-    font-size: 14px;
+    font-size: 17px;
   }
   .services-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
+    gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -260,7 +372,7 @@
   .svc-card {
     position: relative;
     display: block;
-    height: 380px;
+    height: 460px;
     border-radius: 20px;
     overflow: hidden;
     text-decoration: none;
@@ -294,12 +406,12 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 32px;
+    padding: 32px 32px 44px;
     z-index: 2;
   }
   .svc-num {
     display: inline-block;
-    font-size: 11px;
+    font-size: 14px;
     letter-spacing: 0.25em;
     padding: 4px 12px;
     background: rgba(255,255,255,0.15);
@@ -307,61 +419,73 @@
     border-radius: 999px;
     margin-bottom: 14px;
   }
-  /* システムロゴ（動画上のチップ） */
+  /* システムロゴ（左上コーナータブ） */
   .svc-logos {
     position: absolute;
-    top: 18px;
-    left: 18px;
+    top: 0;
+    left: 0;
     z-index: 3;
     display: flex;
     align-items: center;
-    gap: 13px;
-    padding: 9px 15px;
-    background: rgba(255,255,255,0.95);
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.28);
-    backdrop-filter: blur(6px);
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    gap: 10px;
+    padding: 14px 20px 14px 16px;
+    background: white;
+    border-radius: 0 0 20px 0;
   }
   .svc-logos img {
     display: block;
     width: auto;
-    height: 19px;
+    height: 20px;
   }
   .svc-logos .sep {
-    width: 1px;
-    height: 17px;
-    background: rgba(0,0,0,0.12);
-  }
-  .svc-card:hover .svc-logos {
-    transform: translateY(-2px);
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.25);
   }
   @media (max-width: 720px) {
     .svc-logos img { height: 17px; }
-    .svc-logos { gap: 11px; padding: 8px 13px; }
+    .svc-logos { gap: 8px; padding: 12px 16px 12px 14px; }
   }
+  .svc-num { display: none; }
   .svc-title {
-    font-size: clamp(24px, 2.5vw, 32px);
+    font-size: clamp(32px, 3vw, 52px);
     font-weight: 800;
-    margin-bottom: 8px;
-    letter-spacing: -0.005em;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
   }
   .svc-desc {
-    font-size: 13.5px;
+    font-size: 17px;
     opacity: 0.85;
     line-height: 1.7;
-    margin-bottom: 18px;
+    margin-bottom: 0;
     max-width: 90%;
   }
   .svc-cta {
     display: inline-flex;
     align-items: center;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 700;
     padding: 8px 18px;
     border: 1px solid rgba(255,255,255,0.4);
     border-radius: 999px;
     transition: background 0.3s, border-color 0.3s, padding 0.3s;
+  }
+  .svc-arrow-btn {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    z-index: 3;
+    transition: background 0.3s, border-color 0.3s, transform 0.3s;
   }
   .svc-card:hover {
     transform: translateY(-6px);
@@ -382,11 +506,17 @@
     border-color: white;
     padding: 8px 24px;
   }
+  .svc-card:hover .svc-arrow-btn {
+    background: rgba(255,255,255,0.28);
+    border-color: rgba(255,255,255,0.6);
+    transform: translate(2px, -2px);
+  }
   /* 5枚目「現地レポート」全幅バナー型カード */
   .svc-card-wide {
     grid-column: 1 / -1;
-    display: block;
-    border-radius: 20px;
+    display: flex;
+    height: 275px;
+    border-radius: 16px;
     overflow: hidden;
     text-decoration: none;
     color: white;
@@ -394,14 +524,90 @@
     box-shadow: 0 10px 32px rgba(10, 79, 163, 0.18);
     transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
   }
-  .svc-card-wide img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
   .svc-card-wide:hover {
     transform: translateY(-4px);
     box-shadow: 0 18px 48px rgba(10, 79, 163, 0.28);
+  }
+  .svc-banner-left {
+    flex: 0 0 50%;
+    background: linear-gradient(135deg, #6e8ff7 0%, #e07ed8 100%);
+    padding: 40px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    position: relative;
+  }
+  .svc-banner-left h3 {
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .svc-banner-left p {
+    font-size: clamp(13px, 1.4vw, 16px);
+    opacity: 0.92;
+    line-height: 1.7;
+  }
+  .svc-banner-arrow {
+    position: absolute;
+    right: 40px;
+    bottom: 36px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    border: 1px solid rgba(255,255,255,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .svc-card-wide:hover .svc-banner-arrow {
+    background: rgba(255,255,255,0.4);
+    transform: translate(2px, -2px);
+  }
+  .svc-banner-right {
+    flex: 1;
+    overflow: hidden;
+  }
+  .svc-banner-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease-out;
+  }
+  .svc-card-wide:hover .svc-banner-right img {
+    transform: scale(1.04);
+  }
+  @media (max-width: 720px) {
+    .svc-card-wide {
+      height: auto;
+      flex-direction: column;
+      overflow: visible;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    .svc-banner-right {
+      order: -1;
+      height: 220px;
+      border-radius: 10px 10px 0 0;
+      overflow: hidden;
+      box-shadow: 0 10px 32px rgba(10, 79, 163, 0.18);
+    }
+    .svc-banner-left {
+      flex: none;
+      padding: 32px 28px 48px;
+      border-radius: 0 0 10px 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 32px rgba(10, 79, 163, 0.18);
+    }
+    .svc-banner-arrow {
+      right: 28px;
+      bottom: 28px;
+    }
   }
 
   /* video-band removed */
@@ -417,9 +623,13 @@
   .logi-bg {
     position: absolute;
     inset: 0;
-    background: none;
     z-index: 0;
     pointer-events: none;
+    background-image: url("assets/brand/logi-bg-wave.png");
+    background-size: 120%;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.2;
   }
   .logi-inner {
     position: relative;
@@ -429,14 +639,14 @@
     text-align: center;
   }
   .logistics-section h2 {
-    font-size: clamp(28px, 4vw, 52px);
+    font-size: clamp(32px, 4vw, 52px);
     font-weight: 900;
     line-height: 1.4;
     margin: 14px 0 22px;
     letter-spacing: -0.005em;
   }
   .logi-gradient {
-    background: linear-gradient(90deg, #88b8ff, #ffaee0);
+    background: linear-gradient(90deg, #60a0ff, #ff78cc);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -445,179 +655,193 @@
   .logi-lead {
     max-width: 760px;
     margin: 0 auto 56px;
-    font-size: 14px;
+    font-size: 17px;
     line-height: 2;
-    color: #5b6675;
+    color: #1d1d1f;
   }
-  /* 2カラム：左=ピラー（01/02/03テキスト）、右=倉庫写真縦積み */
-  .logi-split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    max-width: 1180px;
-    margin: 64px auto 0;
-    text-align: left;
-    align-items: start;
-  }
-  @media (max-width: 880px) {
-    .logi-split { grid-template-columns: 1fr; gap: 48px; margin-top: 48px; }
-  }
-  .logi-pillars {
+  /* 交互レイアウト（Figmaデザイン準拠） */
+  .logi-items {
     display: flex;
     flex-direction: column;
-    gap: 64px;
-    padding-top: 12px;
+    gap: 60px;
+    margin-top: 64px;
+    text-align: left;
   }
-  .logi-pillar { position: relative; }
+  .logi-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .logi-item-img {
+    border-radius: 10px;
+    overflow: hidden;
+    height: 360px;
+  }
+  .logi-item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .logi-num-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
   .logi-pillar-num {
-    font-size: 64px;
+    font-size: clamp(48px, 5.5vw, 68px);
     font-weight: 900;
     line-height: 1;
-    background: linear-gradient(135deg, #88b8ff, #d63976);
+    background: linear-gradient(90deg, #6e8ff7, #e07ed8);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 12px;
     letter-spacing: -0.03em;
   }
   .logi-pill {
-    display: inline-block;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    padding: 5px 14px;
-    background: rgba(10,79,163,0.08);
-    border: 1px solid rgba(10,79,163,0.22);
-    color: #0a4fa3;
-    border-radius: 999px;
-    margin-bottom: 16px;
-    font-weight: 600;
-  }
-  .logi-pillar h3 {
-    font-size: 24px;
+    font-size: clamp(20px, 2.5vw, 32px);
     font-weight: 800;
-    margin-bottom: 14px;
-    letter-spacing: -0.005em;
+    letter-spacing: 0.05em;
+    background: linear-gradient(90deg, #6e8ff7, #e07ed8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0.6;
+  }
+  .logi-item-title {
+    font-size: clamp(22px, 3vw, 38px);
+    font-weight: 800;
+    color: #1d1d1f;
+    margin: 4px 0 18px;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  .logi-item-desc {
+    font-size: 18px;
+    line-height: 1.9;
     color: #1d1d1f;
   }
-  .logi-pillar p {
-    font-size: 14px;
-    line-height: 1.95;
-    color: #5b6675;
-  }
-  .logi-photos {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-  .logi-photo {
-    width: 100%;
-    height: 280px;
-    object-fit: cover;
-    border-radius: 18px;
-    display: block;
-    box-shadow: 0 14px 36px rgba(10, 79, 163, 0.12);
-    transition: transform 0.3s ease;
-  }
-  .logi-photo:hover { transform: translateY(-3px) scale(1.01); }
   @media (max-width: 880px) {
-    .logi-photo { height: 220px; }
+    .logi-item {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .logi-item-img { height: 240px; }
+    .logi-item.reverse .logi-item-img { order: -1; }
   }
   .logi-locations {
-    margin-top: 44px;
+    margin-top: 56px;
+    max-width: 740px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #6e8ff7;
+    border-radius: 10px;
+    padding: 28px 36px;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
     justify-content: center;
     align-items: center;
+    background: #f5f6fb;
   }
   .loc-label {
-    font-size: 11px;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
     letter-spacing: 0.2em;
-    color: #6e6e73;
-    margin-right: 6px;
+    color: #1d1d1f;
+    margin-bottom: 6px;
   }
   .loc-tag {
     display: inline-block;
-    font-size: 12px;
-    padding: 6px 14px;
+    font-size: 17px;
+    padding: 8px 22px;
     background: #ffffff;
-    border: 1px solid #e5e7ec;
+    border: 1px solid #d0d8f0;
     border-radius: 999px;
     color: #1d1d1f;
-    box-shadow: 0 2px 10px rgba(10,79,163,0.05);
+    box-shadow: 0 2px 8px rgba(154,177,250,0.12);
   }
 
   /* ===== Flow Process ===== */
   .flow-section {
-    background: #0b1426;
+    background: #0c1426;
     padding: 100px 24px;
     text-align: center;
   }
   .flow-section .kicker { color: rgba(255,255,255,0.5) !important; }
   .flow-head { margin-bottom: 56px; }
   .flow-head h2 {
-    font-size: clamp(26px, 3.5vw, 42px);
+    font-size: clamp(30px, 3.5vw, 52px);
     font-weight: 800;
     line-height: 1.3;
   }
   .flow-grid {
     display: flex;
-    align-items: stretch;
+    align-items: center;
     justify-content: center;
     gap: 0;
     max-width: 1180px;
     margin: 0 auto;
     flex-wrap: wrap;
+    position: relative;
   }
   .flow-step {
     flex: 1 1 260px;
-    max-width: 340px;
-    padding: 40px 28px 32px;
-    background:
-      linear-gradient(#ffffff, #ffffff) padding-box,
-      linear-gradient(135deg, #88b8ff, #ffaee0) border-box;
-    border: 2px solid transparent;
+    max-width: 333px;
+    padding: 40px 28px 36px;
+    background: white;
+    border: 2.8px solid #6e8ff7;
     border-radius: 18px;
     text-align: center;
     color: #1d1d1f;
     box-shadow: 0 10px 30px rgba(10, 79, 163, 0.08);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .flow-step:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 44px rgba(10, 79, 163, 0.16);
+    position: relative;
+    z-index: 1;
   }
   .flow-icon {
-    width: 64px;
-    height: 64px;
-    margin: 0 auto 22px;
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .flow-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     display: block;
   }
-  .flow-icon svg { width: 100%; height: 100%; display: block; }
   .flow-title {
-    font-size: 21px;
+    font-size: clamp(18px, 2vw, 28px);
     font-weight: 800;
     margin-bottom: 12px;
     color: #1d1d1f;
-    letter-spacing: -0.005em;
+    letter-spacing: -0.01em;
   }
   .flow-desc {
-    font-size: 13.5px;
+    font-size: 17px;
     line-height: 1.8;
-    color: #5b6675;
-    opacity: 1;
+    color: #1d1d1f;
   }
-  /* ステップ間の接続バー（矢印の置換） */
+  /* ステップ間の接続バー */
   .flow-arrow {
     align-self: center;
-    width: 56px;
-    height: 10px;
+    width: 48px;
+    height: 8px;
     border-radius: 999px;
-    background: linear-gradient(90deg, rgba(136,184,255,0.85), rgba(255,174,224,0.85));
+    background: linear-gradient(90deg, #6e8ff7, #e07ed8);
+    opacity: 0.7;
     color: transparent;
     font-size: 0;
     flex-shrink: 0;
-    margin: 0 8px;
+    margin: 0 -4px;
+    position: relative;
+    z-index: 0;
   }
   @media (max-width: 1100px) {
     .flow-arrow { display: none; }
@@ -661,7 +885,7 @@
     margin: 18px 0 48px;
   }
   .msg-gradient {
-    background: linear-gradient(90deg, #88b8ff, #ffaee0, #ffd47e);
+    background: linear-gradient(90deg, #60a0ff, #ff78cc, #ffd47e);
     background-size: 200% 200%;
     -webkit-background-clip: text;
     background-clip: text;
@@ -690,18 +914,42 @@
 
   /* ===== Final CTA ===== */
   .cta-section {
+    position: relative;
     padding: 100px 24px;
     text-align: center;
-    background: #0a4fa3;
+    background: #0c1426;
     color: white;
+    overflow: hidden;
+  }
+  .cta-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .cta-bg img {
+    width: 110%;
+    height: 140%;
+    object-fit: cover;
+    object-position: center center;
+    position: absolute;
+    top: -40%;
+    left: -5%;
+    opacity: 0.8;
+  }
+  .cta-section h2,
+  .cta-section p,
+  .cta-buttons {
+    position: relative;
+    z-index: 1;
   }
   .cta-section h2 {
-    font-size: clamp(28px, 4vw, 48px);
+    font-size: clamp(28px, 4vw, 52px);
     font-weight: 800;
     line-height: 1.3;
     margin-bottom: 18px;
   }
-  .cta-section p { opacity: 0.95; margin-bottom: 36px; font-size: 15px; }
+  .cta-section p { opacity: 0.95; margin-bottom: 36px; font-size: 18px; }
   .cta-buttons {
     display: flex;
     gap: 14px;
@@ -715,7 +963,7 @@
     border-radius: 999px;
     text-decoration: none;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 18px;
     transition: transform 0.2s, box-shadow 0.2s;
   }
   .cta-primary {
@@ -732,58 +980,349 @@
     box-shadow: 0 12px 32px rgba(0,0,0,0.25);
   }
 
-  footer {
-    text-align: center;
-    padding: 60px 24px;
+  .site-footer {
     background: #050a14;
+    color: rgba(255,255,255,0.55);
+    padding: 64px 24px 0;
+  }
+  .footer-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .footer-logo { margin-bottom: 48px; }
+  .footer-logo img { height: 41px; width: auto; opacity: 0.85; }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .footer-col-title {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .footer-col ul {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .footer-col a {
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 17px;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: white; }
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 0;
+    font-size: 15px;
+    color: rgba(255,255,255,0.28);
+  }
+  .footer-sns {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .footer-sns a {
     color: rgba(255,255,255,0.5);
-    font-size: 12px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.2s;
+  }
+  .footer-sns a:hover { color: white; }
+  @media (max-width: 680px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  }
+  /* 新着情報 */
+  .news-section {
+    background: #f5f6fb;
+    padding: 72px 24px 64px;
+  }
+  .news-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .news-heading {
+    font-size: clamp(32px, 3.5vw, 52px);
+    font-weight: 900;
+    text-align: center;
+    color: #1d1d1f;
+    margin: 0 0 40px;
+  }
+  .news-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .news-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid #dde1ed;
+    text-decoration: none;
+    color: #1d1d1f;
+  }
+  .news-item:first-child {
+    border-top: 1px solid #dde1ed;
+  }
+  .news-date {
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+    color: #1d1d1f;
+    min-width: 90px;
+  }
+  .news-badge {
+    background: #5579ea;
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .news-text {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.5;
+    flex: 1;
+  }
+  .news-more-wrap {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-top: 24px;
+  }
+  .news-more {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #1d1d1f;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .news-more-circle {
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    background: #5579ea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 19px;
+  }
+  .sp-br { display: none; }
+  .pc-br { display: inline; }
+  @media (max-width: 600px) {
+    .sp-br { display: inline; }
+    .pc-br { display: none; }
+    .news-item { flex-wrap: wrap; gap: 6px 12px; }
+    .news-date { min-width: unset; }
+    .news-badge { flex-shrink: 0; }
+    .news-text { flex: 0 0 100%; order: 3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  }
+  /* Instagram PR */
+  .insta-section {
+    background: #f5f6fb;
+    overflow: hidden;
+  }
+  .insta-card {
+    background: white;
+    border-radius: 60px 60px 0 0;
+    padding: 44px 4% 60px;
+  }
+  .insta-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .insta-tagline {
+    font-size: 21px;
+    font-weight: 600;
+    background: linear-gradient(90deg, #6e8ff7, #e07ed8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 4px;
+  }
+  .insta-title-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .insta-heading {
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1.3;
+    background: linear-gradient(90deg, #6e8ff7, #e07ed8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    white-space: nowrap;
+  }
+  .insta-arrow-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6e8ff7, #e07ed8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 21px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .insta-desc {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #1d1d1f;
+  }
+  .insta-photos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    overflow: visible;
+  }
+  .insta-photo {
+    border-radius: 18px;
+    overflow: hidden;
+    aspect-ratio: 1;
+  }
+  .insta-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.25s;
+  }
+  .insta-photo:hover img { opacity: 0.72; }
+  .insta-photo:last-child img {
+    object-position: 30% center;
+  }
+  @media (max-width: 800px) {
+    .insta-card { border-radius: 36px 36px 0 0; padding: 36px 20px 52px; }
+    .insta-inner { grid-template-columns: 1fr; gap: 28px; }
+    .insta-heading { font-size: 44px; }
   }
 </style>
 </head>
 <body>
 
-<header class="site-header">
-  <a href="https://saiteki-net.jp/" aria-label="株式会社サイテキ">
-    <img src="assets/brand/saiteki-white.png" alt="株式会社サイテキ">
+<header class="site-header" id="site-header">
+  <a href="https://saiteki-net.jp/" class="logo-link" aria-label="株式会社サイテキ">
+    <img src="assets/brand/logo-white.png" alt="株式会社サイテキ">
   </a>
+  <div class="header-right">
+    <a href="https://saiteki-net.jp/contact-from/" class="header-cta" target="_blank" rel="noopener">お問い合わせ</a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </header>
+
+<nav class="nav-overlay" id="nav-overlay" aria-hidden="true">
+  <div class="nav-overlay-grid">
+    <div class="nav-overlay-col">
+      <p class="nav-overlay-col-title">SERVICE</p>
+      <a href="genchi-busshou.html">現地物販運営</a>
+      <a href="tsuhan.html">通販運営</a>
+      <a href="seizou.html">グッズ製造提案</a>
+      <a href="system.html">システムレンタル</a>
+    </div>
+    <div class="nav-overlay-col">
+      <p class="nav-overlay-col-title">CONTENTS</p>
+      <a href="https://saiteki-net.jp/activity/" target="_blank" rel="noopener">私たちの取り組み</a>
+      <a href="https://saiteki-net.jp/topic/" target="_blank" rel="noopener">新着情報</a>
+      <a href="https://saiteki-net.jp/interview/" target="_blank" rel="noopener">インタビュー</a>
+      <a href="genchi-report.html">現地レポート</a>
+    </div>
+    <div class="nav-overlay-col">
+      <p class="nav-overlay-col-title">COMPANY</p>
+      <a href="https://saiteki-net.jp/history/" target="_blank" rel="noopener">会社の沿革</a>
+      <a href="https://saiteki-net.jp/company-info/" target="_blank" rel="noopener">会社概要</a>
+      <a href="https://saiteki-net.jp/privacy-policy/" target="_blank" rel="noopener">プライバシーポリシー</a>
+      <a href="https://saiteki-net.jp/contact-from/" target="_blank" rel="noopener">お問い合わせ</a>
+    </div>
+  </div>
+</nav>
 
 <section class="hero">
   <video autoplay muted loop playsinline poster="">
-    <source src="assets/videos/concert-13082773.mp4" type="video/mp4">
+    <source src="assets/videos/fv-compressed.mp4" type="video/mp4">
   </video>
   <div class="hero-inner">
     <span class="badge">OPERATION <span class="x">×</span> TECHNOLOGY</span>
     <h1>
-      物販の売上と利益を、<br>
+      物販の売上と利益を、<br class="pc-br">
       <span class="accent">最大化する。</span>
     </h1>
     <p class="sub">
-      並ぶ苦痛を、選ぶ楽しさへ。最強のファンサービスが、最大の売上と利益を呼ぶ。
+      並ぶ苦痛を、選ぶ楽しさへ。<br class="sp-br">最強のファンサービスが、<br class="sp-br">最大の売上と利益を呼ぶ。
     </p>
-    <a href="#stats" class="cta">サービスを見る →</a>
   </div>
 </section>
 
 <section class="stats-section" id="stats">
   <span class="kicker" style="color:rgba(255,255,255,0.5);">RESULTS</span>
-  <h2>各システムを連携させて<br><span style="background:linear-gradient(90deg,#88b8ff,#ffaee0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">掛け算で効果を発揮</span></h2>
-  <p style="opacity:0.65;margin:14px auto 50px;font-size:14px;max-width:640px;">課題解決で得られる結果——ファンと運営双方に嬉しい体験を、数字で。</p>
+  <h2>製造・通販・会場を連携させて<br><span style="background:linear-gradient(90deg,#60a0ff,#ff78cc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">掛け算で効果を発揮</span></h2>
+  <p style="opacity:0.65;margin:14px auto 36px;font-size:17px;max-width:640px;">課題解決で得られる結果——<br class="sp-br">ファンと運営双方に嬉しい体験を、数字で。</p>
+  <div style="width:100%;max-width:600px;margin:0 auto 56px;">
+    <img src="assets/brand/results-mockup.png" alt="OPT!M / POST!M システムイメージ" style="width:100%;height:auto;display:block;">
+  </div>
   <div class="stats-grid">
-    <div class="stat"><div class="num">150<span class="small">%UP</span></div><div class="label">1人あたり平均購入金額<br>¥4,713 → ¥7,359</div></div>
-    <div class="stat"><div class="num">1/3</div><div class="label">レジ対応時間<br>事前選択＋QR提示で短縮</div></div>
-    <div class="stat"><div class="num">18<span class="small">万</span></div><div class="label">OPT!M<br>ユーザーDL数突破</div></div>
-    <div class="stat"><div class="num">100<span class="small">+</span></div><div class="label">年間稼働案件数<br>エンタメ業界を支える</div></div>
-    <div class="stat"><div class="num">0</div><div class="label">通信障害<br>完全オフライン対応</div></div>
+    <div class="stat">
+      <div class="stat-title">1人あたり平均購入金額</div>
+      <div class="num">150<span class="small">%UP</span></div>
+      <div class="label">¥4,713 → ¥7,359</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">レジ対応時間</div>
+      <div class="num">1/3</div>
+      <div class="label" style="white-space:nowrap;">事前選択＋QR提示で短縮</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">OPT!MのDL数</div>
+      <div class="num">20<span class="small">万</span></div>
+      <div class="label">ユーザーDL数<br class="sp-br">増加中</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">年間稼働案件数</div>
+      <div class="num">100<span class="small">+</span></div>
+      <div class="label">エンタメ業界を支援</div>
+    </div>
+    <div class="stat">
+      <div class="stat-title">通信障害</div>
+      <div class="num">0<span class="small">件</span></div>
+      <div class="label">完全オフライン対応</div>
+    </div>
   </div>
 </section>
 
 <section class="services-section">
   <div class="services-head">
     <span class="kicker">SERVICES</span>
-    <h2>企画から販売まで。<br>物販のすべてを<span style="background:linear-gradient(90deg,#88b8ff,#ffaee0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">「最適化」</span>します。</h2>
-    <p class="services-lead">システムだけの貸し出しから全体最適化まで。<br>イベント物販の問題や課題の解決が得意な会社です。</p>
+    <h2>企画から販売まで。<br>物販のすべてを<span style="background:linear-gradient(90deg,#60a0ff,#ff78cc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">「最適化」</span>します。</h2>
+    <p class="services-lead">システムだけの貸し出しから全体最適化まで。<br class="pc-br">イベント物販の問題や課題の解決が得意な会社です。</p>
   </div>
   <div class="services-grid">
     <a href="genchi-busshou.html" class="svc-card">
@@ -800,8 +1339,8 @@
         <span class="svc-num">SERVICE 01</span>
         <h3 class="svc-title">現地物販運営</h3>
         <p class="svc-desc">売り場効率 × 動きの設計で、待機時間を「買い物時間」に。<br>従来の3倍の回転スピードを実現。</p>
-        <span class="svc-cta">詳しく見る →</span>
       </div>
+      <div class="svc-arrow-btn" aria-hidden="true">→</div>
     </a>
 
     <a href="tsuhan.html" class="svc-card">
@@ -816,8 +1355,8 @@
         <span class="svc-num">SERVICE 02</span>
         <h3 class="svc-title">通販運営</h3>
         <p class="svc-desc">事前 / 引き取り / ファストパスの3販売チャネルで取りこぼしゼロ。<br>世界約120の国と地域に配送対応。</p>
-        <span class="svc-cta">詳しく見る →</span>
       </div>
+      <div class="svc-arrow-btn" aria-hidden="true">→</div>
     </a>
 
     <a href="seizou.html" class="svc-card">
@@ -827,10 +1366,10 @@
       <div class="svc-overlay"></div>
       <div class="svc-content">
         <span class="svc-num">SERVICE 03</span>
-        <h3 class="svc-title">グッズ製造提案</h3>
-        <p class="svc-desc">過去の販売データに基づく「売れる」グッズの企画提案。<br>需要予測で在庫ロスを削減。</p>
-        <span class="svc-cta">詳しく見る →</span>
+        <h3 class="svc-title">グッズ計画提案</h3>
+        <p class="svc-desc">過去販売データに基づいた「売れる」グッズを企画提案。<br>需要予測で製造数を最適化。<br>製造～販売まで行い、在庫ロスを構造から削減します。</p>
       </div>
+      <div class="svc-arrow-btn" aria-hidden="true">→</div>
     </a>
 
     <a href="system.html" class="svc-card">
@@ -842,12 +1381,19 @@
         <span class="svc-num">SERVICE 04</span>
         <h3 class="svc-title">システムレンタル</h3>
         <p class="svc-desc">OPT!M / POST!M / ECT!M ——<br>3つの独自システムを単体貸出から組み合わせまで。</p>
-        <span class="svc-cta">詳しく見る →</span>
       </div>
+      <div class="svc-arrow-btn" aria-hidden="true">→</div>
     </a>
 
-    <a href="#" class="svc-card-wide" aria-label="現地レポート — イベント物販での取り組みから分かるサイテキのこだわりと強み">
-      <img src="assets/brand/genchi-report-banner.png" alt="現地レポート — イベント物販での取り組みから分かるサイテキのこだわりと強み" loading="lazy">
+    <a href="genchi-report.html" class="svc-card-wide" aria-label="現地レポート — イベント物販での取り組みから分かるサイテキのこだわりと強み">
+      <div class="svc-banner-left">
+        <h3>現地レポート</h3>
+        <p>イベント物販での取り組みから分かる<br>サイテキのこだわりと強み</p>
+        <div class="svc-banner-arrow" aria-hidden="true">→</div>
+      </div>
+      <div class="svc-banner-right">
+        <img src="assets/brand/genchi-report-banner.png" alt="現地レポートのイラスト" loading="lazy">
+      </div>
     </a>
   </div>
 </section>
@@ -857,54 +1403,74 @@
   <div class="logi-inner">
     <span class="kicker" style="color:#8a94a6;">OUR BACKBONE</span>
     <h2>
-      バックボーンは、<span class="logi-gradient">物流のプロ</span>。<br>
-      だから、<span class="logi-gradient">速くて</span>、<span class="logi-gradient">安くて</span>、<span class="logi-gradient">正確</span>。
+      バックボーンは、<br class="sp-br"><span class="logi-gradient">物流のプロ。</span><br>だから、<br class="sp-br"><span class="logi-gradient">速くて、安くて、<br class="sp-br">正確。</span>
     </h2>
     <p class="logi-lead">
-      創業2011年、首都圏4拠点の物流ネットワークで培った現場力。<br>
-      "売り場のプロ"ではなく、"運ぶプロ"が物販の現場を設計しているから、<br>
+      創業2011年、首都圏4拠点の物流ネットワークで培った現場力。<br class="pc-br">
+      "売り場のプロ"ではなく、"サプライチェーンのプロ"が物販の現場を設計しているから、<br class="pc-br">
       他にない3つの強さが生まれます。
     </p>
 
-    <div class="logi-split">
-      <div class="logi-pillars">
-        <div class="logi-pillar">
-          <div class="logi-pillar-num">01</div>
-          <div class="logi-pill">SPEED</div>
-          <h3>止まらないスピード感</h3>
-          <p>
+    <div class="logi-items">
+
+      <!-- 01 SPEED：写真左・テキスト右 -->
+      <div class="logi-item">
+        <div class="logi-item-img">
+          <img src="assets/brand/logi-speed.jpg" alt="整理整頓された倉庫の棚と商品在庫" loading="lazy">
+        </div>
+        <div class="logi-item-text">
+          <div class="logi-num-row">
+            <span class="logi-pillar-num">01</span>
+            <span class="logi-pill">SPEED</span>
+          </div>
+          <p class="logi-item-title">止まらないスピード感</p>
+          <p class="logi-item-desc">
             搬入から撤収まで、物流オペレーションがそのまま現場に。<br>
             公演前の駆け込み手配にも、4拠点の機動力でリアルタイム対応。
           </p>
         </div>
-        <div class="logi-pillar">
-          <div class="logi-pillar-num">02</div>
-          <div class="logi-pill">COST</div>
-          <h3>中間業者ゼロのコスト感</h3>
-          <p>
+      </div>
+
+      <!-- 02 COST：テキスト左・写真右 -->
+      <div class="logi-item reverse">
+        <div class="logi-item-text">
+          <div class="logi-num-row">
+            <span class="logi-pillar-num">02</span>
+            <span class="logi-pill">COST</span>
+          </div>
+          <p class="logi-item-title">中間業者ゼロのコスト感</p>
+          <p class="logi-item-desc">
             製造・倉庫・配送までを自社一気通貫で対応。<br>
             外注を挟まない構造で、見えないコストを徹底排除します。
           </p>
         </div>
-        <div class="logi-pillar">
-          <div class="logi-pillar-num">03</div>
-          <div class="logi-pill">ACCURACY</div>
-          <h3>1点も取り違えない正確性</h3>
-          <p>
+        <div class="logi-item-img">
+          <img src="assets/brand/logi-cost.jpg" alt="仕分け・梱包された商品" loading="lazy">
+        </div>
+      </div>
+
+      <!-- 03 ACCURACY：写真左・テキスト右 -->
+      <div class="logi-item">
+        <div class="logi-item-img">
+          <img src="assets/brand/logi-accuracy.jpg" alt="検品作業を行うスタッフ" loading="lazy">
+        </div>
+        <div class="logi-item-text">
+          <div class="logi-num-row">
+            <span class="logi-pillar-num">03</span>
+            <span class="logi-pill">ACCURACY</span>
+          </div>
+          <p class="logi-item-title">1点も取り違えない正確性</p>
+          <p class="logi-item-desc">
             検品 → 梱包 → 配送 → 在庫照合まで、すべて物流品質で運用。<br>
             売り場での「品違い」「数違い」を、構造から発生させません。
           </p>
         </div>
       </div>
-      <div class="logi-photos">
-        <img class="logi-photo" src="assets/brand/warehouse-1.jpg" alt="整理整頓された倉庫の棚と商品在庫" loading="lazy">
-        <img class="logi-photo" src="assets/brand/warehouse-2.jpg" alt="検品作業を行うスタッフ" loading="lazy">
-        <img class="logi-photo" src="assets/brand/warehouse-3.jpg" alt="公演用に梱包・出荷準備された段ボール" loading="lazy">
-      </div>
+
     </div>
 
     <div class="logi-locations">
-      <span class="loc-label">物流センター</span>
+      <span class="loc-label">物流センター一覧</span>
       <span class="loc-tag">千葉県市川市</span>
       <span class="loc-tag">東京都江戸川区</span>
       <span class="loc-tag">千葉県大多喜町</span>
@@ -916,43 +1482,28 @@
 <section class="flow-section">
   <div class="flow-head">
     <span class="kicker">PROCESS</span>
-    <h2>企画から販売まで、<br><span style="background:linear-gradient(90deg,#88b8ff,#ffaee0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">一気通貫</span>で最適化</h2>
+    <h2>企画から販売まで、<br><span style="background:linear-gradient(90deg,#60a0ff,#ff78cc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">一気通貫</span>で最適化</h2>
   </div>
   <div class="flow-grid">
     <div class="flow-step">
       <div class="flow-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <defs><linearGradient id="flow-g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#88b8ff"/><stop offset="1" stop-color="#d63976"/></linearGradient></defs>
-          <path d="M14 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10" stroke="url(#flow-g1)"/>
-          <path d="M14 4v5a1 1 0 0 0 1 1h5" stroke="url(#flow-g1)"/>
-          <path d="M16.5 12.5l-5.5 5.5-3 1 1-3 5.5-5.5a1.414 1.414 0 0 1 2 2z" stroke="url(#flow-g1)"/>
-        </svg>
+        <img src="assets/brand/process-icon1.png" alt="企画・デザイン提案">
       </div>
       <div class="flow-title">企画・デザイン提案</div>
       <div class="flow-desc">過去のデータに基づいた<br>「売れる」グッズの提案</div>
     </div>
-    <div class="flow-arrow">→</div>
+    <div class="flow-arrow"></div>
     <div class="flow-step">
       <div class="flow-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <defs><linearGradient id="flow-g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#88b8ff"/><stop offset="1" stop-color="#d63976"/></linearGradient></defs>
-          <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" stroke="url(#flow-g2)"/>
-          <path d="M9.5 12l2 2 3.5-3.5" stroke="url(#flow-g2)"/>
-        </svg>
+        <img src="assets/brand/process-icon2.png" alt="製造・生産管理">
       </div>
       <div class="flow-title">製造・生産管理</div>
       <div class="flow-desc">データに基づく需要予測で<br>リスクのない製造数管理</div>
     </div>
-    <div class="flow-arrow">→</div>
+    <div class="flow-arrow"></div>
     <div class="flow-step">
       <div class="flow-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <defs><linearGradient id="flow-g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#88b8ff"/><stop offset="1" stop-color="#d63976"/></linearGradient></defs>
-          <path d="M3 8.5h6l-.6 9.5H3.6z" stroke="url(#flow-g3)"/>
-          <path d="M4.5 8.5V7a1.5 1.5 0 0 1 3 0v1.5" stroke="url(#flow-g3)"/>
-          <path d="M9 11.5h11l-1 10.5H10z" stroke="url(#flow-g3)"/>
-          <path d="M12 11.5v-2a2.5 2.5 0 0 1 5 0v2" stroke="url(#flow-g3)"/>
-        </svg>
+        <img src="assets/brand/process-icon3.png" alt="現地・EC販売">
       </div>
       <div class="flow-title">現地・EC販売</div>
       <div class="flow-desc">Operation × Technologyで<br>売上と利益を最大化</div>
@@ -960,8 +1511,72 @@
   </div>
 </section>
 
+<section class="news-section">
+  <div class="news-inner">
+    <h2 class="news-heading">最新情報</h2>
+    <ul class="news-list">
+      <li>
+        <a href="https://saiteki-net.jp/2026/05/06/yama-c-u-t%e3%83%aa%e3%83%aa%e3%83%bc%e3%82%b9%e3%83%84%e3%82%a2%e3%83%bc-%e7%be%bd%e5%8c%96-%e3%81%ae%e4%bc%9a%e5%a0%b4%e7%89%a9%e8%b2%a9%e9%81%8b%e5%96%b6%e3%82%92%e5%8f%97/" class="news-item" target="_blank" rel="noopener noreferrer">
+          <span class="news-date">2026.05.06</span>
+          <span class="news-badge">お知らせ</span>
+          <span class="news-text">yama C.U.Tリリースツアー "羽化" の会場物販運営を受託しました。物販専用アプリOPT!M（オプティム）も導入致します。</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://saiteki-net.jp/2026/05/03/viva-la-rock-2026%e3%81%ae%e4%bc%9a%e5%a0%b4%e7%89%a9%e8%b2%a9%e9%81%8b%e5%96%b6%e3%82%92%e5%8f%97%e8%a8%97%e3%81%97%e3%81%be%e3%81%97%e3%81%9f%e3%80%82%e3%82%a2%e3%83%bc%e3%83%86%e3%82%a3%e3%82%b9/" class="news-item" target="_blank" rel="noopener noreferrer">
+          <span class="news-date">2026.05.03</span>
+          <span class="news-badge">お知らせ</span>
+          <span class="news-text">VIVA LA ROCK 2026の会場物販運営を受託しました。アーティスト物販にて物販専用アプリOPT!M（オプティム）も導入致します。</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://saiteki-net.jp/2026/04/10/%e6%98%a5%e3%81%a8%e3%83%92%e3%82%b3%e3%83%bc%e3%82%ad%e3%80%80%e7%ac%ac3%e5%9b%9e%e5%8d%98%e7%8b%ac%e3%83%a9%e3%82%a4%e3%83%96%e3%80%8c%e3%83%a2%e3%83%b3%e3%82%ad%e3%83%bc%e3%83%93%e3%82%b8%e3%83%8d/" class="news-item" target="_blank" rel="noopener noreferrer">
+          <span class="news-date">2026.04.10</span>
+          <span class="news-badge">お知らせ</span>
+          <span class="news-text">春とヒコーキ　第3回単独ライブ「モンキービジネス」の会場物販運営を受託しました。物販専用アプリOPT!M（オプティム）も導入致します。</span>
+        </a>
+      </li>
+    </ul>
+    <div class="news-more-wrap">
+      <a href="https://saiteki-net.jp/topic/" class="news-more" target="_blank" rel="noopener noreferrer">
+        新着一覧
+        <span class="news-more-circle">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="insta-section">
+  <div class="insta-card">
+    <div class="insta-inner">
+      <div class="insta-left">
+        <p class="insta-tagline">ユーザーの#推し活を応援！</p>
+        <div class="insta-title-row">
+          <p class="insta-heading">Instagram</p>
+          <a href="https://www.instagram.com/saiteki.sns" class="insta-arrow-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagramを見る">→</a>
+        </div>
+        <p class="insta-desc">フェス攻略法・参加者インタビュー・実績紹介など<br class="pc-br">さまざまなコンテンツを発信中！</p>
+      </div>
+      <div class="insta-photos">
+        <a href="https://www.instagram.com/saiteki.sns" class="insta-photo" target="_blank" rel="noopener noreferrer">
+          <img src="assets/brand/insta-photo1.jpg" alt="Instagramの投稿1" loading="lazy">
+        </a>
+        <a href="https://www.instagram.com/saiteki.sns" class="insta-photo" target="_blank" rel="noopener noreferrer">
+          <img src="assets/brand/insta-photo2.jpg" alt="Instagramの投稿2" loading="lazy">
+        </a>
+        <a href="https://www.instagram.com/saiteki.sns" class="insta-photo" target="_blank" rel="noopener noreferrer">
+          <img src="assets/brand/insta-photo3.jpg" alt="Instagramの投稿3" loading="lazy">
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="cta-section">
-  <h2>物販のすべてを、<br><span style="background:linear-gradient(90deg,#ffffff,#ffc8e6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">「最適化」</span>しませんか？</h2>
+  <div class="cta-bg">
+    <img src="assets/brand/cta-bg.jpg" alt="" loading="lazy">
+  </div>
+  <h2>物販のすべてを、<br><span style="background:linear-gradient(90deg,#60a0ff,#ff78cc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">「最適化」</span>しませんか？</h2>
   <p>システムだけの貸し出しから、全体最適化までお気軽にご相談ください。</p>
   <div class="cta-buttons">
     <a href="mailto:toiawase@saiteki-net.jp" class="cta-primary">お問い合わせ</a>
@@ -969,10 +1584,82 @@
   </div>
 </section>
 
-<footer>
-  © 株式会社サイテキ ｜ Operation × Technology<br>
-  動画素材: Pexels（無料・商用利用可）
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo" style="display:flex;align-items:center;gap:32px;flex-wrap:wrap;">
+      <a href="https://saiteki-net.jp/">
+        <img src="assets/brand/logo-white.png" alt="株式会社サイテキ">
+      </a>
+      <address style="font-style:normal;font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;">
+        本社所在地<br>
+        〒104-0033 東京都中央区新川1-3-21
+      </address>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <p class="footer-col-title">SERVICE</p>
+        <ul>
+          <li><a href="genchi-busshou.html">現地物販運営</a></li>
+          <li><a href="tsuhan.html">通販運営</a></li>
+          <li><a href="seizou.html">グッズ製造提案</a></li>
+          <li><a href="system.html">システムレンタル</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">CONTENTS</p>
+        <ul>
+          <li><a href="https://saiteki-net.jp/activity/" target="_blank" rel="noopener">私たちの取り組み</a></li>
+          <li><a href="https://saiteki-net.jp/topic/" target="_blank" rel="noopener">新着情報</a></li>
+          <li><a href="https://saiteki-net.jp/interview/" target="_blank" rel="noopener">インタビュー</a></li>
+          <li><a href="genchi-report.html">現地レポート</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">COMPANY</p>
+        <ul>
+          <li><a href="https://saiteki-net.jp/history/" target="_blank" rel="noopener">会社の沿革</a></li>
+          <li><a href="https://saiteki-net.jp/company-info/" target="_blank" rel="noopener">会社概要</a></li>
+          <li><a href="https://saiteki-net.jp/privacy-policy/" target="_blank" rel="noopener">プライバシーポリシー</a></li>
+          <li><a href="https://saiteki-net.jp/contact-from/" target="_blank" rel="noopener">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 株式会社サイテキ</span>
+      <div class="footer-sns">
+        <a href="https://www.instagram.com/saiteki.sns" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </div>
+    </div>
+  </div>
 </footer>
 
+<script>
+  const header = document.getElementById('site-header');
+  const hamburger = document.getElementById('hamburger');
+  const navOverlay = document.getElementById('nav-overlay');
+
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  function toggleMenu(open) {
+    hamburger.classList.toggle('open', open);
+    navOverlay.classList.toggle('open', open);
+    navOverlay.setAttribute('aria-hidden', String(!open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  hamburger.addEventListener('click', () => {
+    toggleMenu(!hamburger.classList.contains('open'));
+  });
+
+  navOverlay.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => toggleMenu(false));
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') toggleMenu(false);
+  });
+</script>
 </body>
 </html>
