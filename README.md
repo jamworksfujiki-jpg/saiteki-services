@@ -2,7 +2,7 @@
 
 イベント物販の「最適化」を提供する株式会社サイテキの公式LPです。
 
-**本番URL**: https://saiteki-services.vercel.app/
+**本番URL**: https://saiteki-net.jp/
 
 ## 構成
 
@@ -14,6 +14,7 @@
 | `seizou.html` | SERVICE 03 ／ グッズ製造提案 |
 | `system.html` | SERVICE 04 ／ システムレンタル |
 | `genchi-report.html` | 現地レポート（事例＋哲学） |
+| `optim.html` / `postim.html` / `ectim.html` | システム詳細（OPT!M / POST!M / ECT!M） |
 
 ### デザインシステム
 - 共通CSS: `assets/css/figma-design.css`（カラー・タイポ・コンポーネント）
@@ -46,9 +47,9 @@
    ```
 
 5. **自動デプロイ**
-   - `main` への push をトリガーに GitHub Actions が動き、Vercel 本番に自動反映されます
+   - `main` への push をトリガーに GitHub Actions が動き、**LoliPop FTP 経由で https://saiteki-net.jp/ に自動反映**されます
    - デプロイ状況: [Actions タブ](../../actions)
-   - 数十秒〜2分で https://saiteki-services.vercel.app/ に反映
+   - 数十秒〜1分で反映
 
 ## 編集ガイド
 
@@ -61,13 +62,14 @@
 | 画像の追加 | `assets/parts/pptx/` または `assets/brand/` に配置してから HTML から参照 |
 
 ### 注意事項
-- **本番URL `saiteki-net.jp` には触らない**（このリポジトリは LP のみ、本サイトは別ドメイン）
+- **LoliPop 上には WordPress 本体・他LPも同居**しているため、GitHub Actions は「repo にあるファイルのみ追加/上書き」の増分同期。LoliPop 側の他ファイルは触りません
 - 大幅変更は **別ブランチで作業 → PR レビュー** が安全（破壊的変更を防ぐため）
-- `node_modules/` `verify-*.png` 等の中間ファイルは `.gitignore` で除外済み
+- `node_modules/` `verify-*.png` `docs/` 等の中間ファイル・社内資料は `.gitignore` および Actions の `exclude` で除外済み
 
 ## トラブル時
 - 自動デプロイが失敗した場合: Actions タブのログを確認
-- 緊急ロールバック: Vercel ダッシュボードから過去のデプロイを Promote
+- 緊急ロールバック: 該当ファイルを1つ前のcommitに戻して push → 再度アップロードで復旧
+- FTP認証情報: GitHub Secrets の `LOLIPOP_FTP_HOST` / `LOLIPOP_FTP_USER` / `LOLIPOP_FTP_PASSWORD`
 
 ## メンテナンス担当
 - 構築: 藤木義紀 (jamworksfujiki@gmail.com / fujiki@jamworks.jp)
