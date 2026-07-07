@@ -6,8 +6,8 @@
 
 :root {
   /* Brand gradient */
-  --grad-start: #88b8ff;
-  --grad-mid: #ffaee0;
+  --grad-start: #60a0ff;
+  --grad-mid: #ff78cc;
   --grad-end: #d63976;
   --grad-warm: #ffd47e;
 
@@ -499,8 +499,8 @@ button { font: inherit; cursor: pointer; }
 }
 .stat__num .small { font-size: 0.5em; font-weight: 700; }
 .stat__label {
-  font-size: 13px;
-  color: var(--ink-mute);
+  font-size: 14px;
+  color: #1d1d1f;
   margin-top: 12px;
   line-height: 1.65;
 }
@@ -903,13 +903,7 @@ button { font: inherit; cursor: pointer; }
   max-width: 980px;
   margin: 56px auto 0;
   padding: 28px;
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  box-shadow: var(--sh-3);
-  transition: transform 0.3s var(--ease), box-shadow 0.3s;
 }
-.feature-image:hover { transform: translateY(-3px); box-shadow: var(--sh-4); }
 .feature-image img {
   width: 100%;
   height: auto;
