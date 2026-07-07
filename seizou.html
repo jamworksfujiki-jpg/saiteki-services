@@ -24,7 +24,7 @@
   .compare-col.good {
     background:
       linear-gradient(#ffffff, #ffffff) padding-box,
-      linear-gradient(135deg, #88b8ff, #ffaee0) border-box;
+      linear-gradient(135deg, #60a0ff, #ff78cc) border-box;
     border: 2px solid transparent;
     box-shadow: 0 10px 30px rgba(10, 79, 163, 0.08);
   }
@@ -51,6 +51,14 @@
   }
   .compare-col.bad li::before { content: "×"; position: absolute; left: 4px; top: -1px; color: #d63976; font-weight: 900; font-size: 18px; }
   .compare-col.good li::before { content: "✓"; position: absolute; left: 4px; top: 0; color: #0a4fa3; font-weight: 900; }
+  p { color: #1d1d1f; font-size: 17px; }
+  .page-hero__lead { color: #fff; }
+  .section--dark2 .section-head__lead { color: #fff; font-size: 16px; }
+  .section--light1 .section-head__lead,
+  .section--white .section-head__lead { color: #1d1d1f; font-size: 16px; }
+  .cta-section p { color: #fff; }
+  .page-more { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #1d1d1f; font-size: 18px; font-weight: 600; margin: 16px auto 0; width: fit-content; }
+  .page-more-circle { width: 33px; height: 33px; border-radius: 50%; background: #5579ea; display: flex; align-items: center; justify-content: center; color: white; font-size: 19px; flex-shrink: 0; }
 </style>
 <link rel="icon" href="https://saiteki-net.jp/wordpress/wp-content/uploads/2023/01/cropped-favicon-32x32.png" sizes="32x32" />
 <link rel="icon" href="https://saiteki-net.jp/wordpress/wp-content/uploads/2023/01/cropped-favicon-192x192.png" sizes="192x192" />
@@ -159,14 +167,14 @@
       <div class="flow-step">
         <div class="flow-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <defs><linearGradient id="sz-g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#88b8ff"/><stop offset="1" stop-color="#d63976"/></linearGradient></defs>
+            <defs><linearGradient id="sz-g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a0ff"/><stop offset="1" stop-color="#d63976"/></linearGradient></defs>
             <line x1="3" y1="20.5" x2="21" y2="20.5" stroke="url(#sz-g1)"/>
             <rect x="5.5" y="13" width="3.5" height="6.5" rx="0.5" stroke="url(#sz-g1)"/>
             <rect x="10.25" y="9" width="3.5" height="10.5" rx="0.5" stroke="url(#sz-g1)"/>
             <rect x="15" y="5" width="3.5" height="14.5" rx="0.5" stroke="url(#sz-g1)"/>
           </svg>
         </div>
-        <h3>STEP 1 ／ データ分析</h3>
+        <h3>STEP 1：データ分析</h3>
         <p>過去の販売実績・ジャンル別売れ筋・客層を分析し、需要を予測します。</p>
       </div>
 
@@ -175,13 +183,13 @@
       <div class="flow-step">
         <div class="flow-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <defs><linearGradient id="sz-g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#88b8ff"/><stop offset="1" stop-color="#d63976"/></linearGradient></defs>
+            <defs><linearGradient id="sz-g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a0ff"/><stop offset="1" stop-color="#d63976"/></linearGradient></defs>
             <path d="M14 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10" stroke="url(#sz-g2)"/>
             <path d="M14 4v5a1 1 0 0 0 1 1h5" stroke="url(#sz-g2)"/>
             <path d="M9 14l2 2 4-4" stroke="url(#sz-g2)"/>
           </svg>
         </div>
-        <h3>STEP 2 ／ 商品提案</h3>
+        <h3>STEP 2：商品提案</h3>
         <p>「売れる」グッズの企画・デザインを提案。色・サイズ展開も最適化します。</p>
       </div>
 
@@ -190,12 +198,12 @@
       <div class="flow-step">
         <div class="flow-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <defs><linearGradient id="sz-g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#88b8ff"/><stop offset="1" stop-color="#d63976"/></linearGradient></defs>
+            <defs><linearGradient id="sz-g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a0ff"/><stop offset="1" stop-color="#d63976"/></linearGradient></defs>
             <path d="M3 7l9-4 9 4-9 4-9-4z" stroke="url(#sz-g3)"/>
             <path d="M3 12l9 4 9-4 M3 17l9 4 9-4" stroke="url(#sz-g3)"/>
           </svg>
         </div>
-        <h3>STEP 3 ／ 製造数管理</h3>
+        <h3>STEP 3：製造数管理</h3>
         <p>需要予測に基づく適正製造数で発注。「売り切れ」「在庫余り」どちらも防ぎます。</p>
       </div>
 
@@ -203,7 +211,8 @@
 
     <figure class="feature-image">
       <img src="assets/parts/pptx/image78.png" alt="POST!M POS画面：商品別売上・在庫の可視化UI" loading="lazy">
-      <figcaption>POST!Mのタブレット型POS画面。商品別の販売実績・残在庫をリアルタイムで可視化し、次回の製造数判断に活かします。<br><a href="postim.html" style="color:#0a4fa3; font-weight:700; text-decoration:underline; text-underline-offset:3px;">POST!M の詳細を見る →</a></figcaption>
+      <figcaption>POST!Mのタブレット型POS画面。商品別の販売実績・残在庫をリアルタイムで可視化し、次回の製造数判断に活かします。</figcaption>
+      <a href="postim.html" class="page-more">POST!M の詳細を見る <span class="page-more-circle">→</span></a>
     </figure>
   </div>
 </section>
@@ -246,7 +255,7 @@
   <div class="container">
     <div class="highlight-box">
       <span class="highlight-box__label">MANUFACTURING NETWORK</span>
-      <h3>製造の<strong style="color:#ffaee0">一気通貫</strong>体制で、<br>提案から納品までを最短化。</h3>
+      <h3>製造の<strong style="color:#ff78cc">一気通貫</strong>体制で、<br>提案から納品までを最短化。</h3>
       <p>
         サイテキは「企画→製造→倉庫→現地販売」までを自社で運用。中間業者を挟まない構造のため、コスト・スピード・品質の3点を同時に最適化できます。<br>
         提案がそのまま製造現場に伝わり、納品まで一直線。発注後の「あれ、なんで遅れてるの？」が起きません。
@@ -280,7 +289,7 @@
       <span class="kicker">TRUSTED BY</span>
       <h2>年間<span class="accent">100案件</span>超のエンタメ現場で稼働中。</h2>
       <p class="section-head__lead">
-        音楽フェスから舞台・アニメ・コミックマーケットまで。ジャンルを問わず、物販のある現場をご一緒しています。
+        音楽フェスから舞台・アニメ・コミックマーケットまで。<br>ジャンルを問わず、物販のある現場をご一緒しています。
       </p>
     </div>
     <div class="proof-strip">
