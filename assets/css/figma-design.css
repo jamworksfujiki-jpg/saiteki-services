@@ -913,8 +913,8 @@ button { font: inherit; cursor: pointer; }
 .feature-image figcaption {
   margin-top: 18px;
   text-align: center;
-  font-size: 13px;
-  color: var(--ink-mute);
+  font-size: 16px;
+  color: #1d1d1f;
   line-height: 1.7;
 }
 .section--dark1 .feature-image,
