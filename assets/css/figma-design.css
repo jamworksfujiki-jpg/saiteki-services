@@ -955,8 +955,8 @@ button { font: inherit; cursor: pointer; }
 .footer-logo img { height: 41px; width: auto; opacity: 0.85; }
 .footer-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 36px 48px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 36px 40px;
   padding-bottom: 48px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
@@ -982,7 +982,7 @@ button { font: inherit; cursor: pointer; }
 .footer-sns { display: flex; align-items: center; gap: 20px; }
 .footer-sns a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 16px; transition: color 0.2s; }
 .footer-sns a:hover { color: white; }
-@media (max-width: 680px) {
+@media (max-width: 900px) {
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
 }

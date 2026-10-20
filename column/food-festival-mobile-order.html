@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>フードフェスのモバイルオーダーシステムとは？行列の最後尾をQRに変え、出店者の回転率と客単価を上げる仕組み（開発中）｜株式会社サイテキ</title>
+<meta name="description" content="フードフェス（食フェス・グルメイベント）向けのモバイルオーダーシステムを株式会社サイテキが開発中です。来場者は行列に並ばずスマホで複数店舗の料理を注文・決済し、できあがり通知で受け取り。出店者は回転率と客単価が上がり、主催者は回遊率とマーケティングデータを得られます。ライブ物販で年間100案件超の運営実績をもとに設計した仕組みを解説します。">
+<link rel="canonical" href="https://saiteki-net.jp/column/food-festival-mobile-order.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="株式会社サイテキ">
+<meta property="og:title" content="フードフェスのモバイルオーダーシステムとは？行列の最後尾をQRに変え、出店者の回転率と客単価を上げる仕組み（開発中）">
+<meta property="og:description" content="フードフェス（食フェス・グルメイベント）向けのモバイルオーダーシステムを株式会社サイテキが開発中です。来場者は行列に並ばずスマホで複数店舗の料理を注文・決済し、できあがり通知で受け取り。出店者は回転率と客単価が上がり、主催者は回遊率とマーケティングデータを得られます。ライブ物販で年間100案件超の運営実績をもとに設計した仕組みを解説します。">
+<meta property="og:url" content="https://saiteki-net.jp/column/food-festival-mobile-order.html">
+<meta property="og:image" content="https://saiteki-net.jp/assets/brand/saiteki-full.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/css/figma-design.css">
+<link rel="stylesheet" href="../assets/css/column.css">
+<link rel="icon" href="https://saiteki-net.jp/wordpress/wp-content/uploads/2023/01/cropped-favicon-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://saiteki-net.jp/wordpress/wp-content/uploads/2023/01/cropped-favicon-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://saiteki-net.jp/wordpress/wp-content/uploads/2023/01/cropped-favicon-180x180.png" />
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "フードフェスのモバイルオーダーシステムとは？行列の最後尾をQRに変え、出店者の回転率と客単価を上げる仕組み（開発中）", "description": "フードフェス（食フェス・グルメイベント）向けのモバイルオーダーシステムを株式会社サイテキが開発中です。来場者は行列に並ばずスマホで複数店舗の料理を注文・決済し、できあがり通知で受け取り。出店者は回転率と客単価が上がり、主催者は回遊率とマーケティングデータを得られます。ライブ物販で年間100案件超の運営実績をもとに設計した仕組みを解説します。", "datePublished": "2026-10-20", "dateModified": "2026-10-20", "inLanguage": "ja", "author": {"@type": "Organization", "name": "株式会社サイテキ", "url": "https://saiteki-net.jp", "address": {"@type": "PostalAddress", "postalCode": "104-0033", "addressRegion": "東京都", "addressLocality": "中央区", "streetAddress": "新川1-3-21", "addressCountry": "JP"}, "telephone": "+81-3-6868-5533", "email": "toiawase@saiteki-net.jp", "foundingDate": "2011-01", "founder": {"@type": "Person", "name": "石山 龍二"}}, "publisher": {"@type": "Organization", "name": "株式会社サイテキ", "url": "https://saiteki-net.jp", "address": {"@type": "PostalAddress", "postalCode": "104-0033", "addressRegion": "東京都", "addressLocality": "中央区", "streetAddress": "新川1-3-21", "addressCountry": "JP"}, "telephone": "+81-3-6868-5533", "email": "toiawase@saiteki-net.jp", "foundingDate": "2011-01", "founder": {"@type": "Person", "name": "石山 龍二"}}, "mainEntityOfPage": "https://saiteki-net.jp/column/food-festival-mobile-order.html", "keywords": "フードフェス モバイルオーダー, 食フェス 行列, グルメイベント 注文システム, フードフェス 出店 売上, イベント モバイルオーダー, サイテキ"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "いつから使えますか？", "acceptedAnswer": {"@type": "Answer", "text": "2026年10月時点で開発中です。試験導入にご協力いただけるフードフェス主催者・出店者を募っていますので、問い合わせフォームからご相談ください。"}}, {"@type": "Question", "name": "来場者はアプリを入れる必要がありますか？", "acceptedAnswer": {"@type": "Answer", "text": "不要です。QRコードからスマホのブラウザで注文でき、ログインも不要です。"}}, {"@type": "Question", "name": "高齢の来場者やスマホを使わない人はどうなりますか？", "acceptedAnswer": {"@type": "Answer", "text": "窓口での口頭注文・会計も残します。スマホで注文する人が増えるほど、口頭注文の列も短くなります。"}}, {"@type": "Question", "name": "出店者側に必要なものは何ですか？", "acceptedAnswer": {"@type": "Answer", "text": "注文を受けるタブレットとインターネット環境です。メニュー登録・売上レポート・受付の一時停止などは店舗側の画面で操作できます。"}}, {"@type": "Question", "name": "小さなイベントでも使えますか？", "acceptedAnswer": {"@type": "Answer", "text": "出店数が少ない小規模なフェスや、商店街のイベントからでも相談できます。まずは小さく試して、データを見ながら広げる進め方を想定しています。"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://saiteki-net.jp/"}, {"@type": "ListItem", "position": 2, "name": "コラム", "item": "https://saiteki-net.jp/column/"}, {"@type": "ListItem", "position": 3, "name": "フードフェスのモバイルオーダーシステムとは？行列の最後尾をQRに変え、出店者の回転率と客単価を上げる仕組み（開発中）", "item": "https://saiteki-net.jp/column/food-festival-mobile-order.html"}]}</script>
+</head>
+<body class="column-page">
+
+<header class="site-header" id="site-header">
+  <a href="/" class="logo-link" aria-label="株式会社サイテキ">
+    <img src="../assets/brand/logo-white.png" alt="株式会社サイテキ">
+  </a>
+  <div class="header-right">
+    <a href="https://saiteki-net.jp/contact-from/" class="header-cta">お問い合わせ</a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="nav-overlay" id="nav-overlay" aria-hidden="true">
+  <div class="nav-overlay-grid">
+    <div class="nav-overlay-col">
+      <p class="nav-overlay-col-title">SERVICE</p>
+      <a href="../genchi-busshou.html">現地物販運営</a>
+      <a href="../tsuhan.html">通販運営</a>
+      <a href="../seizou.html">グッズ製造提案</a>
+      <a href="../system.html">システムレンタル</a>
+    </div>
+    <div class="nav-overlay-col">
+      <p class="nav-overlay-col-title">CONTENTS</p>
+      <a href="https://saiteki-net.jp/activity/" target="_blank" rel="noopener">私たちの取り組み</a>
+      <a href="https://saiteki-net.jp/topic/" target="_blank" rel="noopener">新着情報</a>
+      <a href="https://saiteki-net.jp/interview/" target="_blank" rel="noopener">インタビュー</a>
+      <a href="../genchi-report.html">現地レポート</a>
+      <a href="/column/">コラム</a>
+    </div>
+    <div class="nav-overlay-col">
+      <p class="nav-overlay-col-title">COMPANY</p>
+      <a href="https://saiteki-net.jp/history/" target="_blank" rel="noopener">会社の沿革</a>
+      <a href="https://saiteki-net.jp/company-info/" target="_blank" rel="noopener">会社概要</a>
+      <a href="https://saiteki-net.jp/privacy-policy/" target="_blank" rel="noopener">プライバシーポリシー</a>
+      <a href="https://saiteki-net.jp/contact-from/" target="_blank" rel="noopener">お問い合わせ</a>
+    </div>
+  </div>
+</nav>
+<section class="page-hero page-hero--column">
+  <div class="page-hero__bg"></div>
+  <div class="page-hero__overlay"></div>
+  <div class="page-hero__inner">
+    <span class="page-hero__tag">COLUMN ／ NEW SERVICE</span>
+    <h1>フードフェスのモバイルオーダーシステムとは？行列の最後尾をQRに変え、出店者の回転率と客単価を上げる仕組み（開発中）</h1>
+    <p class="page-hero__meta"><a href="/column/">コラム一覧</a><span aria-hidden="true">／</span><time datetime="2026-10-20">2026.10.20</time><span aria-hidden="true">／</span>株式会社サイテキ</p>
+  </div>
+</section>
+
+<section class="section section--white">
+  <div class="container container--article">
+    <article class="article">
+      <p class="article__summary">フードフェス（食フェス・グルメイベント）向けのモバイルオーダーシステムを株式会社サイテキが開発中です。来場者は行列に並ばずスマホで複数店舗の料理を注文・決済し、できあがり通知で受け取り。出店者は回転率と客単価が上がり、主催者は回遊率とマーケティングデータを得られます。ライブ物販で年間100案件超の運営実績をもとに設計した仕組みを解説します。</p>
+<p><strong>フードフェスのモバイルオーダーシステムとは、来場者が行列に並ばず、スマホで複数の出店者の料理を注文・決済し、「できあがり」の通知で受け取りに行く仕組みです。</strong> 株式会社サイテキは、ライブ・フェスの物販で年間100案件超を運営してきた経験と、物販用モバイルオーダー「OPT!M（オプティム）」の実績をもとに、フードフェス専用のシステムを開発しています（2026年10月時点で開発中・試験導入先を相談受付中）。</p>
+<h2>フードフェスで起きている「行列の問題」</h2>
+<p>人気のフードフェスでは、1つの店に数十分の行列ができ、最後尾の看板を持ったスタッフが何人も立っています。これは来場者にとっても出店者にとっても損です。</p>
+<p class="note">来場者</p>
+<ul><li>並んでいる間は、ほかの店を見て回れない</li><li>1店に並んだら、2店目・3店目を諦める</li><li>食べ終わったら帰る。滞在時間が短い</li></ul>
+<p class="note">出店者</p>
+<ul><li>調理と会計を同じ人がやるので、列が伸びるほど回転が落ちる</li><li>現金・各種キャッシュレスが店ごとにバラバラで、会計に時間がかかる</li><li>「どれが売れたか」のデータが残らない</li></ul>
+<p class="note">主催者</p>
+<ul><li>行列が通路をふさぎ、回遊率（会場内を回ってもらう率）が下がる</li><li>客単価が上がらない。出店料以外の収益が作りにくい</li><li>来場者のデータが取れないので、次回の企画に活かせない</li></ul>
+<h2>サイテキのフードフェスシステム（開発中）の流れ</h2>
+<ol><li><strong>行列の最後尾をQRに変える</strong>：会場や各店に掲示したQRコードから、来場者はスマホのブラウザで注文（ログイン不要・アプリ不要）</li><li><strong>複数店舗をまとめて注文・決済</strong>：店ごとに並ばず、スマホで会場内の料理を選んで決済</li><li><strong>店舗はタブレットで受注</strong>：注文が店舗の注文管理タブレットに届く。店舗は「できあがり」を押すだけ</li><li><strong>できあがり通知で受け取り</strong>：来場者のスマホに通知が出たら受け取りに行く。並ぶ時間が「ほかの店を見て回る時間」に変わる</li><li><strong>口頭注文も併用</strong>：スマホを使わない来場者のために、窓口での注文・会計も残す</li></ol>
+<p>スマホとタブレットは同じ状態を共有するため、「注文が届いていない」「もうできている」のズレが起きません。</p>
+<h2>3者それぞれのメリット</h2>
+<div class="table-wrap"><table><thead><tr><th>立場</th><th>メリット</th></tr></thead><tbody><tr><td>来場者</td><td>並ばない。複数の店を楽しめる。食材や辛さなどのキーワードで店をまたいで探せる（構想）</td></tr><tr><td>出店者</td><td>会計時間が減り回転率が上がる。「もう1品」が増え客単価が上がる。売上データが残る</td></tr><tr><td>主催者</td><td>回遊率が上がり滞在時間が伸びる。客単価が上がり利益が増える。来場者・店舗別のマーケティングデータが取れ、次回の施策提案ができる</td></tr></tbody></table></div>
+<p>サイテキはこの3つが同時に成り立つ形を「完璧な最終形」と位置づけています。物販用のOPT!Mでは、手元でゆっくり選べるようになった結果、平均購入単価が4,713円から7,359円（約1.5倍）に上がりました。同じ考え方をフードに持ち込みます。</p>
+<h2>「店舗単位」ではなく「食材単位」で探せるフードフェスへ</h2>
+<p>一般的なイベントアプリは店舗ごとにメニューが並びます。サイテキが目指しているのは、「辛いもの」「肉」「子どもと食べられる」といったキーワードで<strong>店舗をまたいで検索できる</strong>体験です。来場者は「何を食べたいか」から入れるので、知らない店にも出会いやすくなり、結果として会場全体の回遊と売上が増えます。</p>
+<h2>導入の考え方</h2>
+<ul><li><strong>主催者と一緒に会場全体で導入</strong>するのが基本。イベントの公式アプリやサイトとはWebアプリとして連動できる形を想定しています</li><li>店ごとに決済方法がバラバラな現状を踏まえ、<strong>出店者単位での導入</strong>も検討しています</li><li>必要なのは、出店者側の注文管理タブレットとネット環境。Wi-Fiがない場所ではSIM端末で対応します</li><li>手数料はかかりますが、回転率と客単価の向上で十分に回収できる設計を目指しています</li></ul>
+<h2>物販の運営会社がフードを手がける理由</h2>
+<p>サイテキは「日本一、行列がキライな会社。」を掲げ、ライブ物販の行列を「選ぶ時間」に変えてきました。フードフェスの行列は、物販の行列と構造が同じです。「窓口に着いてから選ぶ」「会計に時間がかかる」「データが残らない」。この3つを、運営ノウハウと仕組みの両方で解く点はまったく変わりません。</p>
+<h2>よくある質問</h2>
+<h3>Q. いつから使えますか？</h3>
+<p>A. 2026年10月時点で開発中です。試験導入にご協力いただけるフードフェス主催者・出店者を募っていますので、問い合わせフォームからご相談ください。</p>
+<h3>Q. 来場者はアプリを入れる必要がありますか？</h3>
+<p>A. 不要です。QRコードからスマホのブラウザで注文でき、ログインも不要です。</p>
+<h3>Q. 高齢の来場者やスマホを使わない人はどうなりますか？</h3>
+<p>A. 窓口での口頭注文・会計も残します。スマホで注文する人が増えるほど、口頭注文の列も短くなります。</p>
+<h3>Q. 出店者側に必要なものは何ですか？</h3>
+<p>A. 注文を受けるタブレットとインターネット環境です。メニュー登録・売上レポート・受付の一時停止などは店舗側の画面で操作できます。</p>
+<h3>Q. 小さなイベントでも使えますか？</h3>
+<p>A. 出店数が少ない小規模なフェスや、商店街のイベントからでも相談できます。まずは小さく試して、データを見ながら広げる進め方を想定しています。</p>
+<hr>
+<p class="note">この記事は株式会社サイテキが作成・公開しています（最終更新：2026年10月20日）。問い合わせ：<a href="https://saiteki-net.jp/contact-from/">https://saiteki-net.jp/contact-from/</a></p>
+    </article>
+  </div>
+</section>
+
+<section class="section section--light1 column-related">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">RELATED COLUMN</span>
+      <h2>関連する<span class="accent">コラム</span></h2>
+    </div>
+    <div class="column-grid">
+      <a class="column-card" href="/column/merch-queue-is-lost-sales.html">
+        <span class="column-card__cat">ON-SITE</span>
+        <h3>物販の行列は「機会損失」だった。1会計6分を2分にすると来場者を何人受け入れられるか（現地物販運営の計算式）</h3>
+        <p>ライブ・フェス・展示イベントの物販行列は、満足度の問題ではなく売上の機会損失です。株式会社サイテキが実地計測した「1会計6分」の内訳と、モバイルオーダーで2…</p>
+        <span class="column-card__more">記事を読む →</span>
+      </a>
+      <a class="column-card" href="/column/data-driven-merch-production.html">
+        <span class="column-card__cat">MERCHANDISE</span>
+        <h3>グッズの製造数はどう決める？「勘」をやめて販売データで決めるグッズ製造提案（売り切れと在庫余りを同時に減らす）</h3>
+        <p>ライブ・舞台・アニメのグッズ製造数を「前回と同じ数」「これくらいあれば」という勘で決めると、売り切れ（機会損失）と在庫余り（廃棄・倉庫費）が毎回どちらか起き…</p>
+        <span class="column-card__more">記事を読む →</span>
+      </a>
+      <a class="column-card" href="/column/outdoor-festival-heatstroke-icebag.html">
+        <span class="column-card__cat">COOL CARE</span>
+        <h3>野外フェスの熱中症対策は「水分補給」だけで十分？アイスバッグ販売とアイスチャージサービスの運営をまるごと任せる方法</h3>
+        <p>2025年5〜9月の熱中症による救急搬送は100,510人で過去最多（総務省消防庁）。野外イベントの主催者にとって熱中症対策は必須です。株式会社サイテキは、…</p>
+        <span class="column-card__more">記事を読む →</span>
+      </a>
+    </div>
+    <p class="column-related__all"><a href="/column/" class="btn-outline">コラム一覧を見る</a></p>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-bg"><img src="../assets/brand/cta-bg.jpg" alt="" loading="lazy"></div>
+  <h2>物販のすべてを、<br><span class="accent">「最適化」</span>しませんか？</h2>
+  <p>システムだけの貸し出しから、全体最適化までお気軽にご相談ください。</p>
+  <div class="cta-buttons">
+    <a href="https://saiteki-net.jp/contact-from/" class="cta-primary">お問い合わせ</a>
+    <a href="tel:0368685533" class="cta-secondary">03-6868-5533</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo" style="display:flex;align-items:center;gap:32px;flex-wrap:wrap;">
+      <a href="https://saiteki-net.jp/">
+        <img src="../assets/brand/logo-white.png" alt="株式会社サイテキ">
+      </a>
+      <address style="font-style:normal;font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;">
+        本社所在地<br>
+        〒104-0033 東京都中央区新川1-3-21
+      </address>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <p class="footer-col-title">SERVICE</p>
+        <ul>
+          <li><a href="../genchi-busshou.html">現地物販運営</a></li>
+          <li><a href="../tsuhan.html">通販運営</a></li>
+          <li><a href="../seizou.html">グッズ製造提案</a></li>
+          <li><a href="../system.html">システムレンタル</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">CONTENTS</p>
+        <ul>
+          <li><a href="https://saiteki-net.jp/activity/" target="_blank" rel="noopener">私たちの取り組み</a></li>
+          <li><a href="https://saiteki-net.jp/topic/" target="_blank" rel="noopener">新着情報</a></li>
+          <li><a href="https://saiteki-net.jp/interview/" target="_blank" rel="noopener">インタビュー</a></li>
+          <li><a href="../genchi-report.html">現地レポート</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-col--column">
+        <p class="footer-col-title">COLUMN</p>
+        <ul>
+          <li><a href="/column/about-saiteki.html">サイテキとは</a></li>
+          <li><a href="/column/what-is-optim.html">OPT!M（オプティム）とは</a></li>
+          <li><a href="/column/artist-merch-system-rental.html">物販システムレンタル</a></li>
+          <li><a href="/column/pre-order-ec-three-channels.html">事前通販の3チャネル</a></li>
+          <li><a href="/column/event-merch-logistics-shipping.html">イベント物販の物流</a></li>
+          <li><a href="/column/nfc-venue-limited-ec.html">NFC現地限定EC</a></li>
+          <li><a href="/column/food-festival-mobile-order.html">フードフェスの注文システム</a></li>
+          <li><a href="/column/merch-queue-is-lost-sales.html">物販の行列は機会損失</a></li>
+          <li><a href="/column/data-driven-merch-production.html">製造数をデータで決める</a></li>
+          <li><a href="/column/outdoor-festival-heatstroke-icebag.html">フェスの熱中症対策</a></li>
+          <li><a href="/column/" class="footer-col__all">コラム一覧 →</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">COMPANY</p>
+        <ul>
+          <li><a href="https://saiteki-net.jp/history/" target="_blank" rel="noopener">会社の沿革</a></li>
+          <li><a href="https://saiteki-net.jp/company-info/" target="_blank" rel="noopener">会社概要</a></li>
+          <li><a href="https://saiteki-net.jp/privacy-policy/" target="_blank" rel="noopener">プライバシーポリシー</a></li>
+          <li><a href="https://saiteki-net.jp/contact-from/" target="_blank" rel="noopener">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 株式会社サイテキ</span>
+      <div class="footer-sns">
+        <a href="https://www.instagram.com/saiteki.sns" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('site-header');
+  const hamburger = document.getElementById('hamburger');
+  const navOverlay = document.getElementById('nav-overlay');
+  window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 60); });
+  function toggleMenu(open) {
+    hamburger.classList.toggle('open', open);
+    navOverlay.classList.toggle('open', open);
+    navOverlay.setAttribute('aria-hidden', String(!open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  hamburger.addEventListener('click', () => { toggleMenu(!hamburger.classList.contains('open')); });
+  navOverlay.querySelectorAll('a').forEach(a => { a.addEventListener('click', () => toggleMenu(false)); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') toggleMenu(false); });
+</script>
+</body>
+</html>

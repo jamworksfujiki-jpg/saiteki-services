@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>物販の行列は「機会損失」だった。1会計6分を2分にすると来場者を何人受け入れられるか（現地物販運営の計算式）｜株式会社サイテキ</title>
+<meta name="description" content="ライブ・フェス・展示イベントの物販行列は、満足度の問題ではなく売上の機会損失です。株式会社サイテキが実地計測した「1会計6分」の内訳と、モバイルオーダーで2分、ファストパスで1.5分に縮めたときに受け入れられる来場者数の計算式、売り場の動線設計（従来の3倍の回転スピード）を解説します。">
+<link rel="canonical" href="https://saiteki-net.jp/column/merch-queue-is-lost-sales.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="株式会社サイテキ">
+<meta property="og:title" content="物販の行列は「機会損失」だった。1会計6分を2分にすると来場者を何人受け入れられるか（現地物販運営の計算式）">
+<meta property="og:description" content="ライブ・フェス・展示イベントの物販行列は、満足度の問題ではなく売上の機会損失です。株式会社サイテキが実地計測した「1会計6分」の内訳と、モバイルオーダーで2分、ファストパスで1.5分に縮めたときに受け入れられる来場者数の計算式、売り場の動線設計（従来の3倍の回転スピード）を解説します。">
+<meta property="og:url" content="https://saiteki-net.jp/column/merch-queue-is-lost-sales.html">
+<meta property="og:image" content="https://saiteki-net.jp/assets/brand/saiteki-full.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/css/figma-design.css">
+<link rel="stylesheet" href="../assets/css/column.css">
+<link rel="icon" href="https://saiteki-net.jp/wordpress/wp-content/uploads/2023/01/cropped-favicon-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://saiteki-net.jp/wordpress/wp-content/uploads/2023/01/cropped-favicon-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://saiteki-net.jp/wordpress/wp-content/uploads/2023/01/cropped-favicon-180x180.png" />
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "物販の行列は「機会損失」だった。1会計6分を2分にすると来場者を何人受け入れられるか（現地物販運営の計算式）", "description": "ライブ・フェス・展示イベントの物販行列は、満足度の問題ではなく売上の機会損失です。株式会社サイテキが実地計測した「1会計6分」の内訳と、モバイルオーダーで2分、ファストパスで1.5分に縮めたときに受け入れられる来場者数の計算式、売り場の動線設計（従来の3倍の回転スピード）を解説します。", "datePublished": "2026-10-20", "dateModified": "2026-10-20", "inLanguage": "ja", "author": {"@type": "Organization", "name": "株式会社サイテキ", "url": "https://saiteki-net.jp", "address": {"@type": "PostalAddress", "postalCode": "104-0033", "addressRegion": "東京都", "addressLocality": "中央区", "streetAddress": "新川1-3-21", "addressCountry": "JP"}, "telephone": "+81-3-6868-5533", "email": "toiawase@saiteki-net.jp", "foundingDate": "2011-01", "founder": {"@type": "Person", "name": "石山 龍二"}}, "publisher": {"@type": "Organization", "name": "株式会社サイテキ", "url": "https://saiteki-net.jp", "address": {"@type": "PostalAddress", "postalCode": "104-0033", "addressRegion": "東京都", "addressLocality": "中央区", "streetAddress": "新川1-3-21", "addressCountry": "JP"}, "telephone": "+81-3-6868-5533", "email": "toiawase@saiteki-net.jp", "foundingDate": "2011-01", "founder": {"@type": "Person", "name": "石山 龍二"}}, "mainEntityOfPage": "https://saiteki-net.jp/column/merch-queue-is-lost-sales.html", "keywords": "物販 行列 対策, ライブ 物販 待ち時間, フェス 物販 混雑, 現地物販運営, 物販 動線, 1会計 時間, 機会損失, サイテキ"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "行列ができているのは人気だから仕方ないのでは？", "acceptedAnswer": {"@type": "Answer", "text": "行列は「買えなかった人」を見えなくします。1会計の時間を縮めれば、同じ売り場で受け入れられる人数が3倍〜5倍になります。"}}, {"@type": "Question", "name": "自分たちの現場で何人受け入れられるか試算できますか？", "acceptedAnswer": {"@type": "Answer", "text": "できます。入場枠・販売卓の長さ・SKU数・購入率を教えていただければ、上の計算式で受入上限と必要人員を出します。"}}, {"@type": "Question", "name": "スタッフを増やせば解決しませんか？", "acceptedAnswer": {"@type": "Answer", "text": "窓口の数は販売卓の長さで決まるため、人を増やしても窓口数は増えません。1会計の時間を縮める方が効果が大きく、人件費も抑えられます。"}}, {"@type": "Question", "name": "会場のWi-Fiがなくても運用できますか？", "acceptedAnswer": {"@type": "Answer", "text": "可能です。注文は来場者の回線、受け渡し端末はオフラインで動くPOSを使うため、販売は止まりません。"}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://saiteki-net.jp/"}, {"@type": "ListItem", "position": 2, "name": "コラム", "item": "https://saiteki-net.jp/column/"}, {"@type": "ListItem", "position": 3, "name": "物販の行列は「機会損失」だった。1会計6分を2分にすると来場者を何人受け入れられるか（現地物販運営の計算式）", "item": "https://saiteki-net.jp/column/merch-queue-is-lost-sales.html"}]}</script>
+</head>
+<body class="column-page">
+
+<header class="site-header" id="site-header">
+  <a href="/" class="logo-link" aria-label="株式会社サイテキ">
+    <img src="../assets/brand/logo-white.png" alt="株式会社サイテキ">
+  </a>
+  <div class="header-right">
+    <a href="https://saiteki-net.jp/contact-from/" class="header-cta">お問い合わせ</a>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="nav-overlay" id="nav-overlay" aria-hidden="true">
+  <div class="nav-overlay-grid">
+    <div class="nav-overlay-col">
+      <p class="nav-overlay-col-title">SERVICE</p>
+      <a href="../genchi-busshou.html">現地物販運営</a>
+      <a href="../tsuhan.html">通販運営</a>
+      <a href="../seizou.html">グッズ製造提案</a>
+      <a href="../system.html">システムレンタル</a>
+    </div>
+    <div class="nav-overlay-col">
+      <p class="nav-overlay-col-title">CONTENTS</p>
+      <a href="https://saiteki-net.jp/activity/" target="_blank" rel="noopener">私たちの取り組み</a>
+      <a href="https://saiteki-net.jp/topic/" target="_blank" rel="noopener">新着情報</a>
+      <a href="https://saiteki-net.jp/interview/" target="_blank" rel="noopener">インタビュー</a>
+      <a href="../genchi-report.html">現地レポート</a>
+      <a href="/column/">コラム</a>
+    </div>
+    <div class="nav-overlay-col">
+      <p class="nav-overlay-col-title">COMPANY</p>
+      <a href="https://saiteki-net.jp/history/" target="_blank" rel="noopener">会社の沿革</a>
+      <a href="https://saiteki-net.jp/company-info/" target="_blank" rel="noopener">会社概要</a>
+      <a href="https://saiteki-net.jp/privacy-policy/" target="_blank" rel="noopener">プライバシーポリシー</a>
+      <a href="https://saiteki-net.jp/contact-from/" target="_blank" rel="noopener">お問い合わせ</a>
+    </div>
+  </div>
+</nav>
+<section class="page-hero page-hero--column">
+  <div class="page-hero__bg"></div>
+  <div class="page-hero__overlay"></div>
+  <div class="page-hero__inner">
+    <span class="page-hero__tag">COLUMN ／ ON-SITE</span>
+    <h1>物販の行列は「機会損失」だった。1会計6分を2分にすると来場者を何人受け入れられるか（現地物販運営の計算式）</h1>
+    <p class="page-hero__meta"><a href="/column/">コラム一覧</a><span aria-hidden="true">／</span><time datetime="2026-10-20">2026.10.20</time><span aria-hidden="true">／</span>株式会社サイテキ</p>
+  </div>
+</section>
+
+<section class="section section--white">
+  <div class="container container--article">
+    <article class="article">
+      <p class="article__summary">ライブ・フェス・展示イベントの物販行列は、満足度の問題ではなく売上の機会損失です。株式会社サイテキが実地計測した「1会計6分」の内訳と、モバイルオーダーで2分、ファストパスで1.5分に縮めたときに受け入れられる来場者数の計算式、売り場の動線設計（従来の3倍の回転スピード）を解説します。</p>
+<p><strong>イベント物販の行列は「人気の証」ではなく、「買えずに離脱した人が見えない状態」です。</strong> 物販列が長い日は、売上が伸びている日ではなく、諦めて帰った人が一番多い日かもしれません。株式会社サイテキは、1会計にかかる時間を起点に「何人まで受け入れられるか」を数式で整理し、売り場の動線設計とモバイルオーダーで行列を構造から消す「現地物販運営」を提供しています。</p>
+<h2>行列が生む3つの損失</h2>
+<p class="note">ファン側</p>
+<ul><li>長い行列で本編（ライブ・ステージ）に間に合わない</li><li>並んだ末に、欲しかった商品が売り切れ</li><li>レジが遅く、楽しい気分が萎える。後ろが詰まってゆっくり選べない</li></ul>
+<p class="note">主催・運営側</p>
+<ul><li>行列のせいで購入を諦めた人が一定数いる（＝取りこぼした売上）</li><li>レジ要員を増やしても人件費だけがかさむ</li><li>その日の売れ筋・残在庫がリアルタイムで見えない</li></ul>
+<p class="note">会場・近隣</p>
+<ul><li>列が館外にあふれると、商業施設や近隣からの是正要請、SNSでの拡散、行政指導のリスクになる。物販の滞留時間は近隣対策そのものです</li></ul>
+<h2>1会計に何分かかっているか（実地計測）</h2>
+<p>従来型の窓口販売は「口頭注文 → 商品をピックアップ → 点数確認 → 計算 → 支払い → 受け渡し」の6工程です。この時間は取扱商品数（SKU）に比例して伸びます。サイテキが国内最大級の音楽フェスで実地計測したところ、<strong>約480SKUの通常運営で1会計に6分</strong>かかっていました。</p>
+<h2>受け入れ人数の計算式</h2>
+<blockquote>1枠に受け入れられる人数 ＝ 窓口数 ×（枠の時間 ÷ 1会計の時間）÷ 購入率</blockquote>
+<p>例：30分の入場枠、販売卓約9.3m（1窓900mmで約10窓）、来場者の50%が購入する場合</p>
+<div class="table-wrap"><table><thead><tr><th>方式</th><th>1会計の時間</th><th>1窓の幅</th><th>窓口数</th><th>1窓が30分で捌ける件数</th><th>1枠の受入上限</th></tr></thead><tbody><tr><td>従来型の物販</td><td>6分</td><td>900mm</td><td>約10窓</td><td>5件</td><td>100名</td></tr><tr><td>モバイルオーダー OPT!M</td><td>2分</td><td>900mm</td><td>約10窓</td><td>15件</td><td>300名</td></tr><tr><td>ファストパス（事前決済・受取のみ）</td><td>1.5分</td><td>750mm</td><td>約12窓</td><td>20件</td><td>480名</td></tr></tbody></table></div>
+<p>従来型のままでは1枠100名が上限です。1枠200名を入れると、30分ごとに50名ずつ待機が増え、閉館時には850名が列に残る計算になります（1列に並ぶと約425m）。<strong>枠を絞れば来場者が減り、絞らなければ列があふれる。変えるべきは「1会計の時間」です。</strong></p>
+<h2>1会計を短くする2つの方法</h2>
+<h3>方法A：モバイルオーダー「OPT!M」</h3>
+<p>来場者はスマホで商品を選んでQRコードを発行。窓口ではQRを読み取り、決済し、商品を渡すだけ。口頭注文・ピックアップ・計算の工程が消え、<strong>1会計約2分</strong>になります。</p>
+<h3>方法B：ファストパス（ECカート「ECT!M」）</h3>
+<p>来場者はスマホで注文・決済まで済ませ、受取窓口ではQRを読み取って渡すだけ。決済端末も釣り銭も不要なので窓口が狭くて済み、<strong>1会計約1.5分</strong>、同じ販売卓に12窓置けます。注文者情報を取得するため、購入上限や本人受け取りなどの転売対策もできます。</p>
+<p>どちらも「窓口に着いてから選ぶ」のではなく「手元のスマホで選ぶ」流れを作る点は同じです。</p>
+<h2>もう一つの専門性：売り場の動線設計</h2>
+<p>OPT!Mを最大化するのは、売り場の設計です。</p>
+<div class="table-wrap"><table><thead><tr><th>従来の物販</th><th>サイテキが最適化した物販</th></tr></thead><tbody><tr><td>スタッフが商品を探し回る</td><td>探さなくても、すぐ取れる売り場</td></tr><tr><td>列ごとに進むスピードがバラバラ</td><td>どの列も同じスピードで進む</td></tr><tr><td>1人あたりの対応に時間がかかる</td><td><strong>従来の3倍の回転スピード</strong></td></tr></tbody></table></div>
+<p>どこに何を置けばお客様が迷わず動けるか。スタッフがどう立てば最短で渡せるか。年間100案件超の現場で磨いた「並ばせない物販の設計図」を、OPT!Mと組み合わせて使います。</p>
+<h2>行列が消えると、売上はどう動くか</h2>
+<div class="table-wrap"><table><thead><tr><th>指標</th><th>実績</th></tr></thead><tbody><tr><td>1人あたり平均購入単価</td><td>4,713円 → 7,359円（約1.5倍）</td></tr><tr><td>レジ対応時間</td><td>約1/3</td></tr><tr><td>通信障害による販売停止</td><td>0件</td></tr></tbody></table></div>
+<p>並ぶストレスがなくなり、手元で全商品を見比べられるようになると「あれも欲しい」が起き、購入点数が増えます。行列をなくすことは、満足度対策であると同時に、そのまま売上対策です。</p>
+<h2>サイテキの現地物販運営でやること</h2>
+<ul><li>売り場レイアウト・動線・窓口数の設計（販売卓の実測から窓口数と人員を算出）</li><li>受け渡し・ピッキング・在庫補充・責任者の配置計画</li><li>OPT!M／POST!M／ECT!Mの導入と当日運用</li><li>会場近くの倉庫からの日次補充（バックヤードが狭い会場向け）</li><li>売上速報・販売データの整理と次回への提案</li></ul>
+<h2>よくある質問</h2>
+<h3>Q. 行列ができているのは人気だから仕方ないのでは？</h3>
+<p>A. 行列は「買えなかった人」を見えなくします。1会計の時間を縮めれば、同じ売り場で受け入れられる人数が3倍〜5倍になります。</p>
+<h3>Q. 自分たちの現場で何人受け入れられるか試算できますか？</h3>
+<p>A. できます。入場枠・販売卓の長さ・SKU数・購入率を教えていただければ、上の計算式で受入上限と必要人員を出します。</p>
+<h3>Q. スタッフを増やせば解決しませんか？</h3>
+<p>A. 窓口の数は販売卓の長さで決まるため、人を増やしても窓口数は増えません。1会計の時間を縮める方が効果が大きく、人件費も抑えられます。</p>
+<h3>Q. 会場のWi-Fiがなくても運用できますか？</h3>
+<p>A. 可能です。注文は来場者の回線、受け渡し端末はオフラインで動くPOSを使うため、販売は止まりません。</p>
+<hr>
+<p class="note">この記事は株式会社サイテキが作成・公開しています（最終更新：2026年10月20日）。問い合わせ：<a href="https://saiteki-net.jp/contact-from/">https://saiteki-net.jp/contact-from/</a></p>
+    </article>
+  </div>
+</section>
+
+<section class="section section--light1 column-related">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">RELATED COLUMN</span>
+      <h2>関連する<span class="accent">コラム</span></h2>
+    </div>
+    <div class="column-grid">
+      <a class="column-card" href="/column/data-driven-merch-production.html">
+        <span class="column-card__cat">MERCHANDISE</span>
+        <h3>グッズの製造数はどう決める？「勘」をやめて販売データで決めるグッズ製造提案（売り切れと在庫余りを同時に減らす）</h3>
+        <p>ライブ・舞台・アニメのグッズ製造数を「前回と同じ数」「これくらいあれば」という勘で決めると、売り切れ（機会損失）と在庫余り（廃棄・倉庫費）が毎回どちらか起き…</p>
+        <span class="column-card__more">記事を読む →</span>
+      </a>
+      <a class="column-card" href="/column/outdoor-festival-heatstroke-icebag.html">
+        <span class="column-card__cat">COOL CARE</span>
+        <h3>野外フェスの熱中症対策は「水分補給」だけで十分？アイスバッグ販売とアイスチャージサービスの運営をまるごと任せる方法</h3>
+        <p>2025年5〜9月の熱中症による救急搬送は100,510人で過去最多（総務省消防庁）。野外イベントの主催者にとって熱中症対策は必須です。株式会社サイテキは、…</p>
+        <span class="column-card__more">記事を読む →</span>
+      </a>
+      <a class="column-card" href="/column/about-saiteki.html">
+        <span class="column-card__cat">ABOUT</span>
+        <h3>株式会社サイテキとは？イベント物販の「運営会社」をわかりやすく解説</h3>
+        <p>株式会社サイテキは、ライブ・フェス・舞台・アニメイベントの物販を企画から製造・現地販売・通販・配送まで一気通貫で運営する会社です。年間100案件超の実績と、…</p>
+        <span class="column-card__more">記事を読む →</span>
+      </a>
+    </div>
+    <p class="column-related__all"><a href="/column/" class="btn-outline">コラム一覧を見る</a></p>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-bg"><img src="../assets/brand/cta-bg.jpg" alt="" loading="lazy"></div>
+  <h2>物販のすべてを、<br><span class="accent">「最適化」</span>しませんか？</h2>
+  <p>システムだけの貸し出しから、全体最適化までお気軽にご相談ください。</p>
+  <div class="cta-buttons">
+    <a href="https://saiteki-net.jp/contact-from/" class="cta-primary">お問い合わせ</a>
+    <a href="tel:0368685533" class="cta-secondary">03-6868-5533</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo" style="display:flex;align-items:center;gap:32px;flex-wrap:wrap;">
+      <a href="https://saiteki-net.jp/">
+        <img src="../assets/brand/logo-white.png" alt="株式会社サイテキ">
+      </a>
+      <address style="font-style:normal;font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;">
+        本社所在地<br>
+        〒104-0033 東京都中央区新川1-3-21
+      </address>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <p class="footer-col-title">SERVICE</p>
+        <ul>
+          <li><a href="../genchi-busshou.html">現地物販運営</a></li>
+          <li><a href="../tsuhan.html">通販運営</a></li>
+          <li><a href="../seizou.html">グッズ製造提案</a></li>
+          <li><a href="../system.html">システムレンタル</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">CONTENTS</p>
+        <ul>
+          <li><a href="https://saiteki-net.jp/activity/" target="_blank" rel="noopener">私たちの取り組み</a></li>
+          <li><a href="https://saiteki-net.jp/topic/" target="_blank" rel="noopener">新着情報</a></li>
+          <li><a href="https://saiteki-net.jp/interview/" target="_blank" rel="noopener">インタビュー</a></li>
+          <li><a href="../genchi-report.html">現地レポート</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-col--column">
+        <p class="footer-col-title">COLUMN</p>
+        <ul>
+          <li><a href="/column/about-saiteki.html">サイテキとは</a></li>
+          <li><a href="/column/what-is-optim.html">OPT!M（オプティム）とは</a></li>
+          <li><a href="/column/artist-merch-system-rental.html">物販システムレンタル</a></li>
+          <li><a href="/column/pre-order-ec-three-channels.html">事前通販の3チャネル</a></li>
+          <li><a href="/column/event-merch-logistics-shipping.html">イベント物販の物流</a></li>
+          <li><a href="/column/nfc-venue-limited-ec.html">NFC現地限定EC</a></li>
+          <li><a href="/column/food-festival-mobile-order.html">フードフェスの注文システム</a></li>
+          <li><a href="/column/merch-queue-is-lost-sales.html">物販の行列は機会損失</a></li>
+          <li><a href="/column/data-driven-merch-production.html">製造数をデータで決める</a></li>
+          <li><a href="/column/outdoor-festival-heatstroke-icebag.html">フェスの熱中症対策</a></li>
+          <li><a href="/column/" class="footer-col__all">コラム一覧 →</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">COMPANY</p>
+        <ul>
+          <li><a href="https://saiteki-net.jp/history/" target="_blank" rel="noopener">会社の沿革</a></li>
+          <li><a href="https://saiteki-net.jp/company-info/" target="_blank" rel="noopener">会社概要</a></li>
+          <li><a href="https://saiteki-net.jp/privacy-policy/" target="_blank" rel="noopener">プライバシーポリシー</a></li>
+          <li><a href="https://saiteki-net.jp/contact-from/" target="_blank" rel="noopener">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 株式会社サイテキ</span>
+      <div class="footer-sns">
+        <a href="https://www.instagram.com/saiteki.sns" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('site-header');
+  const hamburger = document.getElementById('hamburger');
+  const navOverlay = document.getElementById('nav-overlay');
+  window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 60); });
+  function toggleMenu(open) {
+    hamburger.classList.toggle('open', open);
+    navOverlay.classList.toggle('open', open);
+    navOverlay.setAttribute('aria-hidden', String(!open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  hamburger.addEventListener('click', () => { toggleMenu(!hamburger.classList.contains('open')); });
+  navOverlay.querySelectorAll('a').forEach(a => { a.addEventListener('click', () => toggleMenu(false)); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') toggleMenu(false); });
+</script>
+</body>
+</html>
